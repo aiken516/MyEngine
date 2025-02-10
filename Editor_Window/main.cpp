@@ -1,8 +1,9 @@
-﻿// Editor_Window.cpp : 애플리케이션에 대한 진입점을 정의합니다.
-//
-
-#include "framework.h"
+﻿#include "framework.h"
 #include "Editor_Window.h"
+//#include "..\\MyEngine_SOURCE\\MyApplication.h"
+//#pragma comment (lib, "..\\x64\\Debug\\MyEngine_Window.lib")
+
+//Application app;
 
 #define MAX_LOADSTRING 100
 
@@ -17,15 +18,17 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
+int APIENTRY wWinMain(_In_ HINSTANCE hInstance, //프로그램의 인스턴스 핸들(포인터 같은 개념)
+                     _In_opt_ HINSTANCE hPrevInstance, //직전 실행된 프로그램의 핸들, 없으면 NULL
+                     _In_ LPWSTR    lpCmdLine, //명령행으로 입력된 실행 인자
+                     _In_ int       nCmdShow) //프로그램이 실행될 형태, 보통 모양 정보 등
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 여기에 코드를 입력합니다.
+
+    //app.test();
 
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -42,7 +45,37 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
-    // 기본 메시지 루프입니다:
+    //GetMessage(&msg, nullptr, 0, 0) 프로세스에서 발생한 메시지를 메시지 큐에서 가져옴
+    //큐에 없다면 아무 메시지도 받아오지 않는다.
+
+    //PeekMessage : 메시지 큐가 비었어도 함수가 리턴됨
+    //              메시지가 있으면 true, 없으면 false
+
+    while (true)
+    {
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) 
+        {
+            if (msg.message == WM_QUIT)
+            {
+                break;
+            }
+
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+        }
+        else
+        {
+            //메시지가 없을 때
+            //게임 기본 로직
+
+        }
+    }
+
+
+    /* 기존 메시지 루프(메시지가 있을 때만 루프)
     while (GetMessage(&msg, nullptr, 0, 0))
     {
         if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
@@ -51,6 +84,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
     }
+    */
 
     return (int) msg.wParam;
 }
@@ -98,7 +132,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+      CW_USEDEFAULT, 0, 1600, 900, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
@@ -146,12 +180,39 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+            //DC란 화면의 출력에 필요한 모든 데이터를 가지는 구조체
+            //GDI 모듈에 의해 관리된다
+            //폰트, 색상, 선의 굵기 등 화면 출력에 필요한 모든 경우 WINAPI에서는 DC를 통해 진행
+
+            HBRUSH blueBrush = CreateSolidBrush(RGB(0, 0, 255));
+            // 파랑 브러쉬 DC에 선택 그리고 흰색 브러쉬 반환값 반환
+            HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, blueBrush);
+            Rectangle(hdc, 100, 100, 200, 200);
+            //다시 흰색 원본브러쉬로 선택
+            SelectObject(hdc, oldBrush);
+            // 파랑 브러쉬 삭제
+            DeleteObject(blueBrush);
+            HPEN redPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
+            HPEN oldPen = (HPEN)SelectObject(hdc, redPen);
+            Ellipse(hdc, 200, 200, 300, 300);
+            SelectObject(hdc, oldPen);
+            DeleteObject(redPen);
+            // 기본으로 자주사용 되는 GDI오브젝트를 미리 DC안에 만들어두었는데
+            // 그 오브젝트들을 스톡 오브젝트라고 한다.
+            HBRUSH grayBrush = (HBRUSH)GetStockObject(GRAY_BRUSH);
+            oldBrush = (HBRUSH)SelectObject(hdc, grayBrush);
+            Rectangle(hdc, 400, 400, 500, 500);
+            SelectObject(hdc, oldBrush);
             EndPaint(hWnd, &ps);
         }
         break;
     case WM_DESTROY:
         PostQuitMessage(0);
+        break;
+    case WM_MOVE:
+        {
+        int a = 0;
+        }
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
