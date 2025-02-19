@@ -1,9 +1,8 @@
 ﻿#include "framework.h"
 #include "Editor_Window.h"
-//#include "..\\MyEngine_SOURCE\\MyApplication.h"
+#include "..\\MyEngine_SOURCE\\MyApplication.h"
 //#pragma comment (lib, "..\\x64\\Debug\\MyEngine_Window.lib")
 
-//Application app;
 
 #define MAX_LOADSTRING 100
 
@@ -11,6 +10,9 @@
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
+
+Source::Application application;
+
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -70,7 +72,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, //프로그램의 인스턴스 �
         {
             //메시지가 없을 때
             //게임 기본 로직
-
+            application.Run();
         }
     }
 
@@ -139,6 +141,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       return FALSE;
    }
 
+   application.Initialize(hWnd);
+
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
@@ -184,25 +188,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             //GDI 모듈에 의해 관리된다
             //폰트, 색상, 선의 굵기 등 화면 출력에 필요한 모든 경우 WINAPI에서는 DC를 통해 진행
 
-            HBRUSH blueBrush = CreateSolidBrush(RGB(0, 0, 255));
-            // 파랑 브러쉬 DC에 선택 그리고 흰색 브러쉬 반환값 반환
-            HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, blueBrush);
-            Rectangle(hdc, 100, 100, 200, 200);
-            //다시 흰색 원본브러쉬로 선택
-            SelectObject(hdc, oldBrush);
-            // 파랑 브러쉬 삭제
-            DeleteObject(blueBrush);
-            HPEN redPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
-            HPEN oldPen = (HPEN)SelectObject(hdc, redPen);
-            Ellipse(hdc, 200, 200, 300, 300);
-            SelectObject(hdc, oldPen);
-            DeleteObject(redPen);
-            // 기본으로 자주사용 되는 GDI오브젝트를 미리 DC안에 만들어두었는데
-            // 그 오브젝트들을 스톡 오브젝트라고 한다.
-            HBRUSH grayBrush = (HBRUSH)GetStockObject(GRAY_BRUSH);
-            oldBrush = (HBRUSH)SelectObject(hdc, grayBrush);
-            Rectangle(hdc, 400, 400, 500, 500);
-            SelectObject(hdc, oldBrush);
+
             EndPaint(hWnd, &ps);
         }
         break;
