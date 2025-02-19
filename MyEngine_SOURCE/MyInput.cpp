@@ -14,6 +14,11 @@ namespace Source
 
 	void Input::Initailize()
 	{
+		CreateKeys();
+	}
+
+	void Input::CreateKeys()
+	{
 		for (size_t i = 0; i < (UINT)KeyCode::End; i++)
 		{
 			Key key = {};

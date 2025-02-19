@@ -31,6 +31,7 @@ namespace Source
 		};
 
 		static void Initailize();
+		static void CreateKeys();
 		static void Update();
 
 		static bool GetKeyDown(KeyCode keyCode) { return keys[(UINT)keyCode].state == KeyState::Down; }

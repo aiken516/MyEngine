@@ -1,5 +1,6 @@
 #include "MyGameObject.h"
 #include "MyInput.h"
+#include "MyTime.h"
 
 namespace Source
 {
@@ -12,21 +13,23 @@ namespace Source
 	
 	void GameObject::Update()
 	{
+		const float speed = 300.0f;
+
 		if (Input::GetKey(KeyCode::A) || Input::GetKey(KeyCode::LEFT))
 		{
-			X -= 0.1f;
+			X -= speed * Time::DeltaTime();
 		}
 		if (Input::GetKey(KeyCode::D) || Input::GetKey(KeyCode::RIGHT))
 		{
-			X += 0.1f;
+			X += speed * Time::DeltaTime();
 		}
 		if (Input::GetKey(KeyCode::W) || Input::GetKey(KeyCode::UP))
 		{
-			Y -= 0.1f;
+			Y -= speed * Time::DeltaTime();
 		}
 		if (Input::GetKey(KeyCode::S) || Input::GetKey(KeyCode::DOWN))
 		{
-			Y += 0.1f;
+			Y += speed * Time::DeltaTime();
 		}
 	}
 

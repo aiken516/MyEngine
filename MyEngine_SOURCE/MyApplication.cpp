@@ -1,5 +1,6 @@
 #include "MyApplication.h"
 #include "MyInput.h"
+#include "MyTime.h"
 
 namespace Source
 {
@@ -21,6 +22,7 @@ namespace Source
 		mHDC = GetDC(mHWND);
 
 		Input::Initailize();	
+		Time::Initailze();
 
 		player.SetPosition(0, 0);
 	}
@@ -35,6 +37,7 @@ namespace Source
 	void Application::Update()
 	{
 		Input::Update();
+		Time::Update();
 		player.Update();
 	}
 
@@ -47,5 +50,6 @@ namespace Source
 	void Application::Render()
 	{
 		player.Render(mHDC);
+		Time::Render(mHDC);
 	}
 }
