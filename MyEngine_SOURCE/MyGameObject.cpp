@@ -4,9 +4,12 @@
 
 namespace Source
 {
-	GameObject::GameObject()
+	GameObject::GameObject() : 
+		X(0),
+		Y(0)
 	{
 	}
+
 	GameObject::~GameObject()
 	{
 	}

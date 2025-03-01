@@ -1,9 +1,11 @@
 ﻿#include "framework.h"
 #include "Editor_Window.h"
 #include "..\\MyEngine_SOURCE\\MyApplication.h"
+#include "..\\MyEngine_Window\\MyLoadScenes.h"
+
 //#pragma comment (lib, "..\\x64\\Debug\\MyEngine_Window.lib")
 
-
+    
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
@@ -148,6 +150,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
+
+   //씬 로드
+   Source::LoadScenes();
 
    return TRUE;
 }

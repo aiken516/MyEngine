@@ -16,6 +16,11 @@ namespace Source
 		void LateUpdate();
 		void Render();
 	private:
+		void ClearRenderTarget();
+		void CopyRenderTarget(HDC source, HDC dest);
+		void AdjustApplicationWindow(HWND hwnd, UINT width, UINT height);
+		void CreateBackBuffer();
+
 		HWND hwnd_;// 윈도우 핸들
 		HDC hdc_; // 드로잉 핸들
 
@@ -24,8 +29,6 @@ namespace Source
 
 		UINT width_;//화면의 해상도 값
 		UINT height_;//화면의 해상도 값
-
-		GameObject player_;
 	};
 }
 
