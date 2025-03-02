@@ -20,6 +20,11 @@ namespace Source
 
 		static Scene* LoadScene(const std::wstring name)
 		{
+			if (activeScene_ != nullptr)
+			{
+				activeScene_->OnExit();
+			}
+
 			std::map<std::wstring, Scene*>::iterator iter = scenes_.find(name);
 
 			if (iter == scenes_.end())
@@ -28,6 +33,8 @@ namespace Source
 			}
 
 			activeScene_ = iter->second;
+
+			activeScene_->OnEnter();
 
 			return iter->second;
 		}

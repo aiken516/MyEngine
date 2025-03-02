@@ -19,6 +19,8 @@ namespace Source
 		T* AddComponent()
 		{
 			T* component = new T();
+			component->Initialize();
+
 			component->SetOwner(this);
 			components_.push_back(component);
 

@@ -3,8 +3,10 @@
 #include "MyPlayer.h"
 #include "MyTransform.h"
 #include "MySpriteRenderer.h"
+#include "MyInput.h"
+#include "MySceneManager.h"
 
-namespace Source
+namespace Client
 {
 	PlayScene::PlayScene()
 	{
@@ -40,9 +42,25 @@ namespace Source
 	void PlayScene::LateUpdate()
 	{
 		Scene::LateUpdate();
+
+		if (Input::GetKeyDown(KeyCode::R))
+		{
+			SceneManager::LoadScene(L"TitleScene");
+		}
 	}
 	void PlayScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
+
+		wchar_t str[50] = L"";
+
+		swprintf_s(str, 50, L"Play Scene");
+		TextOut(hdc, 200, 200, str, wcsnlen_s(str, 50));
+	}
+	void PlayScene::OnEnter()
+	{
+	}
+	void PlayScene::OnExit()
+	{
 	}
 }

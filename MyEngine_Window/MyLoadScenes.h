@@ -1,12 +1,16 @@
 #pragma once
 #include "..\\MyEngine_SOURCE\\MySceneManager.h"
-#include "MyPlayScene.h"
+using namespace Source;
 
-namespace Source
+#include "MyPlayScene.h"
+#include "MyTitleScene.h"
+
+namespace Client
 {
 	void LoadScenes()
 	{
 		SceneManager::CreateScene<PlayScene>(L"PlayScene");
+		SceneManager::CreateScene<TitleScene>(L"TitleScene");
 
 		SceneManager::LoadScene(L"PlayScene");
 	}

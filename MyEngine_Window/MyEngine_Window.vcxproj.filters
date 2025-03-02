@@ -4,16 +4,33 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{67c4117a-9406-4f6c-9266-c3101b5d646d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{448bbafe-eaea-4224-ac67-13f3a6963c61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyLoadScenes.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="MyPlayScene.h" />
-    <ClInclude Include="MyPlayer.h" />
+    <ClInclude Include="MyPlayScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTitleScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="MyPlayer.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MyPlayScene.cpp" />
-    <ClCompile Include="MyPlayer.cpp" />
+    <ClCompile Include="MyPlayer.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="MyPlayScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTitleScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

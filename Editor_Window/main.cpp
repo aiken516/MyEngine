@@ -157,7 +157,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
 
    //씬 로드
-   Source::LoadScenes();
+   Client::LoadScenes();
 
    return TRUE;
 }

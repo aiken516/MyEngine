@@ -37,7 +37,17 @@ namespace Source
 			go->Render(hdc);
 		}
 	}
+
+	void Scene::OnEnter()
+	{
 	
+	}
+
+	void Scene::OnExit()
+	{
+	
+	}
+
 	void Scene::AddGameObject(GameObject* gameObject)
 	{
 		gameObjects_.push_back(gameObject);
