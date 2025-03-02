@@ -15,42 +15,21 @@ namespace Source
 	void PlayScene::Initialize()
 	{
 		{
-			Player* player = new Player();
-			Transform* transform = player->AddComponent<Transform>();
-			transform->SetPosition(800, 450);
+			Player* background = new Player();
+			Transform* transform
+				= background->AddComponent<Transform>();
+			transform->SetPosition(Vector2(0, 0));
 
 			transform->SetName(L"TR");
 
-			SpriteRenderer* spriteRenderer = player->AddComponent<SpriteRenderer>();
+			SpriteRenderer* spriteRenderer
+				= background->AddComponent<SpriteRenderer>();
 			spriteRenderer->SetName(L"SR");
+			spriteRenderer->ImageLoad(
+				L"C:\\Users\\User\\Documents\\GitHub\\MyEngine\\Resources\\background.png"
+			);
 
-			AddGameObject(player);
-		}
-
-		{
-			Player* player = new Player();
-			Transform* transform = player->AddComponent<Transform>();
-			transform->SetPosition(300, 450);
-
-			transform->SetName(L"TR");
-
-			SpriteRenderer* spriteRenderer = player->AddComponent<SpriteRenderer>();
-			spriteRenderer->SetName(L"SR");
-
-			AddGameObject(player);
-		}
-
-		{
-			Player* player = new Player();
-			Transform* transform = player->AddComponent<Transform>();
-			transform->SetPosition(100, 650);
-
-			transform->SetName(L"TR");
-
-			SpriteRenderer* spriteRenderer = player->AddComponent<SpriteRenderer>();
-			spriteRenderer->SetName(L"SR");
-
-			AddGameObject(player);
+			AddGameObject(background);
 		}
 	}
 

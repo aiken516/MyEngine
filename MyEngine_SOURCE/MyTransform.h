@@ -4,6 +4,8 @@
 
 namespace Source
 {
+	using namespace Math;
+
 	class Transform : public Component
 	{
 	public:
@@ -15,11 +17,20 @@ namespace Source
 		void LateUpdate()  override;
 		void Render(HDC hdc)  override;
 
-		void SetPosition(int x, int y) { x_ = x; y_ = y; }
-		int GetX() { return x_; }
-		int GetY() { return y_; }
+		void SetPosition(int x, int y)
+		{ 
+			position_.x = x;
+			position_.y = y;
+		}
+		void SetPosition(Vector2 position) 
+		{ 
+			position_.x = position.x;
+			position_.y = position.y;
+		}
+
+		Vector2 GetPosition() { return position_; }
+
 	private:
-		int x_;
-		int y_;
+		Vector2 position_;
 	};
 }

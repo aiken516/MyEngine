@@ -14,6 +14,11 @@ namespace Source
 		void Update()  override;
 		void LateUpdate()  override;
 		void Render(HDC hdc)  override;
+
+		void ImageLoad(const std::wstring& path);
 	private:
+		Gdiplus::Image* sprite_;
+		UINT width_;
+		UINT height_;
 	};
 }

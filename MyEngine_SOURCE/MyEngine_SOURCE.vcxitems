@@ -20,6 +20,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyInput.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyResource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MySceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MySpriteRenderer.h" />
@@ -32,6 +35,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyInput.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyResource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MySceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MySpriteRenderer.cpp" />

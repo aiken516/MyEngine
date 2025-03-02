@@ -2,6 +2,12 @@
 #include "MyGameObject.h"
 #include "MyTransform.h"
 
+#include <windows.h>  // 기본 Windows API 헤더
+#include <Shlwapi.h>  // PathFileExists()가 선언된 헤더
+#include <iostream>
+
+#pragma comment(lib, "Shlwapi.lib")  // 라이브러리 링크
+
 namespace Source
 {
 	SpriteRenderer::SpriteRenderer()
@@ -10,31 +16,32 @@ namespace Source
 	SpriteRenderer::~SpriteRenderer()
 	{
 	}
+
 	void SpriteRenderer::Initialize()
 	{
 	}
+
 	void SpriteRenderer::Update()
 	{
 	}
+
 	void SpriteRenderer::LateUpdate()
 	{
 	}
+
 	void SpriteRenderer::Render(HDC hdc)
 	{
-		HBRUSH blueBrush = CreateSolidBrush(RGB(0, 0, 255));
-		// 파랑 브러쉬 DC에 선택 그리고 흰색 브러쉬 반환값 반환
-		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, blueBrush);
-		HPEN redPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
-		HPEN oldPen = (HPEN)SelectObject(hdc, redPen);
-		SelectObject(hdc, oldBrush);
-
 		Transform* transform = GetOwner()->GetComponent<Transform>();
+		Vector2 position = transform->GetPosition();
 
-		Rectangle(hdc, transform->GetX(), transform->GetY(), 
-			transform->GetX() + 100, transform->GetY() + 100);
+		Gdiplus::Graphics graphcis(hdc);
+		graphcis.DrawImage(sprite_, Gdiplus::Rect(position.x, position.y, width_, height_));
+	}
 
-		SelectObject(hdc, oldBrush);
-		DeleteObject(blueBrush);
-		DeleteObject(redPen);
+	void SpriteRenderer::ImageLoad(const std::wstring& path)
+	{
+		sprite_ = Gdiplus::Image::FromFile(path.c_str());
+		width_ = sprite_->GetWidth();
+		height_ = sprite_->GetHeight();
 	}
 }
