@@ -3,8 +3,9 @@
 namespace Source
 {
 	Scene::Scene() : 
-		gameObjects_{}
+		layers_{}
 	{
+		CreateLayers();
 	}
 	Scene::~Scene()
 	{
@@ -12,29 +13,53 @@ namespace Source
 
 	void Scene::Initialize()
 	{
+		for (Layer* layer : layers_)
+		{
+			if (layer == nullptr)
+			{
+				continue;
+			}
+
+			layer->Initialize();
+		}
 	}
 
 	void Scene::Update()
 	{
-		for (GameObject* go : gameObjects_)
+		for (Layer* layer : layers_)
 		{
-			go->Update();
+			if (layer == nullptr)
+			{
+				continue;
+			}
+
+			layer->Update();
 		}
 	}
 
 	void Scene::LateUpdate()
 	{
-		for (GameObject* go : gameObjects_)
+		for (Layer* layer : layers_)
 		{
-			go->LateUpdate();
+			if (layer == nullptr)
+			{
+				continue;
+			}
+
+			layer->LateUpdate();
 		}
 	}
 
 	void Scene::Render(HDC hdc)
 	{
-		for (GameObject* go : gameObjects_)
+		for (Layer* layer : layers_)
 		{
-			go->Render(hdc);
+			if (layer == nullptr)
+			{
+				continue;
+			}
+
+			layer->Render(hdc);
 		}
 	}
 
@@ -48,8 +73,17 @@ namespace Source
 	
 	}
 
-	void Scene::AddGameObject(GameObject* gameObject)
+	void Scene::CreateLayers()
 	{
-		gameObjects_.push_back(gameObject);
+		layers_.resize((UINT)LayerType::MAX);
+		for (size_t i = 0; i < (UINT)LayerType::MAX; i++)
+		{
+			layers_[i] = new Layer();
+		}
+	}
+
+	void Scene::AddGameObject(GameObject* gameObject, LayerType layerType)
+	{
+		layers_[(UINT)layerType]->AddGameObject(gameObject);
 	}
 }

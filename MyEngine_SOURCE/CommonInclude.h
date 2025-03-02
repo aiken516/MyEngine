@@ -5,6 +5,7 @@
 #include <map>
 
 #include "MyMath.h"
+#include "MyEnums.h"
 
 // --- Window GUI ---
 #include <mmsystem.h>

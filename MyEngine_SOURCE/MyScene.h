@@ -1,6 +1,7 @@
 #pragma once
 #include "MyEntity.h"
 #include "MyGameObject.h"
+#include "MyLayer.h"
 
 namespace Source
 {
@@ -17,8 +18,9 @@ namespace Source
 		virtual void OnEnter();
 		virtual void OnExit();
 
-		void AddGameObject(GameObject* gameObject);
+		void CreateLayers();
+		void AddGameObject(GameObject* gameObject, LayerType layerType);
 	private:
-		std::vector<GameObject*> gameObjects_;
+		std::vector<Layer*> layers_;
 	};
 }

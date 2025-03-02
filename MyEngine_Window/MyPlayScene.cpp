@@ -31,7 +31,7 @@ namespace Client
 				L"C:\\Users\\User\\Documents\\GitHub\\MyEngine\\Resources\\background.png"
 			);
 
-			AddGameObject(background);
+			AddGameObject(background, LayerType::Background);
 		}
 	}
 
@@ -57,9 +57,11 @@ namespace Client
 		swprintf_s(str, 50, L"Play Scene");
 		TextOut(hdc, 200, 200, str, wcsnlen_s(str, 50));
 	}
+
 	void PlayScene::OnEnter()
 	{
 	}
+
 	void PlayScene::OnExit()
 	{
 	}
