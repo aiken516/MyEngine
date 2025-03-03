@@ -5,6 +5,7 @@
 #include "MySpriteRenderer.h"
 #include "MyInput.h"
 #include "MySceneManager.h"
+#include "MyObject.h"
 
 namespace Client
 {
@@ -17,12 +18,8 @@ namespace Client
 	void PlayScene::Initialize()
 	{
 		{
-			Player* background = new Player();
-			Transform* transform
-				= background->AddComponent<Transform>();
-			transform->SetPosition(Vector2(0, 0));
-
-			transform->SetName(L"TR");
+			Player* background = Object::Instantiate<Player>(
+				Enums::LayerType::Background, Vector2(10.0f, 10.0f));
 
 			SpriteRenderer* spriteRenderer
 				= background->AddComponent<SpriteRenderer>();
@@ -30,8 +27,6 @@ namespace Client
 			spriteRenderer->ImageLoad(
 				L"C:\\Users\\User\\Documents\\GitHub\\MyEngine\\Resources\\background.png"
 			);
-
-			AddGameObject(background, LayerType::Background);
 		}
 	}
 

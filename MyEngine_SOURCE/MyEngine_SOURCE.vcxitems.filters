@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MyApplication.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MyInput.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MyTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTransform.cpp">
       <Filter>Component</Filter>
     </ClCompile>
@@ -31,11 +28,19 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyInput.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyTime.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyApplication.cpp">
+      <Filter>High Level Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyResource.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyResources.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MyApplication.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MyInput.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MyTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTransform.h">
       <Filter>Component</Filter>
     </ClInclude>
@@ -69,6 +74,20 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MySceneManager.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyInput.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyTime.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyApplication.h">
+      <Filter>High Level Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyResource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyResources.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyObject.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Component">
@@ -85,6 +104,12 @@
     </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{a9f1ccfe-b41e-4a42-95ab-a9fb08d685a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper">
+      <UniqueIdentifier>{7db611ad-661d-4a8e-b515-ae01f2195b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="High Level Interface">
+      <UniqueIdentifier>{1818c774-3c5a-4ba2-9764-50248540a25c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

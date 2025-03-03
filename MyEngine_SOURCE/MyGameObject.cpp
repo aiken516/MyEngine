@@ -1,11 +1,13 @@
 #include "MyGameObject.h"
 #include "MyInput.h"
 #include "MyTime.h"
+#include "MyTransform.h"
 
 namespace Source
 {
 	GameObject::GameObject()
 	{
+		AddComponent<Transform>();
 	}
 
 	GameObject::~GameObject()

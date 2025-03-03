@@ -7,6 +7,7 @@ namespace Source
 	{
 		CreateLayers();
 	}
+
 	Scene::~Scene()
 	{
 	}
@@ -75,14 +76,14 @@ namespace Source
 
 	void Scene::CreateLayers()
 	{
-		layers_.resize((UINT)LayerType::MAX);
-		for (size_t i = 0; i < (UINT)LayerType::MAX; i++)
+		layers_.resize((UINT)Enums::LayerType::MAX);
+		for (size_t i = 0; i < (UINT)Enums::LayerType::MAX; i++)
 		{
 			layers_[i] = new Layer();
 		}
 	}
 
-	void Scene::AddGameObject(GameObject* gameObject, LayerType layerType)
+	void Scene::AddGameObject(GameObject* gameObject, const Enums::LayerType layerType)
 	{
 		layers_[(UINT)layerType]->AddGameObject(gameObject);
 	}

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Source
+namespace Source::Enums
 {
 	//랜더링 시 우선 순위를 위한 레이어
 	//유니티의 카메라 레이어 비슷한 개념으로 enum

@@ -19,7 +19,8 @@ namespace Source
 		virtual void OnExit();
 
 		void CreateLayers();
-		void AddGameObject(GameObject* gameObject, LayerType layerType);
+		Layer* GetLayer(const Enums::LayerType layerType) { return layers_[(UINT)layerType]; }
+		void AddGameObject(GameObject* gameObject, const Enums::LayerType layerType);
 	private:
 		std::vector<Layer*> layers_;
 	};

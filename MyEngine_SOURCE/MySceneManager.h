@@ -11,6 +11,10 @@ namespace Source
 		{
 			T* scene = new T();
 			scene->SetName(name);
+
+			activeScene_ = scene;//임시 코드 나중에 수정하기
+
+
 			scene->Initialize();
 
 			scenes_.insert(std::make_pair(name, scene));
@@ -18,26 +22,8 @@ namespace Source
 			return scene;
 		}
 
-		static Scene* LoadScene(const std::wstring name)
-		{
-			if (activeScene_ != nullptr)
-			{
-				activeScene_->OnExit();
-			}
-
-			std::map<std::wstring, Scene*>::iterator iter = scenes_.find(name);
-
-			if (iter == scenes_.end())
-			{
-				return nullptr;
-			}
-
-			activeScene_ = iter->second;
-
-			activeScene_->OnEnter();
-
-			return iter->second;
-		}
+		static Scene* LoadScene(const std::wstring name);
+		static Scene* GetActiveScene() { return activeScene_; }
 
 		static void Initialize();
 		static void Update();
