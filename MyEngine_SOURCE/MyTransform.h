@@ -19,18 +19,18 @@ namespace Source
 
 		void SetPosition(int x, int y)
 		{ 
-			position_.x = x;
-			position_.y = y;
+			_position.x = x;
+			_position.y = y;
 		}
 		void SetPosition(Vector2 position) 
 		{ 
-			position_.x = position.x;
-			position_.y = position.y;
+			_position.x = position.x;
+			_position.y = position.y;
 		}
 
-		Vector2 GetPosition() { return position_; }
+		Vector2 GetPosition() { return _position; }
 
 	private:
-		Vector2 position_;
+		Vector2 _position;
 	};
 }

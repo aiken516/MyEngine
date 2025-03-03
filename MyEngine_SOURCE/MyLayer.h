@@ -19,6 +19,6 @@ namespace Source
 		void AddGameObject(GameObject* gameObject);
 	private:
 		//LayerType type_;
-		std::vector<GameObject*> gameObjects_;
+		std::vector<GameObject*> _gameObjects;
 	};
 }

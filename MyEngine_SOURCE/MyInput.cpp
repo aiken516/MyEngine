@@ -2,7 +2,7 @@
 
 namespace Source
 {
-	std::vector<Input::Key> Input::keys = {};
+	std::vector<Input::Key> Input::_keys = {};
 
 	int ASCII[(UINT)KeyCode::End] =
 	{
@@ -26,7 +26,7 @@ namespace Source
 			key.state = KeyState::None;
 			key.keyCode = (KeyCode)i;
 
-			keys.push_back(key);
+			_keys.push_back(key);
 		}
 	}
 
@@ -37,33 +37,33 @@ namespace Source
 			//키가 눌림
 			if (GetAsyncKeyState(ASCII[i]) & 0x8000)
 			{
-				if (keys[i].pressed)
+				if (_keys[i].pressed)
 				{
 					//이미 눌러져 있었음
-					keys[i].state = KeyState::Pressed;
+					_keys[i].state = KeyState::Pressed;
 				}
 				else
 				{
 					//처음 눌림
-					keys[i].state = KeyState::Down;
+					_keys[i].state = KeyState::Down;
 				}
 
-				keys[i].pressed = true;
+				_keys[i].pressed = true;
 			}
 			else //키가 안 눌림
 			{
-				if (keys[i].pressed)
+				if (_keys[i].pressed)
 				{
 					//이미 눌러져 있었음
-					keys[i].state = KeyState::Up;
+					_keys[i].state = KeyState::Up;
 				}
 				else
 				{
 					//처음 눌림
-					keys[i].state = KeyState::None;
+					_keys[i].state = KeyState::None;
 				}
 
-				keys[i].pressed = false;
+				_keys[i].pressed = false;
 			}
 		}
 	}

@@ -7,6 +7,6 @@ namespace Source
 	{
 	public:
 	private:
-		std::wstring path_;
+		std::wstring _path;
 	};
 }

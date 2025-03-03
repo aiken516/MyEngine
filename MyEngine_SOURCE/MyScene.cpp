@@ -3,7 +3,7 @@
 namespace Source
 {
 	Scene::Scene() : 
-		layers_{}
+		_sceneLayers{}
 	{
 		CreateLayers();
 	}
@@ -14,7 +14,7 @@ namespace Source
 
 	void Scene::Initialize()
 	{
-		for (Layer* layer : layers_)
+		for (Layer* layer : _sceneLayers)
 		{
 			if (layer == nullptr)
 			{
@@ -27,7 +27,7 @@ namespace Source
 
 	void Scene::Update()
 	{
-		for (Layer* layer : layers_)
+		for (Layer* layer : _sceneLayers)
 		{
 			if (layer == nullptr)
 			{
@@ -40,7 +40,7 @@ namespace Source
 
 	void Scene::LateUpdate()
 	{
-		for (Layer* layer : layers_)
+		for (Layer* layer : _sceneLayers)
 		{
 			if (layer == nullptr)
 			{
@@ -53,7 +53,7 @@ namespace Source
 
 	void Scene::Render(HDC hdc)
 	{
-		for (Layer* layer : layers_)
+		for (Layer* layer : _sceneLayers)
 		{
 			if (layer == nullptr)
 			{
@@ -76,15 +76,15 @@ namespace Source
 
 	void Scene::CreateLayers()
 	{
-		layers_.resize((UINT)Enums::LayerType::MAX);
+		_sceneLayers.resize((UINT)Enums::LayerType::MAX);
 		for (size_t i = 0; i < (UINT)Enums::LayerType::MAX; i++)
 		{
-			layers_[i] = new Layer();
+			_sceneLayers[i] = new Layer();
 		}
 	}
 
 	void Scene::AddGameObject(GameObject* gameObject, const Enums::LayerType layerType)
 	{
-		layers_[(UINT)layerType]->AddGameObject(gameObject);
+		_sceneLayers[(UINT)layerType]->AddGameObject(gameObject);
 	}
 }

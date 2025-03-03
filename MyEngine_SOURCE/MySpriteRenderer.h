@@ -17,8 +17,8 @@ namespace Source
 
 		void ImageLoad(const std::wstring& path);
 	private:
-		Gdiplus::Image* sprite_;
-		UINT width_;
-		UINT height_;
+		Gdiplus::Image* _sprite;
+		UINT _width;
+		UINT _height;
 	};
 }

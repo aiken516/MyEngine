@@ -16,7 +16,7 @@ namespace Source
 	
 	void GameObject::Initialize()
 	{
-		for (Component* comp : components_)
+		for (Component* comp : _components)
 		{
 			comp->Initialize();
 		}
@@ -24,7 +24,7 @@ namespace Source
 
 	void GameObject::Update()
 	{
-		for (Component* comp : components_)
+		for (Component* comp : _components)
 		{
 			comp->Update();
 		}
@@ -32,7 +32,7 @@ namespace Source
 
 	void GameObject::LateUpdate()
 	{
-		for (Component* comp : components_)
+		for (Component* comp : _components)
 		{
 			comp->LateUpdate();
 		}
@@ -40,7 +40,7 @@ namespace Source
 
 	void GameObject::Render(HDC hdc)
 	{
-		for (Component* comp : components_)
+		for (Component* comp : _components)
 		{
 			comp->Render(hdc);
 		}

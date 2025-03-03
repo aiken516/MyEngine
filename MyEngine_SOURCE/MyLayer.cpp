@@ -3,7 +3,7 @@
 namespace Source
 {
 	Layer::Layer() :
-		gameObjects_{}
+		_gameObjects{}
 	{
 	}
 
@@ -13,7 +13,7 @@ namespace Source
 
 	void Layer::Initialize()
 	{
-		for (GameObject* go : gameObjects_)
+		for (GameObject* go : _gameObjects)
 		{
 			if (go == nullptr)
 			{
@@ -26,7 +26,7 @@ namespace Source
 	
 	void Layer::Update()
 	{
-		for (GameObject* go : gameObjects_)
+		for (GameObject* go : _gameObjects)
 		{
 			if (go == nullptr)
 			{
@@ -39,7 +39,7 @@ namespace Source
 	
 	void Layer::LateUpdate()
 	{
-		for (GameObject* go : gameObjects_)
+		for (GameObject* go : _gameObjects)
 		{
 			if (go == nullptr)
 			{
@@ -52,7 +52,7 @@ namespace Source
 
 	void Layer::Render(HDC hdc)
 	{
-		for (GameObject* go : gameObjects_)
+		for (GameObject* go : _gameObjects)
 		{
 			if (go == nullptr)
 			{
@@ -70,6 +70,6 @@ namespace Source
 			return;
 		}
 
-		gameObjects_.push_back(gameObject);
+		_gameObjects.push_back(gameObject);
 	}
 }

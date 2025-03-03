@@ -34,12 +34,12 @@ namespace Source
 		static void CreateKeys();
 		static void Update();
 
-		static bool GetKeyDown(KeyCode keyCode) { return keys[(UINT)keyCode].state == KeyState::Down; }
-		static bool GetKeyUp(KeyCode keyCode) { return keys[(UINT)keyCode].state == KeyState::Up; }
-		static bool GetKey(KeyCode keyCode) { return keys[(UINT)keyCode].state == KeyState::Pressed; }
+		static bool GetKeyDown(KeyCode keyCode) { return _keys[(UINT)keyCode].state == KeyState::Down; }
+		static bool GetKeyUp(KeyCode keyCode) { return _keys[(UINT)keyCode].state == KeyState::Up; }
+		static bool GetKey(KeyCode keyCode) { return _keys[(UINT)keyCode].state == KeyState::Pressed; }
 
 	private:
-		static std::vector<Key> keys;
+		static std::vector<Key> _keys;
 	};
 }
 

@@ -8,9 +8,9 @@ namespace Source
 	public:
 		Entity();
 		virtual ~Entity();
-		void SetName(const std::wstring& nameParam) { name_ = nameParam; };
-		std::wstring& GetName() { return name_; }
+		void SetName(const std::wstring& nameParam) { _name = nameParam; };
+		std::wstring& GetName() { return _name; }
 	private:
-		std::wstring name_;
+		std::wstring _name;
 	};
 }

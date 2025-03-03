@@ -3,7 +3,7 @@
 namespace Source
 {
 	Entity::Entity() : 
-		name_(L"")
+		_name(L"")
 	{
 	}
 	Entity::~Entity()

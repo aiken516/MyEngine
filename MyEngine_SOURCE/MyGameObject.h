@@ -22,7 +22,7 @@ namespace Source
 			component->Initialize();
 
 			component->SetOwner(this);
-			components_.push_back(component);
+			_components.push_back(component);
 
 			return component;
 		}
@@ -31,7 +31,7 @@ namespace Source
 		T* GetComponent()
 		{
 			T* componentResult = nullptr;
-			for (Component* comp : components_)
+			for (Component* comp : _components)
 			{
 				componentResult = dynamic_cast<T*>(comp);
 				if (componentResult != nullptr)
@@ -44,7 +44,7 @@ namespace Source
 		}
 
 	private:
-		std::vector<Component*> components_;
+		std::vector<Component*> _components;
 	};
 }
 

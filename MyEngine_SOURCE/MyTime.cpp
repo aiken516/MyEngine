@@ -2,40 +2,40 @@
 
 namespace Source
 {
-	LARGE_INTEGER Time::cpuFrequency = {};
-	LARGE_INTEGER Time::prevCpuFrequency = {};
-	LARGE_INTEGER Time::currentCpuFrequency = {};
-	float Time::deltaTime = 0.0f;
+	LARGE_INTEGER Time::_cpuFrequency = {};
+	LARGE_INTEGER Time::_prevCpuFrequency = {};
+	LARGE_INTEGER Time::_currentCpuFrequency = {};
+	float Time::_deltaTime = 0.0f;
 
 	void Time::Initailze()
 	{
 		//CPU의 고유 진동수 받아오기
-		QueryPerformanceFrequency(&cpuFrequency);
+		QueryPerformanceFrequency(&_cpuFrequency);
 
 		//CPU의 프로그램 시작 시 진동수
-		QueryPerformanceCounter(&prevCpuFrequency);
+		QueryPerformanceCounter(&_prevCpuFrequency);
 	}
 
 	void Time::Update()
 	{
-		QueryPerformanceCounter(&currentCpuFrequency);
+		QueryPerformanceCounter(&_currentCpuFrequency);
 
-		float frequencyDifference = static_cast<float>(currentCpuFrequency.QuadPart - prevCpuFrequency.QuadPart);
+		float frequencyDifference = static_cast<float>(_currentCpuFrequency.QuadPart - _prevCpuFrequency.QuadPart);
 
-		deltaTime = frequencyDifference / static_cast<float>(cpuFrequency.QuadPart);
+		_deltaTime = frequencyDifference / static_cast<float>(_cpuFrequency.QuadPart);
 
-		prevCpuFrequency.QuadPart = currentCpuFrequency.QuadPart;
+		_prevCpuFrequency.QuadPart = _currentCpuFrequency.QuadPart;
 	}
 
 	void Time::Render(HDC hdc)
 	{
 		static float time = 0.0f;
 
-		time += deltaTime;
+		time += _deltaTime;
 
 		wchar_t str[50] = L"";
 
-		int fps = 1.0f / deltaTime;
+		int fps = 1.0f / _deltaTime;
 
 		swprintf_s(str, 50, L"Time : %d", fps);
 		int length = wcsnlen_s(str, 50);

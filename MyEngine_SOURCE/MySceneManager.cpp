@@ -2,26 +2,26 @@
 
 namespace Source
 {
-	std::map<std::wstring, Scene*> SceneManager::scenes_ = {};
-	Scene* SceneManager::activeScene_ = nullptr;
+	std::map<std::wstring, Scene*> SceneManager::_scenes = {};
+	Scene* SceneManager::_activeScene = nullptr;
 
 	Scene* SceneManager::LoadScene(const std::wstring name)
 	{
-		if (activeScene_ != nullptr)
+		if (_activeScene != nullptr)
 		{
-			activeScene_->OnExit();
+			_activeScene->OnExit();
 		}
 
-		std::map<std::wstring, Scene*>::iterator iter = scenes_.find(name);
+		std::map<std::wstring, Scene*>::iterator iter = _scenes.find(name);
 
-		if (iter == scenes_.end())
+		if (iter == _scenes.end())
 		{
 			return nullptr;
 		}
 
-		activeScene_ = iter->second;
+		_activeScene = iter->second;
 
-		activeScene_->OnEnter();
+		_activeScene->OnEnter();
 
 		return iter->second;
 	}
@@ -32,16 +32,16 @@ namespace Source
 
 	void SceneManager::Update()
 	{
-		activeScene_->Update();
+		_activeScene->Update();
 	}
 
 	void SceneManager::LateUpdate()
 	{
-		activeScene_->LateUpdate();
+		_activeScene->LateUpdate();
 	}
 
 	void SceneManager::Render(HDC hdc)
 	{
-		activeScene_->Render(hdc);
+		_activeScene->Render(hdc);
 	}
 }

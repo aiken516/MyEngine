@@ -35,13 +35,13 @@ namespace Source
 		Vector2 position = transform->GetPosition();
 
 		Gdiplus::Graphics graphcis(hdc);
-		graphcis.DrawImage(sprite_, Gdiplus::Rect(position.x, position.y, width_, height_));
+		graphcis.DrawImage(_sprite, Gdiplus::Rect(position.x, position.y, _width, _height));
 	}
 
 	void SpriteRenderer::ImageLoad(const std::wstring& path)
 	{
-		sprite_ = Gdiplus::Image::FromFile(path.c_str());
-		width_ = sprite_->GetWidth();
-		height_ = sprite_->GetHeight();
+		_sprite = Gdiplus::Image::FromFile(path.c_str());
+		_width = _sprite->GetWidth();
+		_height = _sprite->GetHeight();
 	}
 }

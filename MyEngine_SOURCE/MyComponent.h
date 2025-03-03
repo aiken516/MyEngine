@@ -15,11 +15,11 @@ namespace Source
 		virtual void LateUpdate();
 		virtual void Render(HDC hdc);
 
-		void SetOwner(GameObject* owner) { owner_ = owner; }
-		GameObject* GetOwner() { return owner_; }
+		void SetOwner(GameObject* owner) { _owner = owner; }
+		GameObject* GetOwner() { return _owner; }
 
 	private:
-		GameObject* owner_;
+		GameObject* _owner;
 	};
 }
 

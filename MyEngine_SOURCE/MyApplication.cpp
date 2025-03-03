@@ -6,12 +6,12 @@
 namespace Source
 {
 	Application::Application() :
-		hwnd_(nullptr),
-		hdc_(nullptr),
-		width_(0),
-		height_(0),
-		backHdc_(NULL),
-		backBitMap_(NULL)
+		_hwnd(nullptr),
+		_hdc(nullptr),
+		_width(0),
+		_height(0),
+		_backHdc(NULL),
+		_backBitMap(NULL)
 	{
 
 	}
@@ -54,44 +54,44 @@ namespace Source
 	{
 		ClearRenderTarget();
 
-		Time::Render(backHdc_);
-		SceneManager::Render(backHdc_);
+		Time::Render(_backHdc);
+		SceneManager::Render(_backHdc);
 
-		CopyRenderTarget(backHdc_, hdc_);
+		CopyRenderTarget(_backHdc, _hdc);
 	}
 
 	void Application::ClearRenderTarget()
 	{
-		Rectangle(backHdc_, -1, -1, width_ + 1, height_ + 1); // 흰 사각형을 전체에 채워 그림
+		Rectangle(_backHdc, -1, -1, _width + 1, _height + 1); // 흰 사각형을 전체에 채워 그림
 	}
 
 	void Application::CopyRenderTarget(HDC source, HDC dest)
 	{
-		BitBlt(dest, 0, 0, width_, height_, source, 0, 0, SRCCOPY);
+		BitBlt(dest, 0, 0, _width, _height, source, 0, 0, SRCCOPY);
 	}
 
 	void Application::AdjustApplicationWindow(HWND hwnd, UINT width, UINT height)
 	{
-		hwnd_ = hwnd;
-		hdc_ = GetDC(hwnd_);
+		_hwnd = hwnd;
+		_hdc = GetDC(_hwnd);
 
 		RECT rect = { 0, 0, width, height };
 		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
-		width_ = rect.right - rect.left;
-		height_ = rect.bottom - rect.top;
+		_width = rect.right - rect.left;
+		_height = rect.bottom - rect.top;
 
-		SetWindowPos(hwnd_, nullptr, 0, 0, width_, height_, 0);
-		ShowWindow(hwnd_, true);
+		SetWindowPos(_hwnd, nullptr, 0, 0, _width, _height, 0);
+		ShowWindow(_hwnd, true);
 	}
 
 	void Application::CreateBackBuffer()
 	{
 		//윈도우 해상도에 맞게 백버퍼 생성 (캔버스)
-		backBitMap_ = CreateCompatibleBitmap(hdc_, width_, height_);
-		backHdc_ = CreateCompatibleDC(hdc_);
+		_backBitMap = CreateCompatibleBitmap(_hdc, _width, _height);
+		_backHdc = CreateCompatibleDC(_hdc);
 
-		HBITMAP oldBitMap = (HBITMAP)SelectObject(backHdc_, backBitMap_);
+		HBITMAP oldBitMap = (HBITMAP)SelectObject(_backHdc, _backBitMap);
 		DeleteObject(oldBitMap);
 	}
 }
