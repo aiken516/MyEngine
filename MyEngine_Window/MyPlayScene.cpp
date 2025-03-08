@@ -6,6 +6,8 @@
 #include "MyInput.h"
 #include "MySceneManager.h"
 #include "MyObject.h"
+#include "MyTexture.h"
+#include "MyResources.h"
 
 namespace Client
 {
@@ -24,9 +26,10 @@ namespace Client
 			SpriteRenderer* spriteRenderer
 				= background->AddComponent<SpriteRenderer>();
 			spriteRenderer->SetName(L"SR");
-			spriteRenderer->ImageLoad(
-				L"C:\\Users\\User\\Documents\\GitHub\\MyEngine\\Resources\\background.png"
-			);
+
+			spriteRenderer->SetTexture(Resources::Find<Graphics::Texture>(L"background"));
+
+			Scene::Initialize();
 		}
 	}
 

@@ -7,6 +7,8 @@
 #include "MyMath.h"
 #include "MyEnums.h"
 
+#include <assert.h>
+
 // --- Window GUI ---
 #include <mmsystem.h>
 #include <dinput.h>

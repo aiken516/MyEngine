@@ -37,8 +37,15 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyApplication.cpp">
       <Filter>High Level Interface</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MyResource.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)MyResources.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyResource.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyResources.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyTexture.cpp">
+      <Filter>Resource\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTransform.h">
@@ -83,10 +90,17 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyApplication.h">
       <Filter>High Level Interface</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MyResource.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MyResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyObject.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyResource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyResources.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyTexture.h">
+      <Filter>Resource\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +124,12 @@
     </Filter>
     <Filter Include="High Level Interface">
       <UniqueIdentifier>{1818c774-3c5a-4ba2-9764-50248540a25c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{876990f3-5f85-4dea-8559-74841013e482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Texture">
+      <UniqueIdentifier>{6ad6bd69-3f90-43e2-935d-b692a1c85dfa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

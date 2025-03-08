@@ -13,4 +13,14 @@ namespace Source::Enums
 		//
 		MAX = 16
 	};
+
+	enum class ResourceType
+	{
+		Texture,
+		//Mesh,
+		//Video,
+		AudioClip,
+		Prefab,
+		END
+	};
 }

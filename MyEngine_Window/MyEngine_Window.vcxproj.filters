@@ -21,6 +21,7 @@
     <ClInclude Include="MyPlayer.h">
       <Filter>Contents</Filter>
     </ClInclude>
+    <ClInclude Include="MyLoadResources.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MyPlayer.cpp">

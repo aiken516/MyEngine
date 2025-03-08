@@ -1,6 +1,7 @@
 #include "MySpriteRenderer.h"
 #include "MyGameObject.h"
 #include "MyTransform.h"
+#include "MyTexture.h"
 
 #include <windows.h>  // 기본 Windows API 헤더
 #include <Shlwapi.h>  // PathFileExists()가 선언된 헤더
@@ -10,9 +11,13 @@
 
 namespace Source
 {
-	SpriteRenderer::SpriteRenderer()
+	SpriteRenderer::SpriteRenderer() : 
+		Component(),
+		_texture(nullptr),
+		_size(Vector2::one)
 	{
 	}
+
 	SpriteRenderer::~SpriteRenderer()
 	{
 	}
@@ -31,17 +36,28 @@ namespace Source
 
 	void SpriteRenderer::Render(HDC hdc)
 	{
+		if (_texture == nullptr)
+		{
+			assert(false);
+		}
+
 		Transform* transform = GetOwner()->GetComponent<Transform>();
 		Vector2 position = transform->GetPosition();
 
-		Gdiplus::Graphics graphcis(hdc);
-		graphcis.DrawImage(_sprite, Gdiplus::Rect(position.x, position.y, _width, _height));
-	}
-
-	void SpriteRenderer::ImageLoad(const std::wstring& path)
-	{
-		_sprite = Gdiplus::Image::FromFile(path.c_str());
-		_width = _sprite->GetWidth();
-		_height = _sprite->GetHeight();
+		if (_texture->GetTextureType() == Graphics::Texture::TextureType::Bmp)
+		{
+			//https://blog.naver.com/power2845/50147965306
+			TransparentBlt(hdc, position.x, position.y
+				, _texture->GetWidth() * _size.x, _texture->GetHeight() * _size.y
+				, _texture->GetHdc(), 0, 0, _texture->GetWidth(), _texture->GetHeight()
+				, RGB(255, 0, 255));//마젠타
+		}
+		else if (_texture->GetTextureType() == Graphics::Texture::TextureType::Png)
+		{
+			Gdiplus::Graphics graphcis(hdc);
+			graphcis.DrawImage(_texture->GetSprite(), 
+				Gdiplus::Rect(position.x, position.y, 
+					_texture->GetWidth() * _size.x, _texture->GetHeight() * _size.y));
+		}
 	}
 }

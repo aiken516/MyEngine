@@ -5,6 +5,14 @@ namespace Source::Math
 	struct Vector2
 	{
 	public:
+		static Vector2 one;
+		static Vector2 zero;
+
+		static Vector2 up;
+		static Vector2 down;
+		static Vector2 right;
+		static Vector2 left;
+
 		float x;
 		float y;
 

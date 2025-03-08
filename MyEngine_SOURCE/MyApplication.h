@@ -15,6 +15,9 @@ namespace Source
 		void Update();
 		void LateUpdate();
 		void Render();
+		
+		HDC GetHDC() { return _hdc; }
+
 	private:
 		void ClearRenderTarget();
 		void CopyRenderTarget(HDC source, HDC dest);

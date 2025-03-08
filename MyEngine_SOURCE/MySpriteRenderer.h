@@ -1,6 +1,7 @@
 #pragma once
 #include "MyEntity.h"
 #include "MyComponent.h"
+#include "MyTexture.h"
 
 namespace Source
 {
@@ -15,10 +16,11 @@ namespace Source
 		void LateUpdate()  override;
 		void Render(HDC hdc)  override;
 
-		void ImageLoad(const std::wstring& path);
+		void SetTexture(Graphics::Texture* texture) { _texture = texture; }
+		void SetSize(Math::Vector2 size) { _size = size; }
+
 	private:
-		Gdiplus::Image* _sprite;
-		UINT _width;
-		UINT _height;
+		Graphics::Texture* _texture;
+		Math::Vector2 _size;
 	};
 }
