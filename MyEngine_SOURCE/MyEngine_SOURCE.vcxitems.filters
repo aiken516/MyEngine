@@ -46,6 +46,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTexture.cpp">
       <Filter>Resource\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyScript.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTransform.h">
@@ -101,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTexture.h">
       <Filter>Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyScript.h">
+      <Filter>Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

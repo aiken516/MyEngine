@@ -8,6 +8,7 @@
 #include "MyObject.h"
 #include "MyTexture.h"
 #include "MyResources.h"
+#include "MyPlayerScript.h"
 
 namespace Client
 {
@@ -20,7 +21,7 @@ namespace Client
 	void PlayScene::Initialize()
 	{
 		{
-			Player* background = Object::Instantiate<Player>(
+			GameObject* background = Object::Instantiate<GameObject>(
 				Enums::LayerType::Background, Vector2(10.0f, 10.0f));
 
 			SpriteRenderer* spriteRenderer
@@ -28,6 +29,8 @@ namespace Client
 			spriteRenderer->SetName(L"SR");
 
 			spriteRenderer->SetTexture(Resources::Find<Graphics::Texture>(L"background"));
+
+			background->AddComponent<PlayerScript>();
 
 			Scene::Initialize();
 		}

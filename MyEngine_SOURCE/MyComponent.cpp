@@ -2,9 +2,10 @@
 
 namespace Source
 {
-	Component::Component()
+	Component::Component(Enums::ComponentType type) :
+		_owner(),
+		_type(type)
 	{
-
 	}
 
 	Component::~Component()

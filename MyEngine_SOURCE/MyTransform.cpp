@@ -2,7 +2,8 @@
 
 namespace Source
 {
-	Transform::Transform()
+	Transform::Transform() :
+		Component(Enums::ComponentType::Transform)
 	{
 	}
 	Transform::~Transform()

@@ -7,6 +7,7 @@ namespace Source
 {
 	GameObject::GameObject()
 	{
+		_components.resize((UINT)Enums::ComponentType::END);
 		AddComponent<Transform>();
 	}
 
@@ -18,6 +19,11 @@ namespace Source
 	{
 		for (Component* comp : _components)
 		{
+			if (comp == nullptr)
+			{
+				continue;
+			}
+
 			comp->Initialize();
 		}
 	}
@@ -26,6 +32,11 @@ namespace Source
 	{
 		for (Component* comp : _components)
 		{
+			if (comp == nullptr)
+			{
+				continue;
+			}
+
 			comp->Update();
 		}
 	}
@@ -34,6 +45,11 @@ namespace Source
 	{
 		for (Component* comp : _components)
 		{
+			if (comp == nullptr)
+			{
+				continue;
+			}
+
 			comp->LateUpdate();
 		}
 	}
@@ -42,6 +58,11 @@ namespace Source
 	{
 		for (Component* comp : _components)
 		{
+			if (comp == nullptr)
+			{
+				continue;
+			}
+
 			comp->Render(hdc);
 		}
 	}

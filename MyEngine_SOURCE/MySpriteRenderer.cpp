@@ -11,8 +11,8 @@
 
 namespace Source
 {
-	SpriteRenderer::SpriteRenderer() : 
-		Component(),
+	SpriteRenderer::SpriteRenderer() :
+		Component(Enums::ComponentType::Renderer),
 		_texture(nullptr),
 		_size(Vector2::one)
 	{

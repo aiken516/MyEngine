@@ -22,7 +22,8 @@ namespace Source
 			component->Initialize();
 
 			component->SetOwner(this);
-			_components.push_back(component);
+			_components[(UINT)component->GetType()] = component;
+			//_components.push_back(component);
 
 			return component;
 		}
