@@ -2,6 +2,7 @@
 #include "MyGameObject.h"
 #include "MyTransform.h"
 #include "MyTexture.h"
+#include "MyRenderer.h"
 
 #include <windows.h>  // 기본 Windows API 헤더
 #include <Shlwapi.h>  // PathFileExists()가 선언된 헤더
@@ -42,10 +43,11 @@ namespace Source
 		}
 
 		Transform* transform = GetOwner()->GetComponent<Transform>();
-		Vector2 position = transform->GetPosition();
+		Vector2 position = Renderer::MainCamera->CalculatePostion(transform->GetPosition());
 
 		if (_texture->GetTextureType() == Graphics::Texture::TextureType::Bmp)
 		{
+
 			//https://blog.naver.com/power2845/50147965306
 			TransparentBlt(hdc, position.x, position.y
 				, _texture->GetWidth() * _size.x, _texture->GetHeight() * _size.y

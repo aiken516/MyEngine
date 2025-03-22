@@ -49,6 +49,10 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyScript.cpp">
       <Filter>Component</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyCamera.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTransform.h">
@@ -108,6 +112,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyScript.h">
       <Filter>Component</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyCamera.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Component">
@@ -136,6 +144,9 @@
     </Filter>
     <Filter Include="Resource\Texture">
       <UniqueIdentifier>{6ad6bd69-3f90-43e2-935d-b692a1c85dfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{94ca0723-0e85-420e-9e2d-a7b940a68456}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

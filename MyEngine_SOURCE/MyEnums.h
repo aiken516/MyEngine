@@ -8,6 +8,7 @@ namespace Source::Enums
 		Transform,
 		Renderer,
 		Script,
+		Camera,
 		END
 	};
 

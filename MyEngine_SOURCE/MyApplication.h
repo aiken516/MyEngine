@@ -17,6 +17,8 @@ namespace Source
 		void Render();
 		
 		HDC GetHDC() { return _hdc; }
+		UINT GetWidth() { return _width; }
+		UINT GetHeight() { return _height; }
 
 	private:
 		void ClearRenderTarget();

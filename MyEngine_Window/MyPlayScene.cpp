@@ -8,6 +8,8 @@
 #include "MyObject.h"
 #include "MyTexture.h"
 #include "MyResources.h"
+#include "MyCamera.h"
+#include "MyRenderer.h"
 #include "MyPlayerScript.h"
 
 namespace Client
@@ -21,16 +23,29 @@ namespace Client
 	void PlayScene::Initialize()
 	{
 		{
+			GameObject* camera = Object::Instantiate<GameObject>(
+				Enums::LayerType::None, Vector2(0.0f, 10.0f));
+			Camera* cameraComponent = camera->AddComponent<Camera>();
+			Renderer::MainCamera = cameraComponent;
+			camera->AddComponent<PlayerScript>();
+
+
 			GameObject* background = Object::Instantiate<GameObject>(
 				Enums::LayerType::Background, Vector2(10.0f, 10.0f));
 
-			SpriteRenderer* spriteRenderer
-				= background->AddComponent<SpriteRenderer>();
+			SpriteRenderer* spriteRenderer = background->AddComponent<SpriteRenderer>();
 			spriteRenderer->SetName(L"SR");
-
 			spriteRenderer->SetTexture(Resources::Find<Graphics::Texture>(L"background"));
 
-			background->AddComponent<PlayerScript>();
+			GameObject* pacman = Object::Instantiate<GameObject>(
+				Enums::LayerType::Background, Vector2(30.0f, 30.0f));
+
+			SpriteRenderer* pacmanSpriteRenderer = pacman->AddComponent<SpriteRenderer>();
+			pacmanSpriteRenderer->SetName(L"SR");
+			pacmanSpriteRenderer->SetTexture(Resources::Find<Graphics::Texture>(L"Pacman"));
+			pacmanSpriteRenderer->SetSize(Vector2(3.0f, 3.0f));
+
+			pacman->AddComponent<PlayerScript>();
 
 			Scene::Initialize();
 		}

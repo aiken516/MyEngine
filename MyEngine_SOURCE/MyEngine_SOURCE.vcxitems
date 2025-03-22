@@ -16,6 +16,7 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyEnums.h" />
@@ -33,9 +34,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTransform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)MyApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyGameObject.cpp" />
@@ -51,5 +54,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTransform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyRenderer.cpp" />
   </ItemGroup>
 </Project>
