@@ -16,6 +16,7 @@ namespace Source
 		void LateUpdate();
 		void Render();
 		
+		HWND GetHWND() { return _hwnd; }
 		HDC GetHDC() { return _hdc; }
 		UINT GetWidth() { return _width; }
 		UINT GetHeight() { return _height; }

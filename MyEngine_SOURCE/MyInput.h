@@ -17,6 +17,7 @@ namespace Source
 		A, S, D, F, G, H, J, K, L,
 		Z, X, C, V, B, N, M,
 		LEFT, RIGHT, DOWN, UP,
+		LBUTTON, RBUTTON, MBUTTON,
 		End
 	};
 
@@ -38,8 +39,12 @@ namespace Source
 		static bool GetKeyUp(KeyCode keyCode) { return _keys[(UINT)keyCode].state == KeyState::Up; }
 		static bool GetKey(KeyCode keyCode) { return _keys[(UINT)keyCode].state == KeyState::Pressed; }
 
+		static Math::Vector2 GetMousePosition() { return _mousePosition; }
+
+		static void ClearKey();
 	private:
 		static std::vector<Key> _keys;
+		static Math::Vector2 _mousePosition;
 	};
 }
 
