@@ -43,23 +43,54 @@ namespace Source
 		}
 
 		Transform* transform = GetOwner()->GetComponent<Transform>();
-		Vector2 position = Renderer::MainCamera->CalculatePostion(transform->GetPosition());
+		Vector2 position = transform->GetPosition();
+		float rotation = transform->GetRotation();
+		Vector2 scale = transform->GetScale();
+			
+		if (Renderer::MainCamera != nullptr)
+		{
+			position = Renderer::MainCamera->CalculatePostion(position);
+		}
 
 		if (_texture->GetTextureType() == Graphics::Texture::TextureType::Bmp)
 		{
-
 			//https://blog.naver.com/power2845/50147965306
-			TransparentBlt(hdc, position.x, position.y
-				, _texture->GetWidth() * _size.x, _texture->GetHeight() * _size.y
-				, _texture->GetHdc(), 0, 0, _texture->GetWidth(), _texture->GetHeight()
-				, RGB(255, 0, 255));//마젠타
+			TransparentBlt(hdc, 
+				position.x,
+				position.y,
+				_texture->GetWidth() * _size.x * scale.x,//size를 지울 필요가 있을 수도
+				_texture->GetHeight() * _size.y * scale.y,//size를 지울 필요가 있을 수도
+				_texture->GetHdc(),
+				0, 0,
+				_texture->GetWidth(),
+				_texture->GetHeight(),
+				RGB(255, 0, 255));//마젠타
 		}
 		else if (_texture->GetTextureType() == Graphics::Texture::TextureType::Png)
 		{
+			Gdiplus::ImageAttributes imageAttributes = {};
+
+			//투명 처리하는 범위
+			imageAttributes.SetColorKey(Gdiplus::Color(230, 230, 230), Gdiplus::Color(255, 255, 255));
+
 			Gdiplus::Graphics graphcis(hdc);
+
+			graphcis.TranslateTransform(position.x, position.y);
+			graphcis.RotateTransform(transform->GetRotation());
+			graphcis.TranslateTransform(-position.x, -position.y);
+
 			graphcis.DrawImage(_texture->GetSprite(), 
-				Gdiplus::Rect(position.x, position.y, 
-					_texture->GetWidth() * _size.x, _texture->GetHeight() * _size.y));
+				Gdiplus::Rect(
+					position.x,
+					position.y, 
+					_texture->GetWidth() * _size.x * scale.x,//size를 지울 필요가 있을 수도
+					_texture->GetHeight() * _size.y * scale.y//size를 지울 필요가 있을 수도
+				),
+				0, 0,
+				_texture->GetWidth(),
+				_texture->GetHeight(),
+				Gdiplus::UnitPixel, nullptr/* & imageAttributes //애초에 알파 값이 있음*/
+			);
 		}
 	}
 }

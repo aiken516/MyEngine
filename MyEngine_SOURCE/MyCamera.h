@@ -4,7 +4,6 @@
 
 namespace Source
 {
-	using namespace Math;
 	class Camera : public Component
 	{
 	public:
@@ -24,7 +23,5 @@ namespace Source
 		Vector2 _distance;
 		Vector2 _resolution;
 		Vector2 _lookPosition;
-
-
 	};
 }

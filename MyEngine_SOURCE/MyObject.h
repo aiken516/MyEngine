@@ -9,7 +9,7 @@
 namespace Source::Object
 {
 	template <typename T>
-	static T* Instantiate(Source::Enums::LayerType type)
+	static T* Instantiate(Enums::LayerType type)
 	{
 		T* gameObject = new T();
 		Scene* activeScene = SceneManager::GetActiveScene();
@@ -20,7 +20,7 @@ namespace Source::Object
 	}
 
 	template <typename T>
-	static T* Instantiate(Source::Enums::LayerType type, Math::Vector2 position)
+	static T* Instantiate(Enums::LayerType type, Vector2 position)
 	{
 		T* gameObject = Instantiate<T>(type);
 

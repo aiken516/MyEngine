@@ -2,11 +2,12 @@
 
 namespace Source::Enums
 {
-	//컴포넌트 간 실행 우선 순위
+	//Enum 순서가 컴포넌트 간 실행 우선 순위
 	enum class ComponentType
 	{
 		Transform,
 		Renderer,
+		Animator,
 		Script,
 		Camera,
 		END
@@ -20,6 +21,7 @@ namespace Source::Enums
 		None = 0,
 		Background = 1,
 		Player = 2,
+		Particle = 3,
 		//
 		MAX = 16
 	};
@@ -30,6 +32,7 @@ namespace Source::Enums
 		//Mesh,
 		//Video,
 		AudioClip,
+		Animation,
 		Prefab,
 		END
 	};

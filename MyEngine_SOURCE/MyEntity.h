@@ -1,8 +1,12 @@
 #pragma once
 #include "CommonInclude.h"
 
+
+
 namespace Source
 {
+	using namespace Math;
+
 	class Entity
 	{
 	public:

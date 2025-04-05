@@ -17,7 +17,7 @@ namespace Source
 		void Render(HDC hdc)  override;
 
 		void SetTexture(Graphics::Texture* texture) { _texture = texture; }
-		void SetSize(Math::Vector2 size) { _size = size; }
+		void SetSize(Vector2 size) { _size = size; }
 
 	private:
 		Graphics::Texture* _texture;

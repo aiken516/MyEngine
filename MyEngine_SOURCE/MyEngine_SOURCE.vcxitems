@@ -15,6 +15,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimation.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyCamera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyComponent.h" />
@@ -37,6 +39,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyRenderer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyAnimation.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyComponent.cpp" />
