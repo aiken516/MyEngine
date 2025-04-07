@@ -11,6 +11,7 @@
 #include "MyCamera.h"
 #include "MyRenderer.h"
 #include "MyPlayerScript.h"
+#include "MyAnimator.h"
 
 namespace Client
 {
@@ -31,21 +32,34 @@ namespace Client
 
 
 			GameObject* background = Object::Instantiate<GameObject>(
-				Enums::LayerType::Background, Vector2(10.0f, 10.0f));
+				Enums::LayerType::Particle, Vector2(10.0f, 100.0f));
 
 			SpriteRenderer* spriteRenderer = background->AddComponent<SpriteRenderer>();
 			spriteRenderer->SetName(L"SR");
-			spriteRenderer->SetTexture(Resources::Find<Graphics::Texture>(L"background"));
+			spriteRenderer->SetTexture(Resources::Find<Graphics::Texture>(L"Punch"));
 
-			GameObject* pacman = Object::Instantiate<GameObject>(
+			/*GameObject* pacman = Object::Instantiate<GameObject>(
 				Enums::LayerType::Background, Vector2(30.0f, 30.0f));
 
 			SpriteRenderer* pacmanSpriteRenderer = pacman->AddComponent<SpriteRenderer>();
 			pacmanSpriteRenderer->SetName(L"SR");
-			pacmanSpriteRenderer->SetTexture(Resources::Find<Graphics::Texture>(L"Pacman"));
+			pacmanSpriteRenderer->SetTexture(Resources::Find<Graphics::Texture>(L"Cat"));
 			pacmanSpriteRenderer->SetSize(Vector2(3.0f, 3.0f));
 
-			pacman->AddComponent<PlayerScript>();
+			pacman->AddComponent<PlayerScript>();*/
+
+			GameObject* cat = Object::Instantiate<GameObject>(
+				Enums::LayerType::Background, Vector2(30.0f, 100.0f));
+
+			cat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
+
+			Animator* animator =cat->AddComponent<Animator>();
+			animator->CreateAnimation(L"CatFrontMove", Resources::Find<Graphics::Texture>(L"Cat"),
+				Vector2::zero, Vector2::zero, Vector2(32.0f, 32.0f), 4, 0.4f);
+
+			animator->PlayAnimation(L"CatFrontMove", true);
+			cat->AddComponent<PlayerScript>();
+
 
 			Scene::Initialize();
 		}

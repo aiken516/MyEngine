@@ -18,6 +18,7 @@ namespace Client
 	}
 	void PlayerScript::Update()
 	{
+
 		if (Input::GetKey(KeyCode::RIGHT))
 		{
 			Transform* tr = GetOwner()->GetComponent<Transform>();
