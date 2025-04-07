@@ -9,6 +9,15 @@ namespace Source
 
 	Layer::~Layer()
 	{
+		for (GameObject* go : _gameObjects)
+		{
+			if (go != nullptr)
+			{
+				delete go;
+				go = nullptr;
+			}
+		}
+		_gameObjects.clear();
 	}
 
 	void Layer::Initialize()

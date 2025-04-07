@@ -12,6 +12,25 @@ namespace Source
 
 	Animator::~Animator()
 	{
+		for (auto& pair : _animations)
+		{
+			if (pair.second != nullptr)
+			{
+				delete pair.second;
+				pair.second = nullptr;
+			}
+		}
+		_animations.clear();
+
+		for (auto& pair : _animationEvents)
+		{
+			if (pair.second != nullptr)
+			{
+				delete pair.second;
+				pair.second = nullptr;
+			}
+		}
+		_animationEvents.clear();
 	}
 
 	void Animator::Initialize()

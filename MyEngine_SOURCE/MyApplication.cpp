@@ -2,6 +2,7 @@
 #include "MyInput.h"
 #include "MyTime.h"
 #include "MySceneManager.h"
+#include "MyResources.h"
 
 namespace Source
 {
@@ -58,6 +59,13 @@ namespace Source
 		SceneManager::Render(_backHdc);
 
 		CopyRenderTarget(_backHdc, _hdc);
+	}
+
+	void Application::Release()
+	{
+		//Static한 클래스, 싱글턴으로 작동하는 클래스를 메모리 해제
+		SceneManager::Release();
+		Resources::Release();
 	}
 
 	void Application::ClearRenderTarget()

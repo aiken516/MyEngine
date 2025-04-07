@@ -13,6 +13,15 @@ namespace Source
 
 	GameObject::~GameObject()
 	{
+		for (Component* comp : _components)
+		{
+			if (comp != nullptr)
+			{
+				delete comp;
+				comp = nullptr;
+			}
+		}
+		_components.clear();
 	}
 	
 	void GameObject::Initialize()

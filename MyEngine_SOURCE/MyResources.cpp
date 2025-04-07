@@ -11,4 +11,17 @@ namespace Source
 	Resources::~Resources()
 	{
 	}
+
+	void Resources::Release()
+	{
+		for (auto& resource : _resources)
+		{
+			if (resource.second != nullptr)
+			{
+				delete resource.second;
+				resource.second = nullptr;
+			}
+		}
+		_resources.clear();
+	}
 }

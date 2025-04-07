@@ -44,4 +44,17 @@ namespace Source
 	{
 		_activeScene->Render(hdc);
 	}
+
+	void SceneManager::Release()
+	{
+		for (auto& scene : _scenes)
+		{
+			if (scene.second != nullptr)
+			{
+				delete scene.second;
+				scene.second = nullptr;
+			}
+		}
+		_scenes.clear();
+	}
 }

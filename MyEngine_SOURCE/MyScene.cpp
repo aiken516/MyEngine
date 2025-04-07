@@ -10,6 +10,15 @@ namespace Source
 
 	Scene::~Scene()
 	{
+		for (Layer* layer : _sceneLayers)
+		{
+			if (layer != nullptr)
+			{
+				delete layer;
+				layer = nullptr;
+			}
+		}
+		_sceneLayers.clear();
 	}
 
 	void Scene::Initialize()

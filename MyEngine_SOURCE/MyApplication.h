@@ -15,6 +15,8 @@ namespace Source
 		void Update();
 		void LateUpdate();
 		void Render();
+
+		void Release();
 		
 		HWND GetHWND() { return _hwnd; }
 		HDC GetHDC() { return _hdc; }

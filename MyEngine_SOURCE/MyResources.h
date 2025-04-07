@@ -9,6 +9,8 @@ namespace Source
 		Resources();
 		~Resources();
 
+		static void Release();
+
 		template <typename T>
 		static T* Find(const std::wstring& key)
 		{
