@@ -5,7 +5,8 @@
 
 namespace Source
 {
-	GameObject::GameObject()
+	GameObject::GameObject() :
+		_state(GameObjectState::Active)
 	{
 		_components.resize((UINT)Enums::ComponentType::END);
 		AddComponent<Transform>();

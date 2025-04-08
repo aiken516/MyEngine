@@ -7,6 +7,13 @@ namespace Source
 	class GameObject
 	{
 	public:
+		enum class GameObjectState
+		{
+			Active,
+			Inactive,
+			Destroy
+		};
+
 		GameObject();
 		~GameObject();
 
@@ -44,7 +51,23 @@ namespace Source
 			return componentResult;
 		}
 
+		void SetActive(bool isActive)
+		{
+			if (isActive)
+			{
+				_state = GameObjectState::Active;
+			}
+			else
+			{
+				_state = GameObjectState::Inactive;
+			}
+		}
+		GameObjectState GetActive() { return _state; }
+
+		void SetDestroy() { _state = GameObjectState::Destroy; }
+
 	private:
+		GameObjectState _state;
 		std::vector<Component*> _components;
 	};
 }

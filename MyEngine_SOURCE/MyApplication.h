@@ -15,6 +15,7 @@ namespace Source
 		void Update();
 		void LateUpdate();
 		void Render();
+		void Destroy();
 
 		void Release();
 		

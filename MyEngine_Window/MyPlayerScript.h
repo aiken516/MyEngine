@@ -15,6 +15,6 @@ namespace Client
 		void LateUpdate()  override;
 		void Render(HDC hdc)  override;
 	private:
-
+		float _deadTime;
 	};
 }

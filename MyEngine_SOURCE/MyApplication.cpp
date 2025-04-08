@@ -37,6 +37,8 @@ namespace Source
 		Update();
 		LateUpdate();
 		Render();
+
+		Destroy();
 	}
 
 	void Application::Update()
@@ -59,6 +61,11 @@ namespace Source
 		SceneManager::Render(_backHdc);
 
 		CopyRenderTarget(_backHdc, _hdc);
+	}
+
+	void Application::Destroy()
+	{
+		SceneManager::Destroy();
 	}
 
 	void Application::Release()

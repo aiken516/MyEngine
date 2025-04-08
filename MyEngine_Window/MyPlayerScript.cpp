@@ -4,10 +4,12 @@
 #include "MyTransform.h"
 #include "MyTime.h"
 #include "MyGameObject.h"
+#include "MyObject.h"
 
 namespace Client
 {
 	PlayerScript::PlayerScript()
+		: _deadTime(0.0f)
 	{
 	}
 	PlayerScript::~PlayerScript()
@@ -18,6 +20,12 @@ namespace Client
 	}
 	void PlayerScript::Update()
 	{
+		_deadTime += Time::DeltaTime();
+		if (_deadTime > 6.0f)
+		{
+			_deadTime = 0.0f;
+			Object::Destroy(GetOwner());
+		}
 
 		if (Input::GetKey(KeyCode::RIGHT))
 		{

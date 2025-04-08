@@ -45,6 +45,11 @@ namespace Source
 		_activeScene->Render(hdc);
 	}
 
+	void SceneManager::Destroy()
+	{
+		_activeScene->Destroy();
+	}
+
 	void SceneManager::Release()
 	{
 		for (auto& scene : _scenes)

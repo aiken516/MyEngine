@@ -72,6 +72,21 @@ namespace Source
 		}
 	}
 
+	void Layer::Destroy()
+	{
+		for (GameObjectIter iter = _gameObjects.begin(); iter != _gameObjects.end();)
+		{
+			GameObject::GameObjectState state = (*iter)->GetActive();
+			if (state == GameObject::GameObjectState::Destroy)
+			{
+				iter = _gameObjects.erase(iter);
+				continue;
+			}
+
+			iter++;
+		}
+	}
+
 	void Layer::AddGameObject(GameObject* gameObject)
 	{
 		if (gameObject == nullptr)

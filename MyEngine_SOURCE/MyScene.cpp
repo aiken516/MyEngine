@@ -73,6 +73,18 @@ namespace Source
 		}
 	}
 
+	void Scene::Destroy()
+	{
+		for (Layer* layer : _sceneLayers)
+		{
+			if (layer == nullptr)
+			{
+				continue;
+			}
+			layer->Destroy();
+		}
+	}
+
 	void Scene::OnEnter()
 	{
 	
