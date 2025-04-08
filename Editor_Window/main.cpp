@@ -36,6 +36,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, //프로그램의 인스턴스 �
     // TODO: 여기에 코드를 입력합니다.
 
     //app.test();
+    // 
+    //메모리 누수 체크
+    //_CrtSetBreakAlloc(n); 으로 어디서 누수가 일어나는지 확인 가능
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     //_CrtSetBreakAlloc(494);
     

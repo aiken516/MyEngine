@@ -15,6 +15,8 @@ namespace Source
 		void LateUpdate()  override;
 		void Render(HDC hdc)  override;
 
+		void SetTarget(GameObject* target) { _target = target; }
+
 		Vector2 CalculatePostion(Vector2 objectPosition) { return objectPosition - _distance; }
 	private:
 		//std::vector<GameObject*> _gameObjects;

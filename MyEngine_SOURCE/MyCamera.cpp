@@ -15,6 +15,7 @@ namespace Source
 		_target(nullptr)
 	{
 	}
+
 	Camera::~Camera()
 	{
 	}
@@ -22,27 +23,30 @@ namespace Source
 	void Camera::Initialize()
 	{
 		_resolution.x = application.GetWidth();
-		_resolution.x = application.GetHeight();
+		_resolution.y = application.GetHeight();
 	}
 
 	void Camera::Update()
 	{
-		if (_target != nullptr)
+		Transform* transform;
+		if (_target == nullptr)
 		{
-			Transform* transform = _target->GetComponent<Transform>();
-			_lookPosition = transform->GetPosition();
+			transform = GetOwner()->GetComponent<Transform>();
 		}
 		else
 		{
-			Transform* transform = GetOwner()->GetComponent<Transform>();
-			_lookPosition = transform->GetPosition();
+			transform = _target->GetComponent<Transform>();
 		}
+
+		_lookPosition = transform->GetPosition();
 
 		_distance = _lookPosition - (_resolution / 2.0f);
 	}
+
 	void Camera::LateUpdate()
 	{
 	}
+
 	void Camera::Render(HDC hdc)
 	{
 	}

@@ -28,7 +28,7 @@ namespace Client
 				Enums::LayerType::None, Vector2(0.0f, 10.0f));
 			Camera* cameraComponent = camera->AddComponent<Camera>();
 			Renderer::MainCamera = cameraComponent;
-			camera->AddComponent<PlayerScript>();
+			//camera->AddComponent<PlayerScript>();
 
 
 			GameObject* background = Object::Instantiate<GameObject>(
@@ -60,6 +60,7 @@ namespace Client
 			animator->PlayAnimation(L"CatFrontMove", true);
 			cat->AddComponent<PlayerScript>();
 
+			cameraComponent->SetTarget(cat);
 
 			Scene::Initialize();
 		}
