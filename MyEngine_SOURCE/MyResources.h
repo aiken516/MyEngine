@@ -46,6 +46,16 @@ namespace Source
 			return resource;
 		}
 
+		static void Insert(const std::wstring& key, Resource* resource)
+		{
+			if (key == L"" || resource == nullptr)
+			{
+				return;
+			}
+
+			_resources.insert(std::make_pair(key, resource));
+		}
+
 	private:
 		static std::map<std::wstring, Resource*> _resources;
 	};

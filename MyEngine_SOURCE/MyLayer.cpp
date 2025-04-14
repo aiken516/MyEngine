@@ -42,6 +42,13 @@ namespace Source
 				continue;
 			}
 
+			GameObject::GameObjectState state = go->GetActive();
+			if (state == GameObject::GameObjectState::Inactive ||
+				state == GameObject::GameObjectState::Destroy)
+			{
+				continue;
+			}
+
 			go->Update();
 		}
 	}
@@ -51,6 +58,13 @@ namespace Source
 		for (GameObject* go : _gameObjects)
 		{
 			if (go == nullptr)
+			{
+				continue;
+			}
+
+			GameObject::GameObjectState state = go->GetActive();
+			if (state == GameObject::GameObjectState::Inactive ||
+				state == GameObject::GameObjectState::Destroy)
 			{
 				continue;
 			}
@@ -68,6 +82,13 @@ namespace Source
 				continue;
 			}
 
+			GameObject::GameObjectState state = go->GetActive();
+			if (state == GameObject::GameObjectState::Inactive ||
+				state == GameObject::GameObjectState::Destroy)
+			{
+				continue;
+			}
+
 			go->Render(hdc);
 		}
 	}
@@ -79,7 +100,13 @@ namespace Source
 			GameObject::GameObjectState state = (*iter)->GetActive();
 			if (state == GameObject::GameObjectState::Destroy)
 			{
+				GameObject* destroyObject = (*iter);
+
 				iter = _gameObjects.erase(iter);
+
+				delete destroyObject;
+				destroyObject = nullptr;
+
 				continue;
 			}
 

@@ -54,17 +54,39 @@ namespace Source
 
 		if (_texture->GetTextureType() == Graphics::Texture::TextureType::Bmp)
 		{
-			//https://blog.naver.com/power2845/50147965306
-			TransparentBlt(hdc, 
-				position.x,
-				position.y,
-				_texture->GetWidth() * _size.x * scale.x,//size를 지울 필요가 있을 수도
-				_texture->GetHeight() * _size.y * scale.y,//size를 지울 필요가 있을 수도
-				_texture->GetHdc(),
-				0, 0,
-				_texture->GetWidth(),
-				_texture->GetHeight(),
-				RGB(255, 0, 255));//마젠타
+			if (_texture->HasAlpha())
+			{
+				BLENDFUNCTION func = {};
+				func.BlendOp = AC_SRC_OVER;
+				func.BlendFlags = 0;
+				func.AlphaFormat = AC_SRC_ALPHA;
+				func.SourceConstantAlpha = 255; // 0(완전 투명) ~ 255(완전 불투명)
+
+				AlphaBlend(hdc,
+					position.x,
+					position.y,
+					_texture->GetWidth() * _size.x * scale.x,//size를 지울 필요가 있을 수도
+					_texture->GetHeight() * _size.y * scale.y,//size를 지울 필요가 있을 수도
+					_texture->GetHdc(),
+					0, 0,
+					_texture->GetWidth(),
+					_texture->GetHeight(),
+					func);//마젠타를 보통 투명색으로함
+			}
+			else
+			{
+				//https://blog.naver.com/power2845/50147965306
+				TransparentBlt(hdc,
+					position.x,
+					position.y,
+					_texture->GetWidth() * _size.x * scale.x,//size를 지울 필요가 있을 수도
+					_texture->GetHeight() * _size.y * scale.y,//size를 지울 필요가 있을 수도
+					_texture->GetHdc(),
+					0, 0,
+					_texture->GetWidth(),
+					_texture->GetHeight(),
+					RGB(255, 0, 255));//마젠타
+			}
 		}
 		else if (_texture->GetTextureType() == Graphics::Texture::TextureType::Png)
 		{

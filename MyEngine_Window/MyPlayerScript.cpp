@@ -24,7 +24,7 @@ namespace Client
 		if (_deadTime > 6.0f)
 		{
 			_deadTime = 0.0f;
-			Object::Destroy(GetOwner());
+			//Object::Destroy(GetOwner());
 		}
 
 		if (Input::GetKey(KeyCode::RIGHT))

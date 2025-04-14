@@ -1,18 +1,52 @@
 #include "MyTexture.h"
 #include "MyApplication.h"
+#include "MyResources.h"
 
 // 해당 전역변수가 존재함을 알리는 키워드 extern
 extern Source::Application application;
 
 namespace Source::Graphics	
 {
-	Texture::Texture() : 
-	Resource(Enums::ResourceType::Texture)
+	Texture::Texture() :
+		Resource(Enums::ResourceType::Texture),
+		_hasAlpha(false),
+		_sprite(nullptr),
+		_bitMap(nullptr),
+		_hdc(nullptr),
+		_textureType(TextureType::NONE),
+		_width(0),
+		_height(0)
 	{
 	}
 	
 	Texture::~Texture()
 	{
+	}
+
+	Texture* Texture::Create(const std::wstring& name, UINT width, UINT height)
+	{
+		Texture* texture = Resources::Find<Texture>(name);
+		if (texture != nullptr)
+		{
+			return texture;
+		}
+
+		texture = new Texture();
+		texture->SetName(name);
+		texture->SetWidth(width);
+		texture->SetHeight(height);
+
+		HDC hdc = application.GetHDC();
+
+		texture->_bitMap = CreateCompatibleBitmap(hdc, width, height);
+		texture->_hdc = CreateCompatibleDC(hdc);
+
+		HBITMAP oldBitMap = (HBITMAP)SelectObject(texture->_hdc, texture->_bitMap);
+		DeleteObject(oldBitMap);
+
+		Resources::Insert(name + L"Sheet", texture);
+
+		return texture;
 	}
 
 	HRESULT Texture::Load(const std::wstring path)
@@ -37,6 +71,15 @@ namespace Source::Graphics
 
 			_width = info.bmWidth;
 			_height = info.bmHeight;
+
+			if (info.bmBitsPixel == 32)
+			{
+				_hasAlpha = true;
+			}
+			else if (info.bmBitsPixel == 24)
+			{
+				_hasAlpha = false;
+			}
 
 			HDC mainDC = application.GetHDC();
 			_hdc = CreateCompatibleDC(mainDC);

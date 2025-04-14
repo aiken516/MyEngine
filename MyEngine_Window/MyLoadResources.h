@@ -13,5 +13,9 @@ namespace Client
         Resources::Load<Graphics::Texture>(L"Chicken", L"..\\Resources\\chicken.bmp");
         Resources::Load<Graphics::Texture>(L"Cat", L"..\\Resources\\CatAlpha.bmp");
         Resources::Load<Graphics::Texture>(L"Punch", L"..\\Resources\\Punch.png");
+        Resources::Load<Graphics::Texture>(L"Mushroom1", L"..\\Resources\\Mushroom\\1.bmp");
+        Resources::Load<Graphics::Texture>(L"Mushroom2", L"..\\Resources\\Mushroom\\2.bmp");
+        Resources::Load<Graphics::Texture>(L"Mushroom3", L"..\\Resources\\Mushroom\\3.bmp");
+
     }
 }

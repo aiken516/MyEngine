@@ -74,23 +74,40 @@ namespace Source
 		Graphics::Texture::TextureType type = _spriteSheet->GetTextureType();
 		if (type == Graphics::Texture::TextureType::Bmp)
 		{
-			BLENDFUNCTION func = {};
-			func.BlendOp = AC_SRC_OVER;
-			func.BlendFlags = 0;
-			func.AlphaFormat = AC_SRC_ALPHA;
-			func.SourceConstantAlpha = 255; // 0(완전 투명) ~ 255(완전 불투명)
+			if (_spriteSheet->HasAlpha())
+			{
+				BLENDFUNCTION func = {};
+				func.BlendOp = AC_SRC_OVER;
+				func.BlendFlags = 0;
+				func.AlphaFormat = AC_SRC_ALPHA;
+				func.SourceConstantAlpha = 255; // 0(완전 투명) ~ 255(완전 불투명)
 
-			AlphaBlend(hdc, 
-				position.x - (currentSprite.size.x / 2.0f),
-				position.y - (currentSprite.size.y / 2.0f),
-				currentSprite.size.x * scale.x,
-				currentSprite.size.y * scale.y,
-				_spriteSheet->GetHdc(),
-				currentSprite.leftTop.x,
-				currentSprite.leftTop.y,
-				currentSprite.size.x,
-				currentSprite.size.y,
-				func);//마젠타를 보통 투명색으로함
+				AlphaBlend(hdc, 
+					position.x - (currentSprite.size.x / 2.0f) + currentSprite.offset.x,
+					position.y - (currentSprite.size.y / 2.0f) + currentSprite.offset.y,
+					currentSprite.size.x * scale.x,
+					currentSprite.size.y * scale.y,
+					_spriteSheet->GetHdc(),
+					currentSprite.leftTop.x,
+					currentSprite.leftTop.y,
+					currentSprite.size.x,
+					currentSprite.size.y,
+					func);//마젠타를 보통 투명색으로함
+			}
+			else
+			{
+				TransparentBlt(hdc,
+					position.x - (currentSprite.size.x / 2.0f) + currentSprite.offset.x,
+					position.y - (currentSprite.size.y / 2.0f) + currentSprite.offset.y,
+					currentSprite.size.x * scale.x,
+					currentSprite.size.y * scale.y,
+					_spriteSheet->GetHdc(),
+					currentSprite.leftTop.x,
+					currentSprite.leftTop.y,
+					currentSprite.size.x,
+					currentSprite.size.y,
+					RGB(255, 0, 255));
+			}
 		}
 		else if (type == Graphics::Texture::TextureType::Png)
 		{
