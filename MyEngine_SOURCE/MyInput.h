@@ -35,11 +35,11 @@ namespace Source
 		static void CreateKeys();
 		static void Update();
 
-		static bool GetKeyDown(KeyCode keyCode) { return _keys[(UINT)keyCode].state == KeyState::Down; }
-		static bool GetKeyUp(KeyCode keyCode) { return _keys[(UINT)keyCode].state == KeyState::Up; }
-		static bool GetKey(KeyCode keyCode) { return _keys[(UINT)keyCode].state == KeyState::Pressed; }
+		__forceinline static bool GetKeyDown(KeyCode keyCode) { return _keys[(UINT)keyCode].state == KeyState::Down; }
+		__forceinline static bool GetKeyUp(KeyCode keyCode) { return _keys[(UINT)keyCode].state == KeyState::Up; }
+		__forceinline static bool GetKey(KeyCode keyCode) { return _keys[(UINT)keyCode].state == KeyState::Pressed; }
 
-		static Math::Vector2 GetMousePosition() { return _mousePosition; }
+		__forceinline static Math::Vector2 GetMousePosition() { return _mousePosition; }
 
 		static void ClearKey();
 	private:

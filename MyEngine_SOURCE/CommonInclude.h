@@ -5,6 +5,7 @@
 #include <map>
 #include <functional>
 #include <filesystem>
+#include <math.h>
 
 #include "MyMath.h"
 #include "MyEnums.h"

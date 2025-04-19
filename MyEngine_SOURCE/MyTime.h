@@ -9,7 +9,7 @@ namespace Source
 		static void Initailze();
 		static void Update();
 		static void Render(HDC hdc);
-		static float DeltaTime() { return _deltaTime; };
+		__forceinline static float DeltaTime() { return _deltaTime; };
 	private:
 		static LARGE_INTEGER _cpuFrequency;
 		static LARGE_INTEGER _prevCpuFrequency;
