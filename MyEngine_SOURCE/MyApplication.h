@@ -25,7 +25,7 @@ namespace Source
 		UINT GetHeight() { return _height; }
 
 	private:
-		void ClearRenderTarget();
+		void ClearRenderTarget(UINT r = 255, UINT g = 255, UINT b = 255);
 		void CopyRenderTarget(HDC source, HDC dest);
 		void AdjustApplicationWindow(HWND hwnd, UINT width, UINT height);
 		void CreateBackBuffer();

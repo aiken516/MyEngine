@@ -108,6 +108,9 @@ namespace Source
 					currentSprite.size.y,
 					RGB(255, 0, 255));
 			}
+
+			//가운데 위치 TEST용
+			Rectangle(hdc, position.x, position.y, position.x + 5, position.y + 5);
 		}
 		else if (type == Graphics::Texture::TextureType::Png)
 		{
