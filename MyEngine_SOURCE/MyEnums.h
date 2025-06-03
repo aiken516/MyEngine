@@ -6,9 +6,10 @@ namespace Source::Enums
 	enum class ComponentType
 	{
 		Transform,
+		Collider,
+		Script,
 		Renderer,
 		Animator,
-		Script,
 		Camera,
 		END
 	};
@@ -35,5 +36,12 @@ namespace Source::Enums
 		Animation,
 		Prefab,
 		END
+	};
+
+	enum class ColliderType
+	{
+		Circle2D,
+		Box2D,
+		End,
 	};
 }

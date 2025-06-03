@@ -3,6 +3,8 @@
 
 namespace Source
 {
+	using namespace Enums;
+
 	class GameObject;
 	class Component : public Entity
 	{

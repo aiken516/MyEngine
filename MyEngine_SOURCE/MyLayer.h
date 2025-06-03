@@ -17,6 +17,8 @@ namespace Source
 		virtual void Render(HDC hdc);
 		virtual void Destroy();
 
+		const std::vector<GameObject*>& GetGameObjects() { return _gameObjects; }
+
 		void AddGameObject(GameObject* gameObject);
 	private:
 		//LayerType type_;

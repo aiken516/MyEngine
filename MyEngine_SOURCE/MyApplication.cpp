@@ -3,6 +3,7 @@
 #include "MyTime.h"
 #include "MySceneManager.h"
 #include "MyResources.h"
+#include "MyCollisionManager.h"
 
 namespace Source
 {
@@ -29,6 +30,7 @@ namespace Source
 
 		Input::Initailize();	
 		Time::Initailze();
+		CollisionManager::Initialize();
 		SceneManager::Initialize();
 	}
 
@@ -45,19 +47,27 @@ namespace Source
 	{
 		Input::Update();
 		Time::Update();
+		CollisionManager::Update();
 		SceneManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
+		CollisionManager::LateUpdate();
 		SceneManager::LateUpdate();
 	}
 
 	void Application::Render()
 	{
-		ClearRenderTarget();
+		//TEST 배경색, 추후에 분리
+		UINT r = 128;
+		UINT g = 128;
+		UINT b = 128;
+		
+		ClearRenderTarget(r, g, b);
 
 		Time::Render(_backHdc);
+		CollisionManager::Render(_backHdc);
 		SceneManager::Render(_backHdc);
 
 		CopyRenderTarget(_backHdc, _hdc);
@@ -75,9 +85,15 @@ namespace Source
 		Resources::Release();
 	}
 
-	void Application::ClearRenderTarget()
+	void Application::ClearRenderTarget(UINT r, UINT g, UINT b)
 	{
+		HBRUSH colorBrush = (HBRUSH)CreateSolidBrush(RGB(r, g, b));
+		HBRUSH oldBrush = (HBRUSH)SelectObject(_backHdc, colorBrush);
+
 		Rectangle(_backHdc, -1, -1, _width + 1, _height + 1); // 흰 사각형을 전체에 채워 그림
+
+		(HBRUSH)SelectObject(_backHdc, oldBrush);
+		DeleteObject(colorBrush);
 	}
 
 	void Application::CopyRenderTarget(HDC source, HDC dest)

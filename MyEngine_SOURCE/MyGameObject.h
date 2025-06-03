@@ -51,6 +51,7 @@ namespace Source
 			return componentResult;
 		}
 
+		GameObjectState GetActive() const { return _state; }
 		void SetActive(bool isActive)
 		{
 			if (isActive)
@@ -62,7 +63,7 @@ namespace Source
 				_state = GameObjectState::Inactive;
 			}
 		}
-		GameObjectState GetActive() { return _state; }
+		bool IsActive() const { return _state == GameObjectState::Active; }
 
 		void SetDestroy() { _state = GameObjectState::Destroy; }
 

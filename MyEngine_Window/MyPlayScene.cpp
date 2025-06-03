@@ -12,6 +12,9 @@
 #include "MyRenderer.h"
 #include "MyPlayerScript.h"
 #include "MyAnimator.h"
+#include "MyBoxCollider2D.h"
+#include "MyCircleCollider2D.h"
+#include "MyCollisionManager.h"
 
 namespace Client
 {
@@ -24,6 +27,10 @@ namespace Client
 	void PlayScene::Initialize()
 	{
 		{
+			// -------------------- 충돌체 설정 ---------------
+			CollisionManager::CollisionLayerCheck(LayerType::Background, LayerType::Background, true);
+
+
 			// -------------------- 카메라 --------------------
 			GameObject* camera = Object::Instantiate<GameObject>(
 				Enums::LayerType::None, Vector2(0.0f, 10.0f));
@@ -50,10 +57,26 @@ namespace Client
 			animator->CreateAnimation(L"CatFrontMove", Resources::Find<Graphics::Texture>(L"Cat"),
 				Vector2::zero, Vector2::zero, Vector2(32.0f, 32.0f), 4, 0.4f);
 
-			//animator->PlayAnimation(L"CatFrontMove", true);
+			animator->PlayAnimation(L"CatFrontMove", true);
 			cat->AddComponent<PlayerScript>();
+			BoxCollider2D* collider = cat->AddComponent<BoxCollider2D>();
+			collider->SetOffset(Vector2(-25.0f, -25.0f));
 
 			cameraComponent->SetTarget(cat);
+
+			// ---------------- 배경 고양이 ----------------
+			GameObject* backgroundCat = Object::Instantiate<GameObject>(
+				Enums::LayerType::Background, Vector2(60.0f, 350.0f));
+
+			backgroundCat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
+
+			Animator* backgroundCatAnimator = backgroundCat->AddComponent<Animator>();
+			backgroundCatAnimator->CreateAnimation(L"CatFrontMove", Resources::Find<Graphics::Texture>(L"Cat"),
+				Vector2::zero, Vector2::zero, Vector2(32.0f, 32.0f), 4, 0.4f);
+
+			backgroundCatAnimator->PlayAnimation(L"CatFrontMove", true);
+			CircleCollider2D* backgroundCatCollider = backgroundCat->AddComponent<CircleCollider2D>();
+			backgroundCatCollider->SetOffset(Vector2(-25.0f, -25.0f));
 
 			// ------------------- 버섯 -------------------
 

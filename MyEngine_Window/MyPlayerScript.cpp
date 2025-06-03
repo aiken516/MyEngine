@@ -62,4 +62,14 @@ namespace Client
 	void PlayerScript::Render(HDC hdc)
 	{
 	}
+	void PlayerScript::OnCollisionEnter(Collider* other)
+	{
+	}
+	void PlayerScript::OnCollisionStay(Collider* other)
+	{
+	}
+	void PlayerScript::OnCollisionExit(Collider* other)
+	{
+		Object::Destroy(GetOwner());
+	}
 }
