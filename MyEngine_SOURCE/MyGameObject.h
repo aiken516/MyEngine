@@ -65,11 +65,15 @@ namespace Source
 		}
 		bool IsActive() const { return _state == GameObjectState::Active; }
 
+		LayerType GetLayerType() const { return _layerType; }
+		void SetLayerType(LayerType layerType) { _layerType = layerType; }
+
 		void SetDestroy() { _state = GameObjectState::Destroy; }
 
 	private:
 		GameObjectState _state;
 		std::vector<Component*> _components;
+		LayerType _layerType;
 	};
 }
 

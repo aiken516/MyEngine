@@ -1,9 +1,11 @@
 #include "MySceneManager.h"
+#include "MyDontDestroyOnLoad.h"
 
 namespace Source
 {
 	std::map<std::wstring, Scene*> SceneManager::_scenes = {};
 	Scene* SceneManager::_activeScene = nullptr;
+	Scene* SceneManager::_dontDestroyOnLoad = nullptr;
 
 	Scene* SceneManager::LoadScene(const std::wstring name)
 	{
@@ -28,26 +30,31 @@ namespace Source
 
 	void SceneManager::Initialize()
 	{
+		_dontDestroyOnLoad = CreateScene<DontDestroyOnLoad>(L"DontDestroyOnLoad");
 	}
 
 	void SceneManager::Update()
 	{
 		_activeScene->Update();
+		_dontDestroyOnLoad->Update();
 	}
 
 	void SceneManager::LateUpdate()
 	{
 		_activeScene->LateUpdate();
+		_dontDestroyOnLoad->LateUpdate();
 	}
 
 	void SceneManager::Render(HDC hdc)
 	{
 		_activeScene->Render(hdc);
+		_dontDestroyOnLoad->Render(hdc);
 	}
 
 	void SceneManager::Destroy()
 	{
 		_activeScene->Destroy();
+		_dontDestroyOnLoad->Destroy();
 	}
 
 	void SceneManager::Release()

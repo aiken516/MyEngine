@@ -12,12 +12,15 @@ namespace Client
 		: _deadTime(0.0f)
 	{
 	}
+
 	PlayerScript::~PlayerScript()
 	{
 	}
+
 	void PlayerScript::Initialize()
 	{
 	}
+
 	void PlayerScript::Update()
 	{
 		_deadTime += Time::DeltaTime();
@@ -56,20 +59,25 @@ namespace Client
 			tr->SetPosition(pos);
 		}
 	}
+
 	void PlayerScript::LateUpdate()
 	{
 	}
+
 	void PlayerScript::Render(HDC hdc)
 	{
 	}
+
 	void PlayerScript::OnCollisionEnter(Collider* other)
 	{
 		int a = 0;
 	}
+
 	void PlayerScript::OnCollisionStay(Collider* other)
 	{
 		int a = 0;
 	}
+
 	void PlayerScript::OnCollisionExit(Collider* other)
 	{
 		Object::Destroy(GetOwner());

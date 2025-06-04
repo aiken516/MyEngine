@@ -88,10 +88,10 @@ namespace Source
 
 		if (distance <= (ownerSize.x / 2.0f + otherSize.x / 2.0f))
 		{
-			return true;
+			return true;//충돌 발생
 		}
 
-		return false; // 충돌 없음
+		return false;//충돌 없음
 	}
 
 	bool CircleCollider2D::IntersectWithBox(BoxCollider2D* other)

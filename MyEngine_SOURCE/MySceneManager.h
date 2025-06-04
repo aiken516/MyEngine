@@ -23,6 +23,7 @@ namespace Source
 
 		static Scene* LoadScene(const std::wstring name);
 		static Scene* GetActiveScene() { return _activeScene; }
+		static Scene* GetDontDestroyOnLoad() { return _dontDestroyOnLoad; }
 
 		static void Initialize();
 		static void Update();
@@ -35,5 +36,6 @@ namespace Source
 		static std::map<std::wstring, Scene*> _scenes;
 
 		static Scene* _activeScene;
+		static Scene* _dontDestroyOnLoad;
 	};
 }

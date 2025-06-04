@@ -123,4 +123,16 @@ namespace Source
 
 		_gameObjects.push_back(gameObject);
 	}
+
+	void Layer::RemoveGameObject(GameObject* gameObject)
+	{
+		for (auto deleteObject = _gameObjects.begin(); deleteObject != _gameObjects.end(); deleteObject++)
+		{
+			if (*deleteObject == gameObject)
+			{
+				_gameObjects.erase(deleteObject);
+				break;
+			}
+		}
+	}
 }

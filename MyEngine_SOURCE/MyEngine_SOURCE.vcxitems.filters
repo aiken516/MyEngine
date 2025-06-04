@@ -73,6 +73,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyCollisionManager.cpp">
       <Filter>Helper</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyDontDestroyOnLoad.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyComponent.h">
@@ -155,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyCollisionManager.h">
       <Filter>Helper</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyDontDestroyOnLoad.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

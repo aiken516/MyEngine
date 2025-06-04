@@ -16,6 +16,8 @@ namespace Source::Object
 		Layer* layer = activeScene->GetLayer(type);
 		layer->AddGameObject(gameObject);
 
+		gameObject->SetLayerType(type);
+
 		return gameObject;
 	}
 
@@ -32,5 +34,15 @@ namespace Source::Object
 	static void Destroy(GameObject* gameObject)
 	{
 		gameObject->SetDestroy();
+	}
+
+	static void DontDestroyOnLoad(GameObject* gameObject)
+	{
+		//오브젝트를 현재 씬에서 제거
+		Scene* activeScene = SceneManager::GetActiveScene();
+		activeScene->RemoveGameObject(gameObject);
+
+		Scene* dontDestroyOnLoad = SceneManager::GetDontDestroyOnLoad();
+		dontDestroyOnLoad->AddGameObject(gameObject, gameObject->GetLayerType());
 	}
 }

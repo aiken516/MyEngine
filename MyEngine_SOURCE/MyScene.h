@@ -21,6 +21,7 @@ namespace Source
 
 		void CreateLayers();
 		Layer* GetLayer(const Enums::LayerType layerType) { return _sceneLayers[(UINT)layerType]; }
+		void RemoveGameObject(GameObject* gameObject);
 		void AddGameObject(GameObject* gameObject, const Enums::LayerType layerType);
 	private:
 		std::vector<Layer*> _sceneLayers;

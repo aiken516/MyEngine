@@ -20,8 +20,9 @@ namespace Source
 		const std::vector<GameObject*>& GetGameObjects() { return _gameObjects; }
 
 		void AddGameObject(GameObject* gameObject);
+		void RemoveGameObject(GameObject* gameObject);
 	private:
-		//LayerType type_;
+		//LayerType _type;
 		std::vector<GameObject*> _gameObjects;
 	};
 

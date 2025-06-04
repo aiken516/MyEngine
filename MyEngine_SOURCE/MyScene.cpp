@@ -104,6 +104,12 @@ namespace Source
 		}
 	}
 
+	void Scene::RemoveGameObject(GameObject* gameObject)
+	{
+		LayerType layerType = gameObject->GetLayerType();
+		_sceneLayers[(UINT)layerType]->RemoveGameObject(gameObject);
+	}
+
 	void Scene::AddGameObject(GameObject* gameObject, const Enums::LayerType layerType)
 	{
 		_sceneLayers[(UINT)layerType]->AddGameObject(gameObject);
