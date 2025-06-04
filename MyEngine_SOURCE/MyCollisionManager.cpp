@@ -16,7 +16,7 @@ namespace Source
 
 	void CollisionManager::Update()
 	{
-		Scene* scene = SceneManager::GetActiveScene();
+		Scene* activeScene = SceneManager::GetActiveScene();
 
 		for (UINT row = 0; row < (UINT)LayerType::MAX; row++)
 		{
@@ -24,8 +24,7 @@ namespace Source
 			{
 				if (_collisionLayerMatrix[row][col])
 				{
-					LayerCollision(scene, (LayerType)row, (LayerType)col);
-
+					LayerCollision(activeScene, (LayerType)row, (LayerType)col);
 				}
 			}
 		}
@@ -39,8 +38,8 @@ namespace Source
 	{
 	}
 
-	// 레이어 간 충돌 체크를 위한 매트릭스 설정(SetCollisionLayer라 명명하는게 나을 수도)
-	void CollisionManager::CollisionLayerCheck(LayerType left, LayerType right, bool isEnable)
+	// 레이어 간 충돌 체크를 위한 매트릭스 설정
+	void CollisionManager::SetCollisionLayerMatrix(LayerType left, LayerType right, bool isEnable)
 	{
 		UINT row = 0;
 		UINT col = 0;
@@ -60,10 +59,10 @@ namespace Source
 		_collisionLayerMatrix[row][col] = isEnable;
 	}
 
-	void CollisionManager::LayerCollision(class Scene* scene, LayerType left, LayerType right)
+	void CollisionManager::LayerCollision(class Scene* activeScene, LayerType left, LayerType right)
 	{
-		const std::vector<GameObject*>& leftObjects = scene->GetLayer(left)->GetGameObjects();
-		const std::vector<GameObject*>& rightObjects = scene->GetLayer(right)->GetGameObjects();
+		const std::vector<GameObject*>& leftObjects = activeScene->GetLayer(left)->GetGameObjects();
+		const std::vector<GameObject*>& rightObjects = activeScene->GetLayer(right)->GetGameObjects();
 
 		for (GameObject* leftObject : leftObjects)
 		{
@@ -178,8 +177,7 @@ namespace Source
 				return true;
 			}
 		}
-		else if ((leftType == ColliderType::Circle2D && rightType == ColliderType::Box2D) || 
-			(leftType == ColliderType::Box2D && rightType == ColliderType::Circle2D))
+		else if ((leftType == ColliderType::Circle2D && rightType == ColliderType::Box2D) || (leftType == ColliderType::Box2D && rightType == ColliderType::Circle2D))
 		{
 			//Circle과 Box
 			Vector2 circlePosition; //원의 중점
@@ -207,17 +205,16 @@ namespace Source
 
 			//사각형 내부에서 원과 가장 가까운 점
 			Vector2 closestPoint;
-			float boxMin = boxCenter.x - boxSize.x / 2.0f;
-			float boxMax = boxCenter.x + boxSize.x / 2.0f;
+			float halfWidth = boxSize.x / 2.0f;
+			float halfHeight = boxSize.y / 2.0f;
 
-			closestPoint.x = (circlePosition.x < boxMin) ? boxMin :
-				(circlePosition.x > boxMax) ? boxMax : circlePosition.x;
+			float boxMinX = boxCenter.x - halfWidth;
+			float boxMaxX = boxCenter.x + halfWidth;
+			float boxMinY = boxCenter.y - halfHeight;
+			float boxMaxY = boxCenter.y + halfHeight;
 
-			boxMin = boxCenter.y - boxSize.y / 2.0f;
-			boxMax = boxCenter.y + boxSize.y / 2.0f;
-
-			closestPoint.y = (circlePosition.y < boxMin) ? boxMin :
-				(circlePosition.y > boxMax) ? boxMax : circlePosition.y;
+			closestPoint.x = std::clamp(circlePosition.x, boxMinX, boxMaxX);
+			closestPoint.y = std::clamp(circlePosition.y, boxMinY, boxMaxY);
 
 			Vector2 difference = circlePosition - closestPoint;
 			if (difference.x * difference.x + difference.y * difference.y <= circleRadius * circleRadius)

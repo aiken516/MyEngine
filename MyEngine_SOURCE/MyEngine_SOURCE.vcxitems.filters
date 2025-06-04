@@ -70,7 +70,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyAnimation.cpp">
       <Filter>Resource\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MyCollisionManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyCollisionManager.cpp">
+      <Filter>Helper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyComponent.h">
@@ -151,7 +153,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimation.h">
       <Filter>Resource\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MyCollisionManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyCollisionManager.h">
+      <Filter>Helper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Component">

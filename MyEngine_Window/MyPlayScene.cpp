@@ -28,7 +28,7 @@ namespace Client
 	{
 		{
 			// -------------------- 충돌체 설정 ---------------
-			CollisionManager::CollisionLayerCheck(LayerType::Background, LayerType::Background, true);
+			CollisionManager::SetCollisionLayerMatrix(LayerType::Background, LayerType::Background, true);
 
 
 			// -------------------- 카메라 --------------------
