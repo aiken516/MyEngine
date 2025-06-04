@@ -14,6 +14,10 @@ namespace Source
 		virtual void LateUpdate() override;
 		virtual void Render(HDC hdc) override;
 
+		virtual bool Intersect(Collider* other) = 0;
+		virtual bool IntersectWithCircle(class CircleCollider2D* other) = 0;
+		virtual bool IntersectWithBox(class BoxCollider2D* other) = 0;
+
 		virtual void OnCollisionEnter(Collider* other);
 		virtual void OnCollisionStay(Collider* other);
 		virtual void OnCollisionExit(Collider* other);
