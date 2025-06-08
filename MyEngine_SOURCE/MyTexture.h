@@ -19,14 +19,14 @@ namespace Source::Graphics
 		static Texture* Create(const std::wstring& name, UINT width, UINT height);
 
 		virtual HRESULT Load(const std::wstring path) override;
-		UINT GetWidth() { return _width; }
+		UINT GetWidth() const { return _width; }
 		void SetWidth(UINT width) { _width = width; }
-		UINT GetHeight() { return _height; }
+		UINT GetHeight() const { return _height; }
 		void SetHeight(UINT height) { _height = height; }
-		HDC GetHdc() { return _hdc; }
-		TextureType GetTextureType() { return _textureType; }
+		HDC GetHdc() const { return _hdc; }
+		TextureType GetTextureType() const { return _textureType; }
 		Gdiplus::Image* GetSprite() { return _sprite; }
-		bool HasAlpha() { return _hasAlpha; }
+		bool HasAlpha() const { return _hasAlpha; }
 
 	private:
 		bool _hasAlpha;

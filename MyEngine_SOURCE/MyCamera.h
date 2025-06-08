@@ -17,7 +17,8 @@ namespace Source
 
 		void SetTarget(GameObject* target) { _target = target; }
 
-		Vector2 CalculatePostion(Vector2 objectPosition) { return objectPosition - _distance; }
+		Vector2 CalculatePostion(Vector2 objectPosition) const { return objectPosition - _distance; }
+		Vector2 CalculateMousePostion(Vector2 objectPosition) const { return objectPosition + _distance; }
 	private:
 		//std::vector<GameObject*> _gameObjects;
 		class GameObject* _target;// 추적하는 오브젝트, 전방선언

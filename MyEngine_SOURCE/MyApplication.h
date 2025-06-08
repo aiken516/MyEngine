@@ -19,10 +19,10 @@ namespace Source
 
 		void Release();
 		
-		HWND GetHWND() { return _hwnd; }
-		HDC GetHDC() { return _hdc; }
-		UINT GetWidth() { return _width; }
-		UINT GetHeight() { return _height; }
+		HWND GetHWND() const { return _hwnd; }
+		HDC GetHDC() const { return _hdc; }
+		UINT GetWidth() const { return _width; }
+		UINT GetHeight() const { return _height; }
 
 	private:
 		void ClearRenderTarget(UINT r = 255, UINT g = 255, UINT b = 255);

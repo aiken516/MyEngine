@@ -105,6 +105,10 @@ namespace Source::Graphics
 			_width = _sprite->GetWidth();
 			_height = _sprite->GetHeight();
 		}
+		else
+		{
+			return S_FALSE;
+		}
 
 		return S_OK;
 	}
