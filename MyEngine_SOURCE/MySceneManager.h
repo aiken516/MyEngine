@@ -24,6 +24,7 @@ namespace Source
 		static Scene* LoadScene(const std::wstring name);
 		static Scene* GetActiveScene() { return _activeScene; }
 		static Scene* GetDontDestroyOnLoad() { return _dontDestroyOnLoad; }
+		static std::vector<GameObject*> GetGameObjectsOnScene(LayerType layerType);
 
 		static void Initialize();
 		static void Update();

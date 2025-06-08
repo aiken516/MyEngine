@@ -28,6 +28,25 @@ namespace Source
 		return iter->second;
 	}
 
+	/// <summary>
+	/// 현재 로딩된 씬(DontDestroyOnLoad 포함)에 있는 모든 오브젝트를 반환하는 함수
+	/// </summary>
+	/// <param name="layerType">반환할 오브젝트들의 레이어</param>
+	/// <returns>현재 로딩된 씬에 있는 모든 오브젝트</returns>
+	std::vector<GameObject*> SceneManager::GetGameObjectsOnScene(LayerType layerType)
+	{
+		std::vector<GameObject*> gameObjects = _activeScene->GetLayer(layerType)->GetGameObjects();
+		std::vector<GameObject*> dontDestroyGameObjects = _dontDestroyOnLoad->GetLayer(layerType)->GetGameObjects();
+
+		gameObjects.insert(
+			gameObjects.end(),
+			dontDestroyGameObjects.begin(),
+			dontDestroyGameObjects.end()
+		);
+
+		return gameObjects;
+	}
+
 	void SceneManager::Initialize()
 	{
 		_dontDestroyOnLoad = CreateScene<DontDestroyOnLoad>(L"DontDestroyOnLoad");

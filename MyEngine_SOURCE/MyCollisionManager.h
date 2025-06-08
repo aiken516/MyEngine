@@ -26,9 +26,10 @@ namespace Source
 		static void LateUpdate();
 		static void Render(HDC hdc);
 
-		// 레이어 간 충돌 체크를 위한 매트릭스 설정(Setter)
+		static void Clear();
+
 		static void SetCollisionLayerMatrix(LayerType left, LayerType right, bool isEnable);
-		static void LayerCollision(class Scene* scene, LayerType left, LayerType right);
+		static void LayerCollision(LayerType left, LayerType right);
 
 		static void CheckCollision(Collider* left, Collider* right);
 		static bool Intersect(Collider* left, Collider* right);

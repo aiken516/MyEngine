@@ -16,15 +16,13 @@ namespace Source
 
 	void CollisionManager::Update()
 	{
-		Scene* activeScene = SceneManager::GetActiveScene();
-
 		for (UINT row = 0; row < (UINT)LayerType::MAX; row++)
 		{
 			for (UINT col = 0; col < (UINT)LayerType::MAX; col++)
 			{
 				if (_collisionLayerMatrix[row][col])
 				{
-					LayerCollision(activeScene, (LayerType)row, (LayerType)col);
+					LayerCollision((LayerType)row, (LayerType)col);
 				}
 			}
 		}
@@ -36,6 +34,16 @@ namespace Source
 
 	void CollisionManager::Render(HDC hdc)
 	{
+	}
+
+	void CollisionManager::Clear()
+	{
+		_collisionMap.clear();
+
+		for (UINT i = 0; i < (UINT)LayerType::MAX; i++)
+		{
+			_collisionLayerMatrix[i].reset();
+		}
 	}
 
 	// 레이어 간 충돌 체크를 위한 매트릭스 설정
@@ -59,10 +67,10 @@ namespace Source
 		_collisionLayerMatrix[row][col] = isEnable;
 	}
 
-	void CollisionManager::LayerCollision(class Scene* activeScene, LayerType left, LayerType right)
+	void CollisionManager::LayerCollision(LayerType left, LayerType right)
 	{
-		const std::vector<GameObject*>& leftObjects = activeScene->GetLayer(left)->GetGameObjects();
-		const std::vector<GameObject*>& rightObjects = activeScene->GetLayer(right)->GetGameObjects();
+		const std::vector<GameObject*>& leftObjects = SceneManager::GetGameObjectsOnScene(left);
+		const std::vector<GameObject*>& rightObjects = SceneManager::GetGameObjectsOnScene(right);
 
 		for (GameObject* leftObject : leftObjects)
 		{

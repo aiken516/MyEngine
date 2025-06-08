@@ -1,4 +1,5 @@
 #include "MyScene.h"
+#include "MyCollisionManager.h"
 
 namespace Source
 {
@@ -92,7 +93,7 @@ namespace Source
 
 	void Scene::OnExit()
 	{
-	
+		CollisionManager::Clear();
 	}
 
 	void Scene::CreateLayers()
