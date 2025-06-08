@@ -21,8 +21,9 @@ namespace Source::Enums
 	{
 		None = 0,
 		Background = 1,
-		Player = 2,
-		Particle = 3,
+		Tile = 2,
+		Player = 3,
+		Particle = 4,
 		//
 		MAX = 16
 	};

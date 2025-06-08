@@ -134,18 +134,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="MyCameraController.h" />
     <ClInclude Include="MyLoadResources.h" />
     <ClInclude Include="MyLoadScenes.h" />
     <ClInclude Include="MyPlayer.h" />
     <ClInclude Include="MyPlayerScript.h" />
     <ClInclude Include="MyPlayScene.h" />
+    <ClInclude Include="MyTile.h" />
     <ClInclude Include="MyTitleScene.h" />
+    <ClInclude Include="MyToolScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MyCameraController.cpp" />
     <ClCompile Include="MyPlayer.cpp" />
     <ClCompile Include="MyPlayerScript.cpp" />
     <ClCompile Include="MyPlayScene.cpp" />
+    <ClCompile Include="MyTile.cpp" />
     <ClCompile Include="MyTitleScene.cpp" />
+    <ClCompile Include="MyToolScene.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

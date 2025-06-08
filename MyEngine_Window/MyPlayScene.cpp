@@ -64,7 +64,7 @@ namespace Client
 
 			cameraComponent->SetTarget(cat);
 
-			Object::DontDestroyOnLoad(cat);
+			//Object::DontDestroyOnLoad(cat);
 			// ---------------- 배경 고양이 ----------------
 			GameObject* backgroundCat = Object::Instantiate<GameObject>(
 				Enums::LayerType::Background, Vector2(60.0f, 350.0f));

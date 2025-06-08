@@ -88,11 +88,16 @@ namespace Source
 		UINT width = application.GetWidth();
 		UINT height = application.GetHeight();
 
-		if (mousePoint.x > 0 && mousePoint.x < width &&
-			mousePoint.y > 0 && mousePoint.y < height)
+		if (0 < mousePoint.x && mousePoint.x < width &&
+			0 < mousePoint.y && mousePoint.y < height)
 		{
 			_mousePosition.x = (float)mousePoint.x;
 			_mousePosition.y = (float)mousePoint.y;
+		}
+		else
+		{
+			_mousePosition.x = -1.0f;
+			_mousePosition.y = -1.0f;
 		}
 	}
 

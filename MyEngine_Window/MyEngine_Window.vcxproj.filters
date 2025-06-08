@@ -4,43 +4,70 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{67c4117a-9406-4f6c-9266-c3101b5d646d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents">
+    <Filter Include="Client">
       <UniqueIdentifier>{448bbafe-eaea-4224-ac67-13f3a6963c61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scripts">
-      <UniqueIdentifier>{0ebb2da2-5d6f-4762-8425-56a25d7dd1fa}</UniqueIdentifier>
+    <Filter Include="Client\Scripts">
+      <UniqueIdentifier>{0d8d6766-2213-439c-acce-6b0417b326eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client\Scenes">
+      <UniqueIdentifier>{7c9ad559-1a14-404e-8399-6820c0874efd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{e7d4fcd7-6b6a-4530-963f-3c53da90ff98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client\Contents">
+      <UniqueIdentifier>{2e6d0fa6-68a3-432f-94cb-51026a972534}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyLoadScenes.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="MyLoadResources.h" />
+    <ClInclude Include="MyPlayerScript.h">
+      <Filter>Client\Scripts</Filter>
+    </ClInclude>
     <ClInclude Include="MyPlayScene.h">
-      <Filter>Scenes</Filter>
+      <Filter>Client\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="MyTitleScene.h">
+      <Filter>Client\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="MyToolScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="MyPlayer.h">
+      <Filter>Client\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTile.h">
       <Filter>Contents</Filter>
     </ClInclude>
-    <ClInclude Include="MyLoadResources.h" />
-    <ClInclude Include="MyPlayerScript.h">
-      <Filter>Scripts</Filter>
+    <ClInclude Include="MyCameraController.h">
+      <Filter>Contents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MyPlayer.cpp">
-      <Filter>Contents</Filter>
+    <ClCompile Include="MyPlayerScript.cpp">
+      <Filter>Client\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="MyPlayScene.cpp">
-      <Filter>Scenes</Filter>
+      <Filter>Client\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="MyTitleScene.cpp">
+      <Filter>Client\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="MyToolScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="MyPlayerScript.cpp">
-      <Filter>Scripts</Filter>
+    <ClCompile Include="MyPlayer.cpp">
+      <Filter>Client\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTile.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="MyCameraController.cpp">
+      <Filter>Contents</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

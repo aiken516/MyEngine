@@ -70,16 +70,16 @@ namespace Client
 
 	void PlayerScript::OnCollisionEnter(Collider* other)
 	{
-		int a = 0;
+		//int a = 0;
 	}
 
 	void PlayerScript::OnCollisionStay(Collider* other)
 	{
-		int a = 0;
+		//int a = 0;
 	}
 
 	void PlayerScript::OnCollisionExit(Collider* other)
 	{
-		Object::Destroy(GetOwner());
+		SceneManager::LoadScene(L"TitleScene");
 	}
 }
