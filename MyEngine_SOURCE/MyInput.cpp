@@ -84,8 +84,16 @@ namespace Source
 		POINT mousePoint = {};
 		GetCursorPos(&mousePoint);//윈도우 전체 화면 기준
 		ScreenToClient(application.GetHWND(), &mousePoint);//엔진의 화면 기준으로
-		_mousePosition.x = (float)mousePoint.x;
-		_mousePosition.y = (float)mousePoint.y;
+
+		UINT width = application.GetWidth();
+		UINT height = application.GetHeight();
+
+		if (mousePoint.x > 0 && mousePoint.x < width &&
+			mousePoint.y > 0 && mousePoint.y < height)
+		{
+			_mousePosition.x = (float)mousePoint.x;
+			_mousePosition.y = (float)mousePoint.y;
+		}
 	}
 
 	void Input::ClearKey()
