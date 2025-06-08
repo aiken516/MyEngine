@@ -7,6 +7,7 @@ namespace Source::Enums
 	{
 		Transform,
 		Collider,
+		RigidBody,
 		Script,
 		Renderer,
 		Animator,

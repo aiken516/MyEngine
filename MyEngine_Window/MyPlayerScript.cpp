@@ -5,6 +5,7 @@
 #include "MyTime.h"
 #include "MyGameObject.h"
 #include "MyObject.h"
+#include "MyRigidBody2D.h"
 
 namespace Client
 {
@@ -30,33 +31,38 @@ namespace Client
 			//Object::Destroy(GetOwner());
 		}
 
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Vector2 pos = tr->GetPosition();
+
+		RigidBody2D* rb = GetOwner()->GetComponent<RigidBody2D>();
+
 		if (Input::GetKey(KeyCode::RIGHT))
 		{
-			Transform* tr = GetOwner()->GetComponent<Transform>();
-			Vector2 pos = tr->GetPosition();
-			pos.x += 100.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
+			//pos.x += 100.0f * Time::DeltaTime();
+			//tr->SetPosition(pos);
+
+			rb->AddForce(Vector2(100.0f, 0.0f));
 		}
 		else if (Input::GetKey(KeyCode::LEFT))
 		{
-			Transform* tr = GetOwner()->GetComponent<Transform>();
-			Vector2 pos = tr->GetPosition();
-			pos.x -= 100.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
+			//pos.x -= 100.0f * Time::DeltaTime();
+			//tr->SetPosition(pos);
+
+			rb->AddForce(Vector2(-100.0f, 0.0f));
 		}
 		else if (Input::GetKey(KeyCode::UP))
 		{
-			Transform* tr = GetOwner()->GetComponent<Transform>();
-			Vector2 pos = tr->GetPosition();
-			pos.y -= 100.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
+			//pos.y -= 100.0f * Time::DeltaTime();
+			//tr->SetPosition(pos);
+
+			rb->AddForce(Vector2(0.0f, -100.0f));
 		}
 		else if (Input::GetKey(KeyCode::DOWN))
 		{
-			Transform* tr = GetOwner()->GetComponent<Transform>();
-			Vector2 pos = tr->GetPosition();
-			pos.y += 100.0f * Time::DeltaTime();
-			tr->SetPosition(pos);
+			//pos.y += 100.0f * Time::DeltaTime();
+			//tr->SetPosition(pos);
+
+			rb->AddForce(Vector2(0.0f, 100.0f));
 		}
 	}
 

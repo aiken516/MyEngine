@@ -76,6 +76,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyDontDestroyOnLoad.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyRigidBody2D.cpp">
+      <Filter>Component\RigidBody</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyComponent.h">
@@ -162,6 +165,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyDontDestroyOnLoad.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyRigidBody2D.h">
+      <Filter>Component\RigidBody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Component">
@@ -214,6 +220,9 @@
     </Filter>
     <Filter Include="Resource\Animation">
       <UniqueIdentifier>{781f641e-d116-4b5b-9d1b-6b362db70cf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\RigidBody">
+      <UniqueIdentifier>{a421d84b-18b6-4ade-87ce-489592f24272}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

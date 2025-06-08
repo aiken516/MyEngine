@@ -53,6 +53,11 @@ namespace Source::Math
 
 		}
 
+		Vector2 operator-()
+		{
+			return Vector2(-x, -y);
+		}
+
 		Vector2 operator*(float value)
 		{
 			return Vector2(x * value, y * value);
@@ -83,6 +88,11 @@ namespace Source::Math
 		{
 			x += other.x;
 			y += other.y;
+		}
+
+		bool operator==(Vector2 other)
+		{
+			return (x == other.x && y == other.y);
 		}
 
 		void Clear()

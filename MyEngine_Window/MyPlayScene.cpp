@@ -15,6 +15,7 @@
 #include "MyBoxCollider2D.h"
 #include "MyCircleCollider2D.h"
 #include "MyCollisionManager.h"
+#include "MyRigidBody2D.h"
 
 namespace Client
 {
@@ -59,12 +60,17 @@ namespace Client
 
 			animator->PlayAnimation(L"CatFrontMove", true);
 			cat->AddComponent<PlayerScript>();
+
 			BoxCollider2D* collider = cat->AddComponent<BoxCollider2D>();
 			collider->SetOffset(Vector2(-25.0f, -25.0f));
 
+			RigidBody2D* rigidBody2D = cat->AddComponent<RigidBody2D>();
+			rigidBody2D->SetMass(1.0f);
+
 			cameraComponent->SetTarget(cat);
 
-			Object::DontDestroyOnLoad(cat);
+			//Object::DontDestroyOnLoad(cat);
+
 			// ---------------- 배경 고양이 ----------------
 			GameObject* backgroundCat = Object::Instantiate<GameObject>(
 				Enums::LayerType::Background, Vector2(60.0f, 350.0f));

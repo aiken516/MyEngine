@@ -34,6 +34,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyResources.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyRigidBody2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MySceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyScript.h" />
@@ -61,6 +62,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyResources.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyRigidBody2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MySceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyScript.cpp" />
