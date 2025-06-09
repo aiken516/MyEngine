@@ -9,7 +9,7 @@ namespace Source
 	CircleCollider2D::CircleCollider2D() :
 		Collider(ColliderType::Circle2D),
 		_center(Math::Vector2::zero),
-		_radius(50.0f)
+		_radius(1.0f)
 	{
 	}
 
@@ -47,15 +47,11 @@ namespace Source
 
 		Vector2 offset = GetOffset();
 
-		Vector2 rightBottom;
-		rightBottom.x = position.x + offset.x + 100 * GetSize().x;
-		rightBottom.y = position.y + offset.y + 100 * GetSize().y;
-
 		Ellipse(hdc, 
-			position.x + offset.x,
-			position.y + offset.y,
-			rightBottom.x,
-			rightBottom.y
+			position.x + offset.x - GetRadius() * PIXELS_PER_UNIT,
+			position.y + offset.y - GetRadius() * PIXELS_PER_UNIT,
+			position.x + offset.x + GetRadius() * PIXELS_PER_UNIT,
+			position.y + offset.y + GetRadius() * PIXELS_PER_UNIT
 		);
 
 		SelectObject(hdc, oldBrush);
@@ -77,16 +73,12 @@ namespace Source
 		Vector2 ownerPosition = ownerTransform->GetPosition() + this->GetOffset();
 		Vector2 otherPosition = otherTransform->GetPosition() + other->GetOffset();
 
-		// size 1,1 일 기본크기가 100픽셀이라고 가정, 추후 확인 필요
-		Vector2 ownerSize = this->GetSize() * 100.0f;
-		Vector2 otherSize = other->GetSize() * 100.0f;
+		float ownerRadius = this->GetRadius() * PIXELS_PER_UNIT;
+		float otherRadius = other->GetRadius() * PIXELS_PER_UNIT;
 
-		Vector2 ownerCirclePosition = ownerPosition + (ownerSize / 2.0f);
-		Vector2 otherCirclePosition = otherPosition + (otherSize / 2.0f);
+		float distance = (ownerPosition - otherPosition).Length();
 
-		float distance = (ownerCirclePosition - otherCirclePosition).Length();
-
-		if (distance <= (ownerSize.x / 2.0f + otherSize.x / 2.0f))
+		if (distance <= (ownerRadius + otherRadius))
 		{
 			return true;//충돌 발생
 		}
@@ -103,33 +95,19 @@ namespace Source
 		Vector2 ownerPosition = ownerTransform->GetPosition() + this->GetOffset();
 		Vector2 otherPosition = otherTransform->GetPosition() + other->GetOffset();
 
-		// size 1,1 일 기본크기가 100픽셀이라고 가정, 추후 확인 필요
-		Vector2 ownerSize = this->GetSize() * 100.0f;
-		Vector2 otherSize = other->GetSize() * 100.0f;
+		float circleRadius = this->GetRadius() * PIXELS_PER_UNIT;
+		Vector2 boxSize = other->GetSize() * PIXELS_PER_UNIT;
 
-		Vector2 circlePosition; //원의 중점
-		Vector2	boxPosition;
-		Vector2 boxSize;
+		Vector2 circlePosition = ownerPosition;
+		Vector2 boxPosition = otherPosition;
 
-		float circleRadius;
-
-		circlePosition = ownerPosition + (ownerSize / 2.0f);
-		circleRadius = ownerSize.x / 2.0f;
-		boxPosition = otherPosition;
-		boxSize = otherSize;
-
-		Vector2 boxCenter = boxPosition + boxSize / 2.0f;
+		float boxMinX = boxPosition.x - boxSize.x * 0.5f;
+		float boxMaxX = boxPosition.x + boxSize.x * 0.5f;
+		float boxMinY = boxPosition.y - boxSize.y * 0.5f;
+		float boxMaxY = boxPosition.y + boxSize.y * 0.5f;
 
 		//사각형 내부에서 원과 가장 가까운 점
 		Vector2 closestPoint;
-		float halfWidth = boxSize.x / 2.0f;
-		float halfHeight = boxSize.y / 2.0f;
-
-		float boxMinX = boxCenter.x - halfWidth;
-		float boxMaxX = boxCenter.x + halfWidth;
-		float boxMinY = boxCenter.y - halfHeight;
-		float boxMaxY = boxCenter.y + halfHeight;
-
 		closestPoint.x = std::clamp(circlePosition.x, boxMinX, boxMaxX);
 		closestPoint.y = std::clamp(circlePosition.y, boxMinY, boxMaxY);
 
@@ -140,5 +118,64 @@ namespace Source
 		}
 
 		return false;// 충돌 없음
+	}
+
+	Vector2 CircleCollider2D::ResolveCollision(Collider* other, RigidBody2D* rigidBody)
+	{
+		return other->ResolveWithCircle(this, rigidBody);// 더블 디스패치 구조
+	}
+
+	Vector2 CircleCollider2D::ResolveWithCircle(CircleCollider2D* other, RigidBody2D* rigidBody)
+	{
+		Transform* ownerTransform = this->GetOwner()->GetComponent<Transform>();
+		Transform* otherTransform = other->GetOwner()->GetComponent<Transform>();
+
+		Vector2 ownerPosition = ownerTransform->GetPosition() + this->GetOffset();
+		Vector2 otherPosition = otherTransform->GetPosition() + other->GetOffset();
+		
+		float ownerRadius = this->GetRadius() * PIXELS_PER_UNIT;
+		float otherRadius = other->GetRadius() * PIXELS_PER_UNIT;
+
+		Vector2 positionDifference = ownerPosition - otherPosition;
+		float distance = positionDifference.Length();
+		Vector2 direction = positionDifference.Normalize();
+
+		float overlap = (ownerRadius + otherRadius) - distance + 0.1f;
+
+		Vector2 correction = direction * overlap;
+		
+		return correction;
+	}
+
+	Vector2 CircleCollider2D::ResolveWithBox(BoxCollider2D* other, RigidBody2D* rigidBody)
+	{
+		Transform* circleTransform = this->GetOwner()->GetComponent<Transform>();
+		Transform* boxTransform = other->GetOwner()->GetComponent<Transform>();
+
+		float circleRadius = this->GetRadius() * PIXELS_PER_UNIT;
+		Vector2 boxSize = other->GetSize() * PIXELS_PER_UNIT;
+
+		Vector2 circlePosition = circleTransform->GetPosition() + this->GetOffset();
+		Vector2 boxPosition = boxTransform->GetPosition() + other->GetOffset();
+
+		float boxMinX = boxPosition.x - boxSize.x * 0.5f;
+		float boxMaxX = boxPosition.x + boxSize.x * 0.5f;
+		float boxMinY = boxPosition.y - boxSize.y * 0.5f;
+		float boxMaxY = boxPosition.y + boxSize.y * 0.5f;
+
+		//사각형 내부에서 원과 가장 가까운 점
+		Vector2 closestPoint;
+		closestPoint.x = std::clamp(circlePosition.x, boxMinX, boxMaxX);
+		closestPoint.y = std::clamp(circlePosition.y, boxMinY, boxMaxY);
+
+		Vector2 positionDifference = circlePosition - closestPoint;
+		float distance = positionDifference.Length();
+		Vector2 direction = positionDifference.Normalize();
+
+		float overlap = circleRadius - distance + 0.1f;
+
+		Vector2 correction = direction * overlap;
+
+		return correction;
 	}
 }

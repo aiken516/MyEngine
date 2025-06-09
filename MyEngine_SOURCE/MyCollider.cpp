@@ -1,6 +1,7 @@
 #include "MyCollider.h"
 #include "MyGameObject.h"
 #include "MyScript.h"
+#include "MyRigidBody2D.h"
 
 namespace Source
 {
@@ -11,7 +12,6 @@ namespace Source
 		Component(Enums::ComponentType::Collider),
 		_type(type),
 		_offset(Math::Vector2::zero),
-		_size(Math::Vector2::one),
 		_collisionID(_currentCollisionID++)
 	{
 	}
@@ -43,6 +43,12 @@ namespace Source
 		{
 			script->OnCollisionEnter(other);
 		}
+
+		RigidBody2D* rigidBody = GetOwner()->GetComponent<RigidBody2D>();
+		if (rigidBody != nullptr)
+		{
+			rigidBody->OnCollisionEnter(other);
+		}
 	}
 
 	void Collider::OnCollisionStay(Collider* other)
@@ -52,6 +58,12 @@ namespace Source
 		{
 			script->OnCollisionStay(other);
 		}
+
+		RigidBody2D* rigidBody = GetOwner()->GetComponent<RigidBody2D>();
+		if (rigidBody != nullptr)
+		{
+			rigidBody->OnCollisionStay(other);
+		}
 	}
 
 	void Collider::OnCollisionExit(Collider* other)
@@ -60,6 +72,12 @@ namespace Source
 		if (script != nullptr)
 		{
 			script->OnCollisionExit(other);
+		}
+
+		RigidBody2D* rigidBody = GetOwner()->GetComponent<RigidBody2D>();
+		if (rigidBody != nullptr)
+		{
+			rigidBody->OnCollisionExit(other);
 		}
 	}
 }

@@ -50,7 +50,7 @@ namespace Client
 			// ------------------- 고양이 -------------------
 
 			GameObject* cat = Object::Instantiate<GameObject>(
-				Enums::LayerType::Background, Vector2(30.0f, 100.0f));
+				Enums::LayerType::Background, Vector2(30.0f, -200.0f));
 
 			cat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
 
@@ -61,11 +61,13 @@ namespace Client
 			animator->PlayAnimation(L"CatFrontMove", true);
 			cat->AddComponent<PlayerScript>();
 
-			BoxCollider2D* collider = cat->AddComponent<BoxCollider2D>();
-			collider->SetOffset(Vector2(-25.0f, -25.0f));
+			CircleCollider2D* collider = cat->AddComponent<CircleCollider2D>();
+			collider->SetRadius(0.5f);
+			//BoxCollider2D* collider = cat->AddComponent<BoxCollider2D>();
 
 			RigidBody2D* rigidBody2D = cat->AddComponent<RigidBody2D>();
 			rigidBody2D->SetMass(1.0f);
+			rigidBody2D->SetUseGravity(false);
 
 			cameraComponent->SetTarget(cat);
 
@@ -73,7 +75,7 @@ namespace Client
 
 			// ---------------- 배경 고양이 ----------------
 			GameObject* backgroundCat = Object::Instantiate<GameObject>(
-				Enums::LayerType::Background, Vector2(60.0f, 350.0f));
+				Enums::LayerType::Background, Vector2(60.0f, 250.0f));
 
 			backgroundCat->GetComponent<Transform>()->SetScale(Vector2(2.0f, 2.0f));
 
@@ -82,8 +84,12 @@ namespace Client
 				Vector2::zero, Vector2::zero, Vector2(32.0f, 32.0f), 4, 0.4f);
 
 			backgroundCatAnimator->PlayAnimation(L"CatFrontMove", true);
-			CircleCollider2D* backgroundCatCollider = backgroundCat->AddComponent<CircleCollider2D>();
-			backgroundCatCollider->SetOffset(Vector2(-25.0f, -25.0f));
+			BoxCollider2D* backgroundCatCollider = backgroundCat->AddComponent<BoxCollider2D>();
+			//CircleCollider2D* backgroundCatCollider = backgroundCat->AddComponent<CircleCollider2D>();
+
+			//RigidBody2D* backgroundCatRigidBody2D = backgroundCat->AddComponent<RigidBody2D>();
+			//backgroundCatRigidBody2D->SetMass(1.0f);
+			//backgroundCatRigidBody2D->SetUseGravity(false);
 
 			// ------------------- 버섯 -------------------
 

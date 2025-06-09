@@ -39,11 +39,6 @@ namespace Source
 	void CollisionManager::Clear()
 	{
 		_collisionMap.clear();
-
-		for (UINT i = 0; i < (UINT)LayerType::MAX; i++)
-		{
-			_collisionLayerMatrix[i].reset();
-		}
 	}
 
 	// 레이어 간 충돌 체크를 위한 매트릭스 설정

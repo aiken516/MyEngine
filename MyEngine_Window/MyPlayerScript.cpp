@@ -86,6 +86,7 @@ namespace Client
 
 	void PlayerScript::OnCollisionExit(Collider* other)
 	{
-		Object::Destroy(GetOwner());
+		//RigidBody2D* rb = GetOwner()->GetComponent<RigidBody2D>();
+		//rb->AddForce(Vector2(0.0f, -1000.0f));
 	}
 }

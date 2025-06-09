@@ -1,5 +1,7 @@
 #pragma once
 #include "MyComponent.h"
+#include "MySettings.h"
+#include "MyRigidBody2D.h"
 
 namespace Source
 {
@@ -18,22 +20,23 @@ namespace Source
 		virtual bool IntersectWithCircle(class CircleCollider2D* other) = 0;
 		virtual bool IntersectWithBox(class BoxCollider2D* other) = 0;
 
+		virtual Vector2 ResolveCollision(Collider* other, class RigidBody2D* rigidBody) = 0;
+		virtual Vector2 ResolveWithCircle(class CircleCollider2D* other, class RigidBody2D* rigidBody) = 0;
+		virtual Vector2 ResolveWithBox(class BoxCollider2D* other, class RigidBody2D* rigidBody) = 0;
+
 		virtual void OnCollisionEnter(Collider* other);
 		virtual void OnCollisionStay(Collider* other);
 		virtual void OnCollisionExit(Collider* other);
 
 		UINT32 GetCollisionID() const { return _collisionID; }
-		Math::Vector2 GetOffset() const { return _offset; }
-		void SetOffset(Math::Vector2 offset) { _offset = offset; }
-		Math::Vector2 GetSize() const { return _size; }
-		void SetSize(Math::Vector2 size) { _size = size; }
+		Vector2 GetOffset() const { return _offset; }
+		void SetOffset(Vector2 offset) { _offset = offset; }
 		ColliderType GetColliderType() const { return _type; }
 	private:
 		static UINT32 _currentCollisionID;
 		
 		ColliderType _type;
 		UINT32 _collisionID;
-		Math::Vector2 _offset;
-		Math::Vector2 _size;
+		Vector2 _offset;
 	};
 }

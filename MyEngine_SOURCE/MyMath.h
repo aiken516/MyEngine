@@ -63,9 +63,32 @@ namespace Source::Math
 			return Vector2(x * value, y * value);
 		}
 
+		void operator*=(float value)
+		{
+			x *= value;
+			y *= value;
+		}
+
 		Vector2 operator/(float value)
 		{
 			return Vector2(x / value, y / value);
+		}
+
+		void operator/=(float value)
+		{
+			x /= value;
+			y /= value;
+		}
+
+		Vector2 operator+(Vector2 other)
+		{
+			return Vector2(x + other.x, y + other.y);
+		}
+		
+		void operator+=(Vector2 other)
+		{
+			x += other.x;
+			y += other.y;
 		}
 
 		Vector2 operator-(Vector2 other)
@@ -79,15 +102,26 @@ namespace Source::Math
 			y -= other.y;
 		}
 
-		Vector2 operator+(Vector2 other)
+		Vector2 operator*(Vector2 other)
 		{
-			return Vector2(x + other.x, y + other.y);
+			return Vector2(x * other.x, y * other.y);
 		}
-		
-		void operator+=(Vector2 other)
+
+		void operator*=(Vector2 other)
 		{
-			x += other.x;
-			y += other.y;
+			x *= other.x;
+			y *= other.y;
+		}
+
+		Vector2 operator/(Vector2 other)
+		{
+			return Vector2(x / other.x, y / other.y);
+		}
+
+		void operator/=(Vector2 other)
+		{
+			x /= other.x;
+			y /= other.y;
 		}
 
 		bool operator==(Vector2 other)

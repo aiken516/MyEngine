@@ -168,6 +168,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyRigidBody2D.h">
       <Filter>Component\RigidBody</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MySettings.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Component">

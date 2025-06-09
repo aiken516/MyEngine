@@ -26,27 +26,28 @@ namespace Source
 			_position.y = position.y;
 		}
 
-		Vector2 GetPosition() { return _position; }
+		Vector2 GetPosition() const { return _position; }
 
 		void SetScale(int x, int y)
 		{
 			_scale.x = x;
 			_scale.y = y;
 		}
+
 		void SetScale(Vector2 scale)
 		{
 			_scale.x = scale.x;
 			_scale.y = scale.y;
 		}
 
-		Vector2 GetScale() { return _scale; }
+		Vector2 GetScale() const { return _scale; }
 
 		void SetRotation(float rotation)
 		{
 			_rotation = rotation;
 		}
 
-		float GetRotation() { return _rotation; }
+		float GetRotation() const { return _rotation; }
 
 	private:
 		Vector2 _position;
