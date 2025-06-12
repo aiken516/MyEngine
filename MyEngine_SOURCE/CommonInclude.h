@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include <vector>
 #include <string>
+#include <stack>
+#include <queue>
 #include <map>
 #include <bitset>
 #include <functional>

@@ -79,6 +79,18 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyRigidBody2D.cpp">
       <Filter>Component\RigidBody</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyUIManager.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyUIBase.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyUIButton.cpp">
+      <Filter>UI\UIButton</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyUIImage.cpp">
+      <Filter>UI\UIImage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyComponent.h">
@@ -171,6 +183,18 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MySettings.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyUIManager.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyUIBase.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyUIButton.h">
+      <Filter>UI\UIButton</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyUIImage.h">
+      <Filter>UI\UIImage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Component">
@@ -226,6 +250,15 @@
     </Filter>
     <Filter Include="Component\RigidBody">
       <UniqueIdentifier>{a421d84b-18b6-4ade-87ce-489592f24272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{dd999783-c3ee-48c2-9583-fa7fce5853b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\UIButton">
+      <UniqueIdentifier>{6ce253a5-6267-4c53-aaf8-7e63e2f6b7ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\UIImage">
+      <UniqueIdentifier>{c9c3c281-9a6b-4907-a849-809d230480b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

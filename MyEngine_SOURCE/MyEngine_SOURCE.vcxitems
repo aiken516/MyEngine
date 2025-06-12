@@ -44,6 +44,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTransform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyUIBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyUIImage.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyUIManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyUIButton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)MyAnimation.cpp" />
@@ -72,5 +76,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTransform.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyUIBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyUIImage.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyUIManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyUIButton.cpp" />
   </ItemGroup>
 </Project>

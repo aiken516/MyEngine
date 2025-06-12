@@ -4,6 +4,7 @@
 #include "MySceneManager.h"
 #include "MyResources.h"
 #include "MyCollisionManager.h"
+#include "MyUIManager.h"
 
 namespace Source
 {
@@ -31,6 +32,7 @@ namespace Source
 		Input::Initailize();	
 		Time::Initailze();
 		CollisionManager::Initialize();
+		UIManager::Initialize();
 		SceneManager::Initialize();
 	}
 
@@ -48,12 +50,14 @@ namespace Source
 		Input::Update();
 		Time::Update();
 		CollisionManager::Update();
+		UIManager::Update();
 		SceneManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
 		CollisionManager::LateUpdate();
+		UIManager::LateUpdate();
 		SceneManager::LateUpdate();
 	}
 
@@ -68,6 +72,7 @@ namespace Source
 
 		Time::Render(_backHdc);
 		CollisionManager::Render(_backHdc);
+		UIManager::Render(_backHdc);
 		SceneManager::Render(_backHdc);
 
 		CopyRenderTarget(_backHdc, _hdc);
@@ -82,6 +87,7 @@ namespace Source
 	{
 		//Static한 클래스, 싱글턴으로 작동하는 클래스를 메모리 해제
 		SceneManager::Release();
+		UIManager::Release();
 		Resources::Release();
 	}
 

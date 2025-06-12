@@ -45,4 +45,11 @@ namespace Source::Enums
 		Box2D,
 		End,
 	};
+
+	enum class UIType
+	{
+		Image,
+		Button,
+		End
+	};
 }
