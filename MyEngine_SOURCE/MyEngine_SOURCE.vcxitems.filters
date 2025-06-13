@@ -55,9 +55,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTransform.cpp">
       <Filter>Component\Transform</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)MyAnimator.cpp">
-      <Filter>Component\Transform</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MyScript.cpp">
       <Filter>Component\Script</Filter>
     </ClCompile>
@@ -78,6 +75,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)MyRigidBody2D.cpp">
       <Filter>Component\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyFmod.cpp">
+      <Filter>Fmod</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyAudioListener.cpp">
+      <Filter>Component\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyAudioSource.cpp">
+      <Filter>Component\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyAudioClip.cpp">
+      <Filter>Resource\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyAnimator.cpp">
+      <Filter>Component\Animator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,9 +156,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTransform.h">
       <Filter>Component\Transform</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimator.h">
-      <Filter>Component\Transform</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyScript.h">
       <Filter>Component\Script</Filter>
     </ClInclude>
@@ -170,6 +179,21 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MySettings.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyFmod.h">
+      <Filter>Fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioListener.h">
+      <Filter>Component\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioSource.h">
+      <Filter>Component\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioClip.h">
+      <Filter>Resource\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimator.h">
+      <Filter>Component\Animator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +250,15 @@
     </Filter>
     <Filter Include="Component\RigidBody">
       <UniqueIdentifier>{a421d84b-18b6-4ade-87ce-489592f24272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fmod">
+      <UniqueIdentifier>{291ff42e-ba2f-4293-a26b-ba3bbf5b53f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Audio">
+      <UniqueIdentifier>{5670c597-beec-4a10-ba2c-ff73754671c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Audio">
+      <UniqueIdentifier>{e1fef670-1a2d-44a1-bc63-b8e426070469}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

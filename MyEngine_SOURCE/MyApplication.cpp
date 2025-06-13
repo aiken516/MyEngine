@@ -4,6 +4,7 @@
 #include "MySceneManager.h"
 #include "MyResources.h"
 #include "MyCollisionManager.h"
+#include "MyFmod.h"
 
 namespace Source
 {
@@ -30,6 +31,7 @@ namespace Source
 
 		Input::Initailize();	
 		Time::Initailze();
+		Fmod::Initialize();
 		CollisionManager::Initialize();
 		SceneManager::Initialize();
 	}

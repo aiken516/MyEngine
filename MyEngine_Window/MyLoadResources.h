@@ -1,6 +1,7 @@
 #pragma once
 #include "..\\MyEngine_SOURCE\\MyResources.h"
 #include "..\\MyEngine_SOURCE\\MyTexture.h"
+#include "..\\MyEngine_SOURCE\\MyAudioClip.h"
 
 using namespace Source;
 
@@ -16,6 +17,8 @@ namespace Client
         Resources::Load<Graphics::Texture>(L"Mushroom1", L"..\\Resources\\Mushroom\\1.bmp");
         Resources::Load<Graphics::Texture>(L"Mushroom2", L"..\\Resources\\Mushroom\\2.bmp");
         Resources::Load<Graphics::Texture>(L"Mushroom3", L"..\\Resources\\Mushroom\\3.bmp");
+
+        Resources::Load<AudioClip>(L"BGSound", L"..\\Resources\\Sounds\\BGM.wav");
 
     }
 }

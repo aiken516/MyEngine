@@ -15,6 +15,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioClip.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioListener.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioSource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MySettings.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimator.h" />
@@ -49,6 +53,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyAudioClip.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyAudioListener.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyAudioSource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyBoxCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyCamera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyCircleCollider2D.cpp" />
@@ -57,6 +64,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyDontDestroyOnLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyEntity.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyFmod.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyLayer.cpp" />

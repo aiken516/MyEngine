@@ -12,6 +12,8 @@ namespace Source::Enums
 		Renderer,
 		Animator,
 		Camera,
+		AudioListener,
+		AudioSource,
 		END
 	};
 
