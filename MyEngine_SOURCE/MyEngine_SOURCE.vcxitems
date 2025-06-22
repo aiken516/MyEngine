@@ -21,7 +21,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyGraphicDevice_DX11.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyGraphics.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MySettings.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimator.h" />
@@ -45,6 +47,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MySceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MySpriteRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTime.h" />
@@ -71,13 +74,16 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyGraphicDevice_DX11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyRigidBody2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MySceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MySpriteRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTime.cpp" />

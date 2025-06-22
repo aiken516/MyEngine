@@ -94,6 +94,15 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyGraphicDevice_DX11.cpp">
       <Filter>GraphicDevice</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyMesh.cpp">
+      <Filter>Resource\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyMaterial.cpp">
+      <Filter>Resource\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyShader.cpp">
+      <Filter>Resource\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyComponent.h">
@@ -204,6 +213,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyGraphics.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyMesh.h">
+      <Filter>Resource\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyMaterial.h">
+      <Filter>Resource\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyShader.h">
+      <Filter>Resource\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Component">
@@ -271,6 +289,15 @@
     </Filter>
     <Filter Include="GraphicDevice">
       <UniqueIdentifier>{772a378d-9f08-4e15-8957-b31a279f7095}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Mesh">
+      <UniqueIdentifier>{168a1576-da33-47c3-a546-f7c19bb5905e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Material">
+      <UniqueIdentifier>{2312213a-9150-47d4-9c67-bc57e4499b2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource\Shader">
+      <UniqueIdentifier>{4ce210c7-8f01-4c94-802c-a08a81a903ad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
