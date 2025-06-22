@@ -17,8 +17,7 @@ namespace Source
 {
 	SpriteRenderer::SpriteRenderer() :
 		Component(Enums::ComponentType::Renderer),
-		_texture(nullptr),
-		_size(Vector2::one)
+		_texture(nullptr)
 	{
 	}
 
@@ -55,11 +54,15 @@ namespace Source
 			position = Renderer::MainCamera->CalculatePostion(position);
 		}
 
-		int worldHeight = application.GetHeight();
-		int worldWidth = application.GetWidth();
+		// 스프라이트가 중앙이 되도록 보정
+		float leftTopX = position.x - (_texture->GetWidth() * scale.x * 0.5f); 
+		float leftTopY = position.y - (_texture->GetHeight() * scale.x * 0.5f);
 
-		if (position.x > worldWidth || position.x + _texture->GetWidth() * _size.x * scale.x < 0.0f ||
-			position.y > worldHeight || position.y + _texture->GetWidth() * _size.y * scale.y < 0.0f)
+		float rightBottomX = position.x + (_texture->GetWidth() * scale.x * 0.5f);
+		float rightBottomY = position.y + (_texture->GetHeight() * scale.y * 0.5f);
+
+		if (leftTopX > application.GetWidth() || rightBottomX < 0.0f ||
+			leftTopY > application.GetHeight() || rightBottomX < 0.0f)
 		{
 			return; // 화면 밖에 있는 경우 컬링
 		}
@@ -75,10 +78,10 @@ namespace Source
 				func.SourceConstantAlpha = 255; // 0(완전 투명) ~ 255(완전 불투명)
 
 				AlphaBlend(hdc,
-					position.x,
-					position.y,
-					_texture->GetWidth() * _size.x * scale.x,//size를 지울 필요가 있을 수도
-					_texture->GetHeight() * _size.y * scale.y,//size를 지울 필요가 있을 수도
+					leftTopX,
+					leftTopY,
+					rightBottomX - leftTopX,
+					rightBottomY - leftTopY,
 					_texture->GetHdc(),
 					0, 0,
 					_texture->GetWidth(),
@@ -89,10 +92,10 @@ namespace Source
 			{
 				//https://blog.naver.com/power2845/50147965306
 				TransparentBlt(hdc,
-					position.x,
-					position.y,
-					_texture->GetWidth() * _size.x * scale.x,//size를 지울 필요가 있을 수도
-					_texture->GetHeight() * _size.y * scale.y,//size를 지울 필요가 있을 수도
+					leftTopX,
+					leftTopY,
+					rightBottomX - leftTopX,
+					rightBottomY - leftTopY,
 					_texture->GetHdc(),
 					0, 0,
 					_texture->GetWidth(),
@@ -109,16 +112,16 @@ namespace Source
 
 			Gdiplus::Graphics graphcis(hdc);
 
-			graphcis.TranslateTransform(position.x, position.y);
+			graphcis.TranslateTransform(leftTopX, leftTopY);
 			graphcis.RotateTransform(transform->GetRotation());
-			graphcis.TranslateTransform(-position.x, -position.y);
+			graphcis.TranslateTransform(-leftTopX, -leftTopY);
 
 			graphcis.DrawImage(_texture->GetSprite(), 
 				Gdiplus::Rect(
-					position.x,
-					position.y, 
-					_texture->GetWidth() * _size.x * scale.x,//size를 지울 필요가 있을 수도
-					_texture->GetHeight() * _size.y * scale.y//size를 지울 필요가 있을 수도
+					leftTopX,
+					leftTopY,
+					rightBottomX - leftTopX,
+					rightBottomY - leftTopY
 				),
 				0, 0,
 				_texture->GetWidth(),

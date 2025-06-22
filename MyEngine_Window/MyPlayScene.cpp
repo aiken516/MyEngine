@@ -49,6 +49,7 @@ namespace Client
 			SpriteRenderer* spriteRenderer = background->AddComponent<SpriteRenderer>();
 			spriteRenderer->SetName(L"SR");
 			spriteRenderer->SetTexture(Resources::Find<Graphics::Texture>(L"Punch"));
+			//BoxCollider2D* backgroundCollider = background->AddComponent<BoxCollider2D>();
 
 			// ------------------- °í¾çÀÌ -------------------
 
