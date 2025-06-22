@@ -3,12 +3,15 @@
 #include "MyTransform.h"
 #include "MyTexture.h"
 #include "MyRenderer.h"
+#include "MyApplication.h"
 
 #include <windows.h>  // 기본 Windows API 헤더
 #include <Shlwapi.h>  // PathFileExists()가 선언된 헤더
 #include <iostream>
 
 #pragma comment(lib, "Shlwapi.lib")  // 라이브러리 링크
+
+extern Source::Application application;
 
 namespace Source
 {
@@ -50,6 +53,15 @@ namespace Source
 		if (Renderer::MainCamera != nullptr)
 		{
 			position = Renderer::MainCamera->CalculatePostion(position);
+		}
+
+		int worldHeight = application.GetHeight();
+		int worldWidth = application.GetWidth();
+
+		if (position.x > worldWidth || position.x + _texture->GetWidth() * _size.x * scale.x < 0.0f ||
+			position.y > worldHeight || position.y + _texture->GetWidth() * _size.y * scale.y < 0.0f)
+		{
+			return; // 화면 밖에 있는 경우 컬링
 		}
 
 		if (_texture->GetTextureType() == Graphics::Texture::TextureType::Bmp)

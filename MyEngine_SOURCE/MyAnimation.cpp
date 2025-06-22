@@ -4,6 +4,9 @@
 #include "MyGameObject.h"
 #include "MyTransform.h"
 #include "MyRenderer.h"
+#include "MyApplication.h"
+
+extern Source::Application application;
 
 namespace Source
 {
@@ -70,8 +73,20 @@ namespace Source
 		}
 
 		Sprite currentSprite = _animationSheet[_index];
+		
+		int worldHeight = application.GetHeight();
+		int worldWidth = application.GetWidth();
+
+		if (position.x - (currentSprite.size.x * 0.5f) + currentSprite.offset.x > worldWidth ||
+			currentSprite.size.x * scale.x < 0.0f ||
+			position.y - (currentSprite.size.y * 0.5f) + currentSprite.offset.y > worldHeight ||
+			currentSprite.size.y * scale.y < 0.0f)
+		{
+			return;
+		}
 
 		Graphics::Texture::TextureType type = _spriteSheet->GetTextureType();
+		
 		if (type == Graphics::Texture::TextureType::Bmp)
 		{
 			if (_spriteSheet->HasAlpha())
@@ -83,8 +98,8 @@ namespace Source
 				func.SourceConstantAlpha = 255; // 0(완전 투명) ~ 255(완전 불투명)
 
 				AlphaBlend(hdc, 
-					position.x - (currentSprite.size.x / 2.0f) + currentSprite.offset.x,
-					position.y - (currentSprite.size.y / 2.0f) + currentSprite.offset.y,
+					position.x - (currentSprite.size.x * 0.5f) + currentSprite.offset.x,
+					position.y - (currentSprite.size.y * 0.5f) + currentSprite.offset.y,
 					currentSprite.size.x * scale.x,
 					currentSprite.size.y * scale.y,
 					_spriteSheet->GetHdc(),
@@ -97,8 +112,8 @@ namespace Source
 			else
 			{
 				TransparentBlt(hdc,
-					position.x - (currentSprite.size.x / 2.0f) + currentSprite.offset.x,
-					position.y - (currentSprite.size.y / 2.0f) + currentSprite.offset.y,
+					position.x - (currentSprite.size.x * 0.5f) + currentSprite.offset.x,
+					position.y - (currentSprite.size.y * 0.5f) + currentSprite.offset.y,
 					currentSprite.size.x * scale.x,
 					currentSprite.size.y * scale.y,
 					_spriteSheet->GetHdc(),
@@ -126,8 +141,8 @@ namespace Source
 
 			graphcis.DrawImage(_spriteSheet->GetSprite(),
 				Gdiplus::Rect(
-					position.x - (currentSprite.size.x / 2.0f),
-					position.y - (currentSprite.size.y / 2.0f),
+					position.x - (currentSprite.size.x * 0.5f),
+					position.y - (currentSprite.size.y * 0.5f),
 					currentSprite.size.x * scale.x,
 					currentSprite.size.y * scale.y
 				),
