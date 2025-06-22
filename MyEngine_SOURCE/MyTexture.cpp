@@ -43,7 +43,7 @@ namespace Source::Graphics
 
 		HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
-		Rectangle(texture->_hdc, -1, -1, texture->GetWidth() + 1, texture->GetHeight() + 1);
+		::Rectangle(texture->_hdc, -1, -1, texture->GetWidth() + 1, texture->GetHeight() + 1);
 		SelectObject(hdc, oldBrush);
 
 		HBITMAP oldBitMap = (HBITMAP)SelectObject(texture->_hdc, texture->_bitMap);

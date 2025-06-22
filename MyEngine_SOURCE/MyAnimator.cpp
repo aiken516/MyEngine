@@ -142,7 +142,7 @@ namespace Source
 				imageFiles[i]->GetHdc(), 0, 0, SRCCOPY);
 		}
 
-		CreateAnimation(name, spriteSheet, Vector2::zero, offset,
+		CreateAnimation(name, spriteSheet, Vector2::Zero, offset,
 			Vector2(imageWidth, imageHeight), fileCount, duration);
 	}
 

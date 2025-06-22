@@ -24,9 +24,11 @@
     <ClInclude Include="MyPlayer.h">
       <Filter>Contents</Filter>
     </ClInclude>
-    <ClInclude Include="MyLoadResources.h" />
     <ClInclude Include="MyPlayerScript.h">
       <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="MyLoadingScene.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -41,6 +43,9 @@
     </ClCompile>
     <ClCompile Include="MyPlayerScript.cpp">
       <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="MyLoadingScene.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

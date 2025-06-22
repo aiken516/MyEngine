@@ -8,7 +8,7 @@ namespace Source
 {
 	CircleCollider2D::CircleCollider2D() :
 		Collider(ColliderType::Circle2D),
-		_center(Math::Vector2::zero),
+		_center(Math::Vector2::Zero),
 		_radius(1.0f)
 	{
 	}
@@ -138,7 +138,8 @@ namespace Source
 
 		Vector2 positionDifference = ownerPosition - otherPosition;
 		float distance = positionDifference.Length();
-		Vector2 direction = positionDifference.Normalize();
+		positionDifference.Normalize();
+		Vector2 direction = positionDifference;
 
 		float overlap = (ownerRadius + otherRadius) - distance + 0.1f;
 
@@ -170,7 +171,8 @@ namespace Source
 
 		Vector2 positionDifference = circlePosition - closestPoint;
 		float distance = positionDifference.Length();
-		Vector2 direction = positionDifference.Normalize();
+		positionDifference.Normalize();
+		Vector2 direction = positionDifference;
 
 		float overlap = circleRadius - distance + 0.1f;
 

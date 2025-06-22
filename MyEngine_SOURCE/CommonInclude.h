@@ -7,6 +7,8 @@
 #include <functional>
 #include <filesystem>
 #include <math.h>
+#include <mutex>
+#include <thread>
 
 #include "MyMath.h"
 #include "MyEnums.h"

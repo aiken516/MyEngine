@@ -2,7 +2,6 @@
 #include "Editor_Window.h"
 #include "..\\MyEngine_SOURCE\\MyApplication.h"
 #include "..\\MyEngine_Window\\MyLoadScenes.h"
-#include "..\\MyEngine_Window\\MyLoadResources.h"
 
 //#pragma comment (lib, "..\\x64\\Debug\\MyEngine_Window.lib")
 
@@ -164,7 +163,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
 
    //씬 로드
-   Client::LoadResources();
    Client::LoadScenes();
 
    return TRUE;

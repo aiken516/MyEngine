@@ -4,8 +4,8 @@ namespace Source
 {
 	Transform::Transform() :
 		Component(Enums::ComponentType::Transform),
-		_position(Vector2::zero),
-		_scale(Vector2::one),
+		_position(Vector2::Zero),
+		_scale(Vector2::One),
 		_rotation(0.0f)
 	{
 	}

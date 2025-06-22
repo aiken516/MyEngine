@@ -1,6 +1,7 @@
 #pragma once
 #include "CommonInclude.h"
 #include "MyGameObject.h"
+#include "MyGraphicDevice_DX11.h"
 
 namespace Source
 {
@@ -29,6 +30,8 @@ namespace Source
 		void CopyRenderTarget(HDC source, HDC dest);
 		void AdjustApplicationWindow(HWND hwnd, UINT width, UINT height);
 		void CreateBackBuffer();
+
+		std::unique_ptr<Graphics::GraphicDevice_DX11> _graphicDevice;
 
 		HWND _hwnd;// 윈도우 핸들
 		HDC _hdc; // 드로잉 핸들

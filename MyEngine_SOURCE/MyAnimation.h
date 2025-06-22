@@ -15,9 +15,9 @@ namespace Source
 			float duration;
 
 			Sprite() :
-				leftTop(Math::Vector2::zero),
-				offset(Math::Vector2::zero),
-				size(Math::Vector2::zero),
+				leftTop(Math::Vector2::Zero),
+				offset(Math::Vector2::Zero),
+				size(Math::Vector2::Zero),
 				duration(0.0f)
 			{
 			}

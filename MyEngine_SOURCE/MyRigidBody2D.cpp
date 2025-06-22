@@ -12,9 +12,9 @@ namespace Source
 		_useGravity(true),
 		_mass(1.0f),
 		_friction(20.0f),
-		_force(Vector2::zero),
-		_acceleration(Vector2::zero),
-		_velocity(Vector2::zero),
+		_force(Vector2::Zero),
+		_acceleration(Vector2::Zero),
+		_velocity(Vector2::Zero),
 		_gravity(Vector2(0.0f, 98.1f)),
 		_terminalVelocity(Vector2(200.0f, 500.0f))
 	{
@@ -42,7 +42,7 @@ namespace Source
 			gravityDirection.Normalize();
 
 			// 현재 속도의 중력 방향 성분
-			float verticalSpeed = Vector2::Dot(_velocity, gravityDirection);
+			float verticalSpeed = _velocity.Dot(gravityDirection);
 
 			if (_isGround)
 			{
@@ -55,7 +55,7 @@ namespace Source
 				_velocity += _gravity * Time::DeltaTime();
 
 				// 중력 적용 후 계산
-				verticalSpeed = Vector2::Dot(_velocity, gravityDirection);
+				verticalSpeed = _velocity.Dot(gravityDirection);
 			}
 
 			// 중력 방향 속도 벡터
@@ -84,7 +84,8 @@ namespace Source
 			float horizontalSpeed = horizontalVelocity.Length();
 			if (horizontalSpeed > _terminalVelocity.x)
 			{
-				horizontalVelocity = horizontalVelocity.Normalize() * _terminalVelocity.x;
+				horizontalVelocity.Normalize();
+				horizontalVelocity *= _terminalVelocity.x;
 			}
 
 			// 최종 속도 = 수직 + 수평
@@ -92,15 +93,17 @@ namespace Source
 		}
 
 		// 마찰력 적용(Damping으로 수정해야 할 수도?)
-		if (_velocity != Vector2::zero)
+		if (_velocity != Vector2::Zero)
 		{
 			//속도의 반대 방향으로 마찰력을 적용
-			Vector2 frictionForce = (-_velocity).Normalize() * _friction * _mass * Time::DeltaTime();
+			Vector2 minusVelocity = -_velocity;
+			minusVelocity.Normalize();
+			Vector2 frictionForce = minusVelocity * _friction * _mass * Time::DeltaTime();
 
 			if (_velocity.Length() < frictionForce.Length())
 			{
 				// 마찰력으로 속도가 0이 되면 정지
-				_velocity = Vector2::zero;
+				_velocity = Vector2::Zero;
 			}
 			else
 			{
@@ -114,7 +117,7 @@ namespace Source
 			transform->SetPosition(position);
 		}
 
-		_force.Clear();
+		_force = Vector2::Zero;
 	}
 
 	void RigidBody2D::LateUpdate()
@@ -135,7 +138,7 @@ namespace Source
 		Collider* collider = this->GetOwner()->GetComponent<Collider>();
 		Vector2 correction = other->ResolveCollision(collider, this);
 
-		if (correction != Vector2::zero)
+		if (correction != Vector2::Zero)
 		{
 			Transform* transform = this->GetOwner()->GetComponent<Transform>();
 			Vector2 position = transform->GetPosition();
@@ -145,9 +148,10 @@ namespace Source
 			Vector2 gravityDirection = _gravity;
 			gravityDirection.Normalize();
 			gravityDirection *= -1.0f;
-			Vector2 correctionDirection = correction.Normalize();
+			correction.Normalize();
+			Vector2 correctionDirection = correction;
 
-			float alignment = Vector2::Dot(correctionDirection, gravityDirection);
+			float alignment = correctionDirection.Dot(gravityDirection);
 			if (alignment > 0.9f)
 			{
 				this->SetIsGround(true);

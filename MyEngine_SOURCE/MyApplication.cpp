@@ -5,6 +5,7 @@
 #include "MyResources.h"
 #include "MyCollisionManager.h"
 #include "MyFmod.h"
+#include "MyRenderer.h"
 
 namespace Source
 {
@@ -28,6 +29,10 @@ namespace Source
 	{
 		AdjustApplicationWindow(hwnd, width, height);
 		CreateBackBuffer();
+
+		_graphicDevice = std::make_unique<Graphics::GraphicDevice_DX11>();
+		Renderer::Initialize();
+		_graphicDevice->Initialize();
 
 		Input::Initailize();	
 		Time::Initailze();
@@ -61,18 +66,11 @@ namespace Source
 
 	void Application::Render()
 	{
-		//TEST 배경색, 추후에 분리
-		UINT r = 128;
-		UINT g = 128;
-		UINT b = 128;
-		
-		ClearRenderTarget(r, g, b);
+		_graphicDevice->Draw();
 
 		Time::Render(_backHdc);
 		CollisionManager::Render(_backHdc);
 		SceneManager::Render(_backHdc);
-
-		CopyRenderTarget(_backHdc, _hdc);
 	}
 
 	void Application::Destroy()
@@ -85,24 +83,9 @@ namespace Source
 		//Static한 클래스, 싱글턴으로 작동하는 클래스를 메모리 해제
 		SceneManager::Release();
 		Resources::Release();
+		Renderer::Release();
 	}
-
-	void Application::ClearRenderTarget(UINT r, UINT g, UINT b)
-	{
-		HBRUSH colorBrush = (HBRUSH)CreateSolidBrush(RGB(r, g, b));
-		HBRUSH oldBrush = (HBRUSH)SelectObject(_backHdc, colorBrush);
-
-		Rectangle(_backHdc, -1, -1, _width + 1, _height + 1); // 흰 사각형을 전체에 채워 그림
-
-		(HBRUSH)SelectObject(_backHdc, oldBrush);
-		DeleteObject(colorBrush);
-	}
-
-	void Application::CopyRenderTarget(HDC source, HDC dest)
-	{
-		BitBlt(dest, 0, 0, _width, _height, source, 0, 0, SRCCOPY);
-	}
-
+	
 	void Application::AdjustApplicationWindow(HWND hwnd, UINT width, UINT height)
 	{
 		_hwnd = hwnd;

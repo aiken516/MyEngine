@@ -61,7 +61,7 @@ namespace Client
 
 			Animator* animator = cat->AddComponent<Animator>();
 			animator->CreateAnimation(L"CatFrontMove", Resources::Find<Graphics::Texture>(L"Cat"),
-				Vector2::zero, Vector2::zero, Vector2(32.0f, 32.0f), 4, 0.4f);
+				Vector2::Zero, Vector2::Zero, Vector2(32.0f, 32.0f), 4, 0.4f);
 
 			animator->PlayAnimation(L"CatFrontMove", true);
 			cat->AddComponent<PlayerScript>();
@@ -86,7 +86,7 @@ namespace Client
 
 			Animator* backgroundCatAnimator = backgroundCat->AddComponent<Animator>();
 			backgroundCatAnimator->CreateAnimation(L"CatFrontMove", Resources::Find<Graphics::Texture>(L"Cat"),
-				Vector2::zero, Vector2::zero, Vector2(32.0f, 32.0f), 4, 0.4f);
+				Vector2::Zero, Vector2::Zero, Vector2(32.0f, 32.0f), 4, 0.4f);
 
 			backgroundCatAnimator->PlayAnimation(L"CatFrontMove", true);
 			BoxCollider2D* backgroundCatCollider = backgroundCat->AddComponent<BoxCollider2D>();
@@ -98,7 +98,7 @@ namespace Client
 
 			AudioSource* backgroundCatAudioSource = backgroundCat->AddComponent<AudioSource>();
 			backgroundCatAudioSource->SetAudioClip(Resources::Find<AudioClip>(L"BGSound"));
-			backgroundCatAudioSource->Play();
+			//backgroundCatAudioSource->Play();
 
 			// ---------------- 배경 고양이 2 ----------------
 			GameObject* backgroundCat2 = Object::Instantiate<GameObject>(
@@ -108,7 +108,7 @@ namespace Client
 
 			Animator* backgroundCat2Animator = backgroundCat2->AddComponent<Animator>();
 			backgroundCat2Animator->CreateAnimation(L"CatFrontMove", Resources::Find<Graphics::Texture>(L"Cat"),
-				Vector2::zero, Vector2::zero, Vector2(32.0f, 32.0f), 4, 0.4f);
+				Vector2::Zero, Vector2::Zero, Vector2(32.0f, 32.0f), 4, 0.4f);
 
 			backgroundCat2Animator->PlayAnimation(L"CatFrontMove", true);
 			BoxCollider2D* backgroundCat2Collider = backgroundCat2->AddComponent<BoxCollider2D>();
@@ -121,7 +121,7 @@ namespace Client
 			AudioSource* backgroundCat2AudioSource = backgroundCat2->AddComponent<AudioSource>();
 			backgroundCat2AudioSource->SetAudioClip(Resources::Find<AudioClip>(L"BGSound"));
 			backgroundCat2AudioSource->SetIsLoop(true);
-			backgroundCat2AudioSource->Play();
+			//backgroundCat2AudioSource->Play();
 
 			// ------------------- 버섯 -------------------
 
@@ -132,7 +132,7 @@ namespace Client
 
 			Animator* mushroomAnimator = mushroom->AddComponent<Animator>();
 			mushroomAnimator->CreateAnimationByFolder(L"Mushroom", L"..\\Resources\\Mushroom",
-				Vector2::zero, 5.4f);
+				Vector2::Zero, 5.4f);
 
 			mushroomAnimator->PlayAnimation(L"Mushroom", true);
 

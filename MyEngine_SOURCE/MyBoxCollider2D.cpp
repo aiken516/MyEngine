@@ -8,7 +8,7 @@ namespace Source
 {
 	BoxCollider2D::BoxCollider2D() :
 		Collider(ColliderType::Box2D),
-		_size(Math::Vector2::one)
+		_size(Math::Vector2::One)
 	{
 	}
 
@@ -46,7 +46,7 @@ namespace Source
 
 		Vector2 offset = GetOffset();
 		
-		Rectangle(hdc, 
+		::Rectangle(hdc, 
 			position.x + offset.x - GetSize().x * 0.5f * PIXELS_PER_UNIT,
 			position.y + offset.y - GetSize().y * 0.5f * PIXELS_PER_UNIT,
 			position.x + offset.x + GetSize().x * 0.5f * PIXELS_PER_UNIT,
@@ -120,7 +120,7 @@ namespace Source
 		Vector2 distance = ownerPosition - otherPosition;
 		Vector2 overlap = ownerHalf + otherHalf - Vector2(fabs(distance.x), fabs(distance.y));
 
-		Vector2 correction = Vector2::zero;
+		Vector2 correction = Vector2::Zero;
 
 		if (overlap.x > 0.0f && overlap.y > 0.0f)
 		{

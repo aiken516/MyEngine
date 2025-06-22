@@ -11,7 +11,7 @@ namespace Source
 	Collider::Collider(ColliderType type) : 
 		Component(Enums::ComponentType::Collider),
 		_type(type),
-		_offset(Math::Vector2::zero),
+		_offset(Math::Vector2::Zero),
 		_collisionID(_currentCollisionID++)
 	{
 	}

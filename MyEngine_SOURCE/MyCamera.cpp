@@ -9,9 +9,9 @@ namespace Source
 {
 	Camera::Camera() :
 		Component(Enums::ComponentType::Camera),
-		_distance(Vector2::zero),
-		_resolution(Vector2::zero),
-		_lookPosition(Vector2::zero),
+		_distance(Vector2::Zero),
+		_resolution(Vector2::Zero),
+		_lookPosition(Vector2::Zero),
 		_target(nullptr)
 	{
 	}

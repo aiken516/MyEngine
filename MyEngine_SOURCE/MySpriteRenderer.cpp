@@ -15,7 +15,7 @@ namespace Source
 	SpriteRenderer::SpriteRenderer() :
 		Component(Enums::ComponentType::Renderer),
 		_texture(nullptr),
-		_size(Vector2::one)
+		_size(Vector2::One)
 	{
 	}
 
@@ -51,6 +51,8 @@ namespace Source
 		{
 			position = Renderer::MainCamera->CalculatePostion(position);
 		}
+
+
 
 		if (_texture->GetTextureType() == Graphics::Texture::TextureType::Bmp)
 		{

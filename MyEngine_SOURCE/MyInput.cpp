@@ -6,7 +6,7 @@ extern Source::Application application;
 namespace Source
 {
 	std::vector<Input::Key> Input::_keys = {};
-	Math::Vector2 Input::_mousePosition = Math::Vector2::zero;
+	Math::Vector2 Input::_mousePosition = Math::Vector2::Zero;
 
 	int ASCII[(UINT)KeyCode::End] =
 	{

@@ -19,6 +19,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioListener.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioSource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyFmod.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyGraphicDevice_DX11.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyGraphics.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MySettings.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimator.h" />
@@ -35,7 +38,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyLayer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)MyMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyResources.h" />
@@ -66,6 +68,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyFmod.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyGameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyGraphicDevice_DX11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyMath.cpp" />
