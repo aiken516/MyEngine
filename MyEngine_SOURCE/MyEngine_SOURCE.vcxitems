@@ -18,9 +18,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioClip.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioListener.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioSource.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyGraphicDevice_DX11.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyGraphics.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyIndexBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyMesh.h" />
@@ -53,6 +55,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTransform.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyVertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)MyAnimation.cpp" />
@@ -67,11 +70,13 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyCollider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyDontDestroyOnLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyFmod.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyGraphicDevice_DX11.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyIndexBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyMaterial.cpp" />
@@ -89,5 +94,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTransform.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyVertexBuffer.cpp" />
   </ItemGroup>
 </Project>

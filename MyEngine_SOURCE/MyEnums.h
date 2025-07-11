@@ -36,6 +36,7 @@ namespace Source::Enums
 		//Mesh,
 		//Video,
 		AudioClip,
+		Shader,
 		Animation,
 		Prefab,
 		END

@@ -6,6 +6,7 @@ namespace Source
 		_name(L"")
 	{
 	}
+
 	Entity::~Entity()
 	{
 	}

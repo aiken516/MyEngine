@@ -15,7 +15,6 @@ namespace Source::Graphics
 		void Initialize();
 		void Draw();
 
-	private:
 		bool CreateDevice();
 		bool CreateSwapChain(DXGI_SWAP_CHAIN_DESC desc);
 		bool GetBuffer(UINT buffer, REFIID riid, void** surface);
@@ -28,8 +27,16 @@ namespace Source::Graphics
 			const void* shaderBytecodeWithInputSignature, SIZE_T bytecodeLength, ID3D11InputLayout** inputLayout);
 		bool CreateBuffer(const D3D11_BUFFER_DESC* desc, const D3D11_SUBRESOURCE_DATA* initialData, ID3D11Buffer** buffer);
 		
-		void BindConstantBuffer(ShaderStage stage, CBType type, ID3D11Buffer* buffer);
+		void SetDataBuffer(ID3D11Buffer* buffer, void* data, UINT size);
 
+		void BindVertexShader(ID3D11VertexShader* vertexShader);
+		void BindPixelShader(ID3D11PixelShader* pixelShader);
+
+		void BindVertexBuffer(UINT startSlot, UINT numBuffers, ID3D11Buffer* const* vertexBuffers, const UINT* strides, const UINT* offsets);
+		void BindIndexBuffer(ID3D11Buffer* indexBuffer, DXGI_FORMAT format, UINT offset);
+		void BindConstantBuffer(ShaderStage stage, ConstantBufferType type, ID3D11Buffer* buffer);
+
+	private:
 		Microsoft::WRL::ComPtr<ID3D11Device> _device;
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> _context;
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> _renderTarget;

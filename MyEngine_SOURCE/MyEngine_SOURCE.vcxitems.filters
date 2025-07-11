@@ -103,6 +103,15 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyShader.cpp">
       <Filter>Resource\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyVertexBuffer.cpp">
+      <Filter>GraphicDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyConstantBuffer.cpp">
+      <Filter>GraphicDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyIndexBuffer.cpp">
+      <Filter>GraphicDevice</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyComponent.h">
@@ -221,6 +230,15 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyShader.h">
       <Filter>Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyVertexBuffer.h">
+      <Filter>GraphicDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyConstantBuffer.h">
+      <Filter>GraphicDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyIndexBuffer.h">
+      <Filter>GraphicDevice</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

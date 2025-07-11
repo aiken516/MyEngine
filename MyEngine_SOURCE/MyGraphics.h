@@ -10,21 +10,36 @@
 
 namespace Source::Graphics
 {
+	struct Vertex
+	{
+		Math::Vector3 Position;
+		Math::Vector4 Color;
+	};
+
 	enum class ShaderStage
 	{
-		VS,	// Vertex Shader
-		HS,	// Hull Shader
-		DS,	// Domain Shader
-		GS,	// Geometry Shader
-		PS,	// Pixel Shader
-		CS,	// Compute Shader
+		VertexShader,	// Vertex Shader
+		HullShader,	// Hull Shader
+		DomainShader,	// Domain Shader
+		GeometryShader,	// Geometry Shader
+		PixelShader,	// Pixel Shader
+		ComputeShader,	// Compute Shader
 		All,
 		End,
 	};
 
-	enum class CBType
+	enum class ConstantBufferType
 	{
 		Transform,
 		End,
+	};
+
+	struct GpuBuffer
+	{
+		Microsoft::WRL::ComPtr<ID3D11Buffer> Buffer;
+		D3D11_BUFFER_DESC Description;
+
+		GpuBuffer() = default;
+		virtual ~GpuBuffer() = default;
 	};
 }

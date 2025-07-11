@@ -31,6 +31,7 @@ namespace Client
 	void PlayScene::Initialize()
 	{
 		{
+			/*
 			// -------------------- 충돌체 설정 ---------------
 			CollisionManager::SetCollisionLayerMatrix(LayerType::Background, LayerType::Background, true);
 
@@ -140,7 +141,7 @@ namespace Client
 
 
 			// ---------------------------------------------
-
+			*/
 			Scene::Initialize();
 		}
 	}
