@@ -30,12 +30,15 @@ namespace Source::Graphics
 		creationFlags |= D3D11_CREATE_DEVICE_DEBUG;
 		#endif
 
-		D3D11CreateDevice(
+		if (FAILED(D3D11CreateDevice(
 			0, D3D_DRIVER_TYPE_HARDWARE,
 			0, creationFlags,
 			featureLevels, ARRAYSIZE(featureLevels),
 			D3D11_SDK_VERSION, _device.GetAddressOf(),
-			0, _context.GetAddressOf());
+			0, _context.GetAddressOf())))
+		{
+			return false;
+		}
 
 		return true;
 	}

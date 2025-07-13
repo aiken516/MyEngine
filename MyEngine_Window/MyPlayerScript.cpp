@@ -28,7 +28,6 @@ namespace Client
 		if (_deadTime > 6.0f)
 		{
 			_deadTime = 0.0f;
-			//Object::Destroy(GetOwner());
 		}
 
 		Transform* tr = GetOwner()->GetComponent<Transform>();
@@ -70,7 +69,7 @@ namespace Client
 	{
 	}
 
-	void PlayerScript::Render(HDC hdc)
+	void PlayerScript::Render()
 	{
 	}
 

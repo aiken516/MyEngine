@@ -23,7 +23,7 @@ namespace Source
 		static void Initialize();
 		static bool CreateSound(const std::string& path, FMOD::Sound** sound);
 		static void SoundPlay(FMOD::Sound* sound, FMOD::Channel** channel);
-		static void Set3DListenerAttributes(const Vector2* position);
+		static void Set3DListenerAttributes(const Vector3& position);
 		static void Release();
 	private:
 		static FMOD::Studio::System* _system;

@@ -38,7 +38,7 @@ namespace Source
 	{
 	}
 
-	void LoadingScene::Render(HDC hdc)
+	void LoadingScene::Render()
 	{
 	}
 

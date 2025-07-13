@@ -9,19 +9,24 @@ namespace Source
 		_rotation(0.0f)
 	{
 	}
+
 	Transform::~Transform()
 	{
 	}
+
 	void Transform::Initialize()
 	{
 	}
+
 	void Transform::Update()
 	{
 	}
+
 	void Transform::LateUpdate()
 	{
 	}
-	void Transform::Render(HDC hdc)
+
+	void Transform::Render()
 	{
 	}
 }

@@ -124,7 +124,7 @@ namespace Source
 	{
 	}
 
-	void RigidBody2D::Render(HDC hdc)
+	void RigidBody2D::Render()
 	{
 	}
 

@@ -12,7 +12,7 @@ namespace Source
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		virtual void Render(HDC hdc);
+		virtual void Render();
 		virtual void Destroy();
 
 		virtual void OnEnter();

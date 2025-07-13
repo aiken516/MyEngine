@@ -39,7 +39,7 @@ namespace Source
 		void Initialize() override;
 		void Update() override;
 		void LateUpdate() override;
-		void Render(HDC hdc) override;
+		void Render() override;
 
 		//애니메이션은 다른 곳에서 받아서 하는게 나을거 같음, 스프라이트 에디터 등이 있으면 좋을 듯
 		void CreateAnimation(const std::wstring& name, 
@@ -48,10 +48,6 @@ namespace Source
 			Vector2 offset,
 			Vector2 size,
 			UINT spriteLength,
-			float duration);
-
-		void CreateAnimationByFolder(const std::wstring& name, const std::wstring& path,
-			Vector2 offset,
 			float duration);
 
 		Animation* FindAnimation(const std::wstring& name); 

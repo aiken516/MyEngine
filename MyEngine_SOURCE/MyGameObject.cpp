@@ -66,7 +66,7 @@ namespace Source
 		}
 	}
 
-	void GameObject::Render(HDC hdc)
+	void GameObject::Render()
 	{
 		for (Component* comp : _components)
 		{
@@ -75,7 +75,7 @@ namespace Source
 				continue;
 			}
 
-			comp->Render(hdc);
+			comp->Render();
 		}
 	}
 }

@@ -35,13 +35,10 @@ namespace Source
 		_coreSystem->playSound(sound, 0, false, channel);
 	}
 
-	void Fmod::Set3DListenerAttributes(const Vector2* position)
+	void Fmod::Set3DListenerAttributes(const Vector3& position)
 	{
 		//-1 ~ 1
-		float normalizedX = (position->x / application.GetWidth()) * 2.0f - 1.0f;
-		float normalizedY = ((position->y / application.GetHeight()) * 2.0f - 1.0f) * -1.0f;
-
-		FMOD_VECTOR fmodPos(normalizedX, normalizedY, 0.3f);
+		FMOD_VECTOR fmodPos(position.x, position.y, position.z);
 		FMOD_VECTOR fmodVel(0.0f, 0.0f, 0.0f);
 		FMOD_VECTOR fmodForward(0.0f, 0.0f, 1.0f);
 		FMOD_VECTOR fmodUp(0.0f, 1.0f, 0.0f);

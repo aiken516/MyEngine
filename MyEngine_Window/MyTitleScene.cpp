@@ -36,11 +36,8 @@ namespace Client
 		}
 	}
 
-	void TitleScene::Render(HDC hdc)
+	void TitleScene::Render()
 	{
-		Scene::Render(hdc);
-
-		wchar_t str[50] = L"Title Scene";
-		TextOut(hdc, 200, 200, str, wcsnlen_s(str, 50));
+		Scene::Render();
 	}
 }

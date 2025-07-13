@@ -65,11 +65,11 @@ namespace Source
 	{
 	}
 
-	void Animator::Render(HDC hdc)
+	void Animator::Render()
 	{
 		if (_currentAnimation != nullptr)
 		{
-			_currentAnimation->Render(hdc);
+			//_currentAnimation->Render(hdc);
 		}
 	}
 
@@ -95,55 +95,6 @@ namespace Source
 		_animationEvents.insert(std::make_pair(name, events));
 
 		_animations.insert(std::make_pair(name, animation));
-	}
-
-	void Animator::CreateAnimationByFolder(const std::wstring& name, const std::wstring& path, Vector2 offset, float duration)
-	{
-		Animation* animation = nullptr;
-
-		animation = FindAnimation(name);
-		if (animation != nullptr)
-		{
-			return;
-		}
-
-		std::filesystem::path folderPath(path);
-		if (!std::filesystem::exists(folderPath))
-		{
-			assert(false);
-			return;
-		}
-
-		std::vector<Graphics::Texture*> imageFiles = {};
-		int fileCount = 0;
-
-		for (auto& path : std::filesystem::recursive_directory_iterator(folderPath))
-		{
-			std::wstring fileName = path.path().filename();
-			std::wstring fullName = path.path();
-
-			Graphics::Texture* texture = Resources::Load<Graphics::Texture>(fileName, fullName);
-			if (texture != nullptr)
-			{
-				imageFiles.push_back(texture);
-				fileCount++;
-			}
-		}
-
-		UINT imageWidth = imageFiles[0]->GetWidth();
-		UINT imageHeight = imageFiles[0]->GetHeight();
-
-		Graphics::Texture* spriteSheet = Graphics::Texture::Create(name, imageWidth * fileCount, imageHeight);
-\
-		for (int i = 0; i < imageFiles.size(); i++)
-		{
-			BitBlt(spriteSheet->GetHdc(), i * imageWidth, 0,
-				imageWidth, imageHeight,
-				imageFiles[i]->GetHdc(), 0, 0, SRCCOPY);
-		}
-
-		CreateAnimation(name, spriteSheet, Vector2::Zero, offset,
-			Vector2(imageWidth, imageHeight), fileCount, duration);
 	}
 
 	Animation* Animator::FindAnimation(const std::wstring& name)

@@ -73,7 +73,7 @@ namespace Source
 		}
 	}
 
-	void Layer::Render(HDC hdc)
+	void Layer::Render()
 	{
 		for (GameObject* go : _gameObjects)
 		{
@@ -89,7 +89,7 @@ namespace Source
 				continue;
 			}
 
-			go->Render(hdc);
+			go->Render();
 		}
 	}
 

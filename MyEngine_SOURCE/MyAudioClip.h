@@ -1,4 +1,4 @@
-#pragma once
+	#pragma once
 #include "MyResource.h"
 #include "MyFmod.h"
 

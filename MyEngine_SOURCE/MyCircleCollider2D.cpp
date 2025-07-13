@@ -29,34 +29,10 @@ namespace Source
 	{
 	}
 
-	void CircleCollider2D::Render(HDC hdc)
+	void CircleCollider2D::Render()
 	{
 		Transform* transform = GetOwner()->GetComponent<Transform>();
 		Vector2 position = transform->GetPosition();
-
-		if (Renderer::MainCamera != nullptr)
-		{
-			position = Renderer::MainCamera->CalculatePostion(position);
-		}
-
-		HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
-
-		HPEN greenPen = CreatePen(PS_SOLID, 2, RGB(0, 255, 0));
-		HPEN oldPen = (HPEN)SelectObject(hdc, greenPen);
-
-		Vector2 offset = GetOffset();
-
-		Ellipse(hdc, 
-			position.x + offset.x - GetRadius() * PIXELS_PER_UNIT,
-			position.y + offset.y - GetRadius() * PIXELS_PER_UNIT,
-			position.x + offset.x + GetRadius() * PIXELS_PER_UNIT,
-			position.y + offset.y + GetRadius() * PIXELS_PER_UNIT
-		);
-
-		SelectObject(hdc, oldBrush);
-		SelectObject(hdc, oldPen);
-		DeleteObject(greenPen);
 	}
 
 	bool CircleCollider2D::Intersect(Collider* other)

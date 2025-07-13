@@ -31,13 +31,14 @@ namespace Source::Graphics
 	enum class ConstantBufferType
 	{
 		Transform,
+		None,
 		End,
 	};
 
 	struct GpuBuffer
 	{
-		Microsoft::WRL::ComPtr<ID3D11Buffer> Buffer;
-		D3D11_BUFFER_DESC Description;
+		Microsoft::WRL::ComPtr<ID3D11Buffer> Buffer = nullptr;
+		D3D11_BUFFER_DESC Description = {};
 
 		GpuBuffer() = default;
 		virtual ~GpuBuffer() = default;

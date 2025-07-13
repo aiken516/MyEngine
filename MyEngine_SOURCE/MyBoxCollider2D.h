@@ -12,7 +12,7 @@ namespace Source
 		void Initialize() override;
 		void Update() override;
 		void LateUpdate() override;
-		void Render(HDC hdc) override;
+		void Render() override;
 
 		bool Intersect(Collider* other) override;
 		bool IntersectWithCircle(class CircleCollider2D* other) override;

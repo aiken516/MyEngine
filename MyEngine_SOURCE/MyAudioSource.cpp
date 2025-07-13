@@ -42,7 +42,7 @@ namespace Source
 		_channel->set3DAttributes(&fmodPos, &fmodVel);
 	}
 
-	void AudioSource::Render(HDC hdc)
+	void AudioSource::Render()
 	{
 	}
 

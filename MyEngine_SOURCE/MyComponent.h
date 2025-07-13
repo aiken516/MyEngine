@@ -15,7 +15,7 @@ namespace Source
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		virtual void Render(HDC hdc);
+		virtual void Render();
 
 		void SetOwner(GameObject* owner) { _owner = owner; }
 		GameObject* GetOwner() { return _owner; }

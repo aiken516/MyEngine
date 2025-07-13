@@ -159,14 +159,9 @@ namespace Client
 			SceneManager::LoadScene(L"TitleScene");
 		}
 	}
-	void PlayScene::Render(HDC hdc)
+	void PlayScene::Render()
 	{
-		Scene::Render(hdc);
-
-		wchar_t str[50] = L"";
-
-		swprintf_s(str, 50, L"Play Scene");
-		TextOut(hdc, 200, 200, str, wcsnlen_s(str, 50));
+		Scene::Render();
 	}
 
 	void PlayScene::OnEnter()

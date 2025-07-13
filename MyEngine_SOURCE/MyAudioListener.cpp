@@ -24,13 +24,13 @@ namespace Source
 
 	void AudioListener::LateUpdate()
 	{
-		Transform* transform = GetOwner()->GetComponent<Transform>();
-		Vector2 posisiotn = transform->GetPosition();
+		//Transform* transform = GetOwner()->GetComponent<Transform>();
+		//Vector2 posisiotn = transform->GetPosition();
 
-		Fmod::Set3DListenerAttributes(&posisiotn);
+		//Fmod::Set3DListenerAttributes(&posisiotn);
 	}
 
-	void AudioListener::Render(HDC hdc)
+	void AudioListener::Render()
 	{
 	}
 }

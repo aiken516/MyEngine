@@ -11,15 +11,16 @@ namespace Source
 		~Transform();
 
 		void Initialize() override;
-		void Update()  override;
-		void LateUpdate()  override;
-		void Render(HDC hdc)  override;
+		void Update() override;
+		void LateUpdate() override;
+		void Render() override;
 
 		void SetPosition(int x, int y)
 		{ 
 			_position.x = x;
 			_position.y = y;
 		}
+
 		void SetPosition(Vector2 position) 
 		{ 
 			_position.x = position.x;

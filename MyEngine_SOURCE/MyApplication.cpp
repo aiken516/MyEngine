@@ -68,9 +68,9 @@ namespace Source
 	{
 		_graphicDevice->Draw();
 
-		Time::Render(_backHdc);
-		CollisionManager::Render(_backHdc);
-		SceneManager::Render(_backHdc);
+		Time::Render();
+		CollisionManager::Render();
+		SceneManager::Render();
 	}
 
 	void Application::Destroy()

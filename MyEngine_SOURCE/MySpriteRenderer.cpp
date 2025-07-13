@@ -35,86 +35,12 @@ namespace Source
 	{
 	}
 
-	void SpriteRenderer::Render(HDC hdc)
+	void SpriteRenderer::Render()
 	{
 		if (_texture == nullptr)
 		{
 			assert(false);
 		}
 
-		Transform* transform = GetOwner()->GetComponent<Transform>();
-		Vector2 position = transform->GetPosition();
-		float rotation = transform->GetRotation();
-		Vector2 scale = transform->GetScale();
-			
-		if (Renderer::MainCamera != nullptr)
-		{
-			position = Renderer::MainCamera->CalculatePostion(position);
-		}
-
-
-
-		if (_texture->GetTextureType() == Graphics::Texture::TextureType::Bmp)
-		{
-			if (_texture->HasAlpha())
-			{
-				BLENDFUNCTION func = {};
-				func.BlendOp = AC_SRC_OVER;
-				func.BlendFlags = 0;
-				func.AlphaFormat = AC_SRC_ALPHA;
-				func.SourceConstantAlpha = 255; // 0(완전 투명) ~ 255(완전 불투명)
-
-				AlphaBlend(hdc,
-					position.x,
-					position.y,
-					_texture->GetWidth() * _size.x * scale.x,//size를 지울 필요가 있을 수도
-					_texture->GetHeight() * _size.y * scale.y,//size를 지울 필요가 있을 수도
-					_texture->GetHdc(),
-					0, 0,
-					_texture->GetWidth(),
-					_texture->GetHeight(),
-					func);//마젠타를 보통 투명색으로함
-			}
-			else
-			{
-				//https://blog.naver.com/power2845/50147965306
-				TransparentBlt(hdc,
-					position.x,
-					position.y,
-					_texture->GetWidth() * _size.x * scale.x,//size를 지울 필요가 있을 수도
-					_texture->GetHeight() * _size.y * scale.y,//size를 지울 필요가 있을 수도
-					_texture->GetHdc(),
-					0, 0,
-					_texture->GetWidth(),
-					_texture->GetHeight(),
-					RGB(255, 0, 255));//마젠타
-			}
-		}
-		else if (_texture->GetTextureType() == Graphics::Texture::TextureType::Png)
-		{
-			Gdiplus::ImageAttributes imageAttributes = {};
-
-			//투명 처리하는 범위
-			imageAttributes.SetColorKey(Gdiplus::Color(230, 230, 230), Gdiplus::Color(255, 255, 255));
-
-			Gdiplus::Graphics graphcis(hdc);
-
-			graphcis.TranslateTransform(position.x, position.y);
-			graphcis.RotateTransform(transform->GetRotation());
-			graphcis.TranslateTransform(-position.x, -position.y);
-
-			graphcis.DrawImage(_texture->GetSprite(), 
-				Gdiplus::Rect(
-					position.x,
-					position.y, 
-					_texture->GetWidth() * _size.x * scale.x,//size를 지울 필요가 있을 수도
-					_texture->GetHeight() * _size.y * scale.y//size를 지울 필요가 있을 수도
-				),
-				0, 0,
-				_texture->GetWidth(),
-				_texture->GetHeight(),
-				Gdiplus::UnitPixel, nullptr/* & imageAttributes //애초에 알파 값이 있음*/
-			);
-		}
 	}
 }
