@@ -25,7 +25,8 @@ namespace Source::Enums
 		None = 0,
 		Background = 1,
 		Player = 2,
-		Particle = 3,
+		Object = 3,
+		Particle = 4,
 		//
 		MAX = 16
 	};
@@ -33,7 +34,6 @@ namespace Source::Enums
 	enum class ResourceType
 	{
 		Texture,
-		//Mesh,
 		//Video,
 		AudioClip,
 		Animation,

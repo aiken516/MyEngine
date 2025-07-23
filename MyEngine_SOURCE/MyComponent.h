@@ -19,7 +19,7 @@ namespace Source
 
 		void SetOwner(GameObject* owner) { _owner = owner; }
 		GameObject* GetOwner() { return _owner; }
-		Enums::ComponentType GetType() { return _type; }
+		Enums::ComponentType GetType() const { return _type; }
 
 	private:
 		GameObject* _owner;

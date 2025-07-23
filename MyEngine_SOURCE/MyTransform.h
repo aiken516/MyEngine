@@ -20,6 +20,7 @@ namespace Source
 			_position.x = x;
 			_position.y = y;
 		}
+
 		void SetPosition(Vector2 position) 
 		{ 
 			_position.x = position.x;

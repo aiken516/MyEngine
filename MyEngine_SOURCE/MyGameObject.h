@@ -30,7 +30,6 @@ namespace Source
 
 			component->SetOwner(this);
 			_components[(UINT)component->GetType()] = component;
-			//_components.push_back(component);
 
 			return component;
 		}

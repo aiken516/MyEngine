@@ -61,8 +61,8 @@ namespace Source
 		float rightBottomX = position.x + (_texture->GetWidth() * scale.x * 0.5f);
 		float rightBottomY = position.y + (_texture->GetHeight() * scale.y * 0.5f);
 
-		if (leftTopX > application.GetWidth() || rightBottomX < 0.0f ||
-			leftTopY > application.GetHeight() || rightBottomX < 0.0f)
+		if (leftTopX > application.GetWidth() || rightBottomX < 0.0f||
+			leftTopY > application.GetHeight() || rightBottomY < 0.0f)
 		{
 			return; // 화면 밖에 있는 경우 컬링
 		}
