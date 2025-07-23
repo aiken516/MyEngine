@@ -19,6 +19,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioListener.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioSource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyFmod.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyRandom.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MySettings.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimator.h" />
