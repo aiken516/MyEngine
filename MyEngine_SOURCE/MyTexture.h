@@ -1,6 +1,10 @@
 #pragma once
 #include "MyResource.h"
 
+#include <d2d1.h>
+#include <wrl/client.h>
+using Microsoft::WRL::ComPtr;
+
 namespace Source::Graphics
 {
 	class Texture : public Resource
@@ -16,27 +20,18 @@ namespace Source::Graphics
 		Texture();
 		~Texture();
 
-		static Texture* Create(const std::wstring& name, UINT width, UINT height);
-
 		virtual HRESULT Load(const std::wstring path) override;
+
 		UINT GetWidth() const { return _width; }
-		void SetWidth(UINT width) { _width = width; }
 		UINT GetHeight() const { return _height; }
-		void SetHeight(UINT height) { _height = height; }
-		HDC GetHdc() const { return _hdc; }
-		TextureType GetTextureType() const { return _textureType; }
-		Gdiplus::Image* GetSprite() { return _sprite; }
-		bool HasAlpha() const { return _hasAlpha; }
+
+		ID2D1Bitmap* GetBitmap() const { return _bitmap.Get(); }
 
 	private:
-		bool _hasAlpha;
-		Gdiplus::Image* _sprite;
-		HBITMAP _bitMap;
-		HDC _hdc;
-
-		TextureType _textureType;
-
+		std::wstring _path;
 		UINT _width;
 		UINT _height;
+
+		ComPtr<ID2D1Bitmap> _bitmap;
 	};
 }

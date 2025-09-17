@@ -73,7 +73,7 @@ namespace Source
 		}
 	}
 
-	void Layer::Render(HDC hdc)
+	void Layer::Render()
 	{
 		for (GameObject* go : _gameObjects)
 		{
@@ -89,7 +89,7 @@ namespace Source
 				continue;
 			}
 
-			go->Render(hdc);
+			go->Render();
 		}
 	}
 
@@ -111,6 +111,26 @@ namespace Source
 			}
 
 			iter++;
+		}
+	}
+
+	void Layer::OnDrawGizmos()
+	{
+		for (GameObject* go : _gameObjects)
+		{
+			if (go == nullptr)
+			{
+				continue;
+			}
+
+			GameObject::GameObjectState state = go->GetActive();
+			if (state == GameObject::GameObjectState::Inactive ||
+				state == GameObject::GameObjectState::Destroy)
+			{
+				continue;
+			}
+
+			go->OnDrawGizmos();
 		}
 	}
 

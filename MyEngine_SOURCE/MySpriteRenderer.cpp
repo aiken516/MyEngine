@@ -4,6 +4,7 @@
 #include "MyTexture.h"
 #include "MyRenderer.h"
 #include "MyApplication.h"
+#include "MyRenderManager.h"
 
 #include <windows.h>  // 기본 Windows API 헤더
 #include <Shlwapi.h>  // PathFileExists()가 선언된 헤더
@@ -37,7 +38,7 @@ namespace Source
 	{
 	}
 
-	void SpriteRenderer::Render(HDC hdc)
+	void SpriteRenderer::Render()
 	{
 		if (_texture == nullptr)
 		{
@@ -45,89 +46,53 @@ namespace Source
 		}
 
 		Transform* transform = GetOwner()->GetComponent<Transform>();
+
 		Vector2 position = transform->GetPosition();
 		float rotation = transform->GetRotation();
 		Vector2 scale = transform->GetScale();
-			
+		UINT width = _texture->GetWidth();
+		UINT height = _texture->GetHeight();
+
 		if (Renderer::MainCamera != nullptr)
 		{
 			position = Renderer::MainCamera->CalculatePostion(position);
 		}
 
-		// 스프라이트가 중앙이 되도록 보정
-		float leftTopX = position.x - (_texture->GetWidth() * scale.x * 0.5f); 
-		float leftTopY = position.y - (_texture->GetHeight() * scale.x * 0.5f);
+		float leftTopX = position.x - (width * scale.x);
+		float leftTopY = position.y - (height * scale.x);
 
-		float rightBottomX = position.x + (_texture->GetWidth() * scale.x * 0.5f);
-		float rightBottomY = position.y + (_texture->GetHeight() * scale.y * 0.5f);
+		float rightBottomX = position.x + (width * scale.x);
+		float rightBottomY = position.y + (height * scale.y);
 
-		if (leftTopX > application.GetWidth() || rightBottomX < 0.0f||
+		if (leftTopX > application.GetWidth() || rightBottomX < 0.0f ||
 			leftTopY > application.GetHeight() || rightBottomY < 0.0f)
 		{
-			return; // 화면 밖에 있는 경우 컬링
+			return; // 화면 밖에 있으면 렌더링하지 않음
 		}
 
-		if (_texture->GetTextureType() == Graphics::Texture::TextureType::Bmp)
-		{
-			if (_texture->HasAlpha())
-			{
-				BLENDFUNCTION func = {};
-				func.BlendOp = AC_SRC_OVER;
-				func.BlendFlags = 0;
-				func.AlphaFormat = AC_SRC_ALPHA;
-				func.SourceConstantAlpha = 255; // 0(완전 투명) ~ 255(완전 불투명)
+		D2D1_MATRIX_3X2_F rotationMatrix = D2D1::Matrix3x2F::Rotation(
+			rotation,
+			D2D1::Point2F(position.x, position.y) // 회전의 중심점
+		);
 
-				AlphaBlend(hdc,
-					leftTopX,
-					leftTopY,
-					rightBottomX - leftTopX,
-					rightBottomY - leftTopY,
-					_texture->GetHdc(),
-					0, 0,
-					_texture->GetWidth(),
-					_texture->GetHeight(),
-					func);//마젠타를 보통 투명색으로함
-			}
-			else
-			{
-				//https://blog.naver.com/power2845/50147965306
-				TransparentBlt(hdc,
-					leftTopX,
-					leftTopY,
-					rightBottomX - leftTopX,
-					rightBottomY - leftTopY,
-					_texture->GetHdc(),
-					0, 0,
-					_texture->GetWidth(),
-					_texture->GetHeight(),
-					RGB(255, 0, 255));//마젠타
-			}
-		}
-		else if (_texture->GetTextureType() == Graphics::Texture::TextureType::Png)
-		{
-			Gdiplus::ImageAttributes imageAttributes = {};
+		D2D1_MATRIX_3X2_F scaleMatrix = D2D1::Matrix3x2F::Scale(
+			D2D1::SizeF(scale.x, scale.y),
+			D2D1::Point2F(position.x, position.y) // 크기 변환의 중심점
+		);
 
-			//투명 처리하는 범위
-			imageAttributes.SetColorKey(Gdiplus::Color(230, 230, 230), Gdiplus::Color(255, 255, 255));
+		D2D1_MATRIX_3X2_F translationMatrix = D2D1::Matrix3x2F::Translation(
+			position.x, position.y
+		);
 
-			Gdiplus::Graphics graphcis(hdc);
+		//변환 행렬 조합 (스케일 -> 회전 -> 위치)
+		D2D1_MATRIX_3X2_F finalTransform = scaleMatrix * rotationMatrix * translationMatrix;
 
-			graphcis.TranslateTransform(leftTopX, leftTopY);
-			graphcis.RotateTransform(transform->GetRotation());
-			graphcis.TranslateTransform(-leftTopX, -leftTopY);
+		RenderRequest request{};
+		request.texture = _texture;
+		request.sourceRect = D2D1::RectF(0.0f, 0.0f, (float)width, (float)height);
+		request.transformMatrix = finalTransform;
 
-			graphcis.DrawImage(_texture->GetSprite(), 
-				Gdiplus::Rect(
-					leftTopX,
-					leftTopY,
-					rightBottomX - leftTopX,
-					rightBottomY - leftTopY
-				),
-				0, 0,
-				_texture->GetWidth(),
-				_texture->GetHeight(),
-				Gdiplus::UnitPixel, nullptr/* & imageAttributes //애초에 알파 값이 있음*/
-			);
-		}
+		// RenderManager에 렌더링 요청 제출
+		RenderManager::AddRenderRequest(request);
 	}
 }

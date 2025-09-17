@@ -47,7 +47,7 @@ namespace Source
 	{
 	}
 
-	void Camera::Render(HDC hdc)
+	void Camera::Render()
 	{
 	}
 }

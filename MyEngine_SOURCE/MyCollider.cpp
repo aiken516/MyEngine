@@ -32,7 +32,11 @@ namespace Source
 	{
 	}
 
-	void Collider::Render(HDC hdc)
+	void Collider::Render()
+	{
+	}
+
+	void Collider::OnDrawGizmos()
 	{
 	}
 

@@ -19,7 +19,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioListener.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAudioSource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyFmod.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyGraphicDevice.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyRandom.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyRenderManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MySettings.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyAnimator.h" />
@@ -67,9 +70,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyFmod.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyGameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyGraphicDevice.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyRenderManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyRigidBody2D.cpp" />

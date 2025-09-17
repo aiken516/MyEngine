@@ -6,7 +6,6 @@
 
 //#pragma comment (lib, "..\\x64\\Debug\\MyEngine_Window.lib")
 
-    
 #define MAX_LOADSTRING 100
 
 // 전역 변수:

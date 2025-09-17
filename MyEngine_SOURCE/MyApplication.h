@@ -1,6 +1,7 @@
 #pragma once
 #include "CommonInclude.h"
 #include "MyGameObject.h"
+#include "MyGraphicDevice.h"
 
 namespace Source
 {
@@ -20,24 +21,21 @@ namespace Source
 		void Release();
 		
 		HWND GetHWND() const { return _hwnd; }
-		HDC GetHDC() const { return _hdc; }
 		UINT GetWidth() const { return _width; }
 		UINT GetHeight() const { return _height; }
 
+		//디버깅용
+		Graphics::GraphicDevice* GetGraphicDevice() const { return _graphicDevice.get(); }
+
 	private:
-		void ClearRenderTarget(UINT r = 255, UINT g = 255, UINT b = 255);
-		void CopyRenderTarget(HDC source, HDC dest);
-		void AdjustApplicationWindow(HWND hwnd, UINT width, UINT height);
-		void CreateBackBuffer();
+		void InitApplicationWindow(HWND hwnd, UINT width, UINT height);
 
 		HWND _hwnd;// 윈도우 핸들
-		HDC _hdc; // 드로잉 핸들
-
-		HDC _backHdc; // 먼저 그리고 그린 값을 넘겨주는 드로잉 핸들, 더블 버퍼링용
-		HBITMAP _backBitMap;// 더블 버퍼링으로 화면을 표출하기 위한 버퍼, 드로잉 핸들에도 1개 있음
 
 		UINT _width;//화면의 해상도 값
 		UINT _height;//화면의 해상도 값
+
+		std::unique_ptr<Graphics::GraphicDevice> _graphicDevice;
 	};
 }
 

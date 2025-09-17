@@ -4,19 +4,16 @@
 #include "MySceneManager.h"
 #include "MyResources.h"
 #include "MyCollisionManager.h"
+#include "MyRenderManager.h"
 #include "MyFmod.h"
 
 namespace Source
 {
 	Application::Application() :
 		_hwnd(nullptr),
-		_hdc(nullptr),
 		_width(0),
-		_height(0),
-		_backHdc(NULL),
-		_backBitMap(NULL)
+		_height(0)
 	{
-
 	}
 
 	Application::~Application()
@@ -26,14 +23,14 @@ namespace Source
 
 	void Application::Initialize(HWND hwnd, UINT width, UINT height)
 	{
-		AdjustApplicationWindow(hwnd, width, height);
-		CreateBackBuffer();
+		InitApplicationWindow(hwnd, width, height);
 
 		Input::Initailize();	
 		Time::Initailze();
 		Fmod::Initialize();
 		CollisionManager::Initialize();
 		SceneManager::Initialize();
+		RenderManager::Initialize();
 	}
 
 	void Application::Run()
@@ -51,28 +48,26 @@ namespace Source
 		Time::Update();
 		CollisionManager::Update();
 		SceneManager::Update();
+		RenderManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
 		CollisionManager::LateUpdate();
 		SceneManager::LateUpdate();
+		RenderManager::LateUpdate();
 	}
 
 	void Application::Render()
 	{
-		//TEST 배경색, 추후에 분리
-		UINT r = 128;
-		UINT g = 128;
-		UINT b = 128;
+		_graphicDevice->BeginDraw(D2D1::ColorF(D2D1::ColorF::White, 1.0f));
 		
-		ClearRenderTarget(r, g, b);
+		SceneManager::Render();
+		//RenderManager::Render(_graphicDevice->GetRenderTarget());
+		RenderManager::ClearRenderRequests();
+		SceneManager::OnDrawGizmos();
 
-		Time::Render(_backHdc);
-		CollisionManager::Render(_backHdc);
-		SceneManager::Render(_backHdc);
-
-		CopyRenderTarget(_backHdc, _hdc);
+		_graphicDevice->EndDraw();
 	}
 
 	void Application::Destroy()
@@ -87,26 +82,9 @@ namespace Source
 		Resources::Release();
 	}
 
-	void Application::ClearRenderTarget(UINT r, UINT g, UINT b)
-	{
-		HBRUSH colorBrush = (HBRUSH)CreateSolidBrush(RGB(r, g, b));
-		HBRUSH oldBrush = (HBRUSH)SelectObject(_backHdc, colorBrush);
-
-		Rectangle(_backHdc, -1, -1, _width + 1, _height + 1); // 흰 사각형을 전체에 채워 그림
-
-		(HBRUSH)SelectObject(_backHdc, oldBrush);
-		DeleteObject(colorBrush);
-	}
-
-	void Application::CopyRenderTarget(HDC source, HDC dest)
-	{
-		BitBlt(dest, 0, 0, _width, _height, source, 0, 0, SRCCOPY);
-	}
-
-	void Application::AdjustApplicationWindow(HWND hwnd, UINT width, UINT height)
+	void Application::InitApplicationWindow(HWND hwnd, UINT width, UINT height)
 	{
 		_hwnd = hwnd;
-		_hdc = GetDC(_hwnd);
 
 		RECT rect = { 0, 0, width, height };
 		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
@@ -116,15 +94,14 @@ namespace Source
 
 		SetWindowPos(_hwnd, nullptr, 0, 0, _width, _height, 0);
 		ShowWindow(_hwnd, true);
-	}
 
-	void Application::CreateBackBuffer()
-	{
-		//윈도우 해상도에 맞게 백버퍼 생성 (캔버스)
-		_backBitMap = CreateCompatibleBitmap(_hdc, _width, _height);
-		_backHdc = CreateCompatibleDC(_hdc);
+		_graphicDevice = std::make_unique<Graphics::GraphicDevice>();
 
-		HBITMAP oldBitMap = (HBITMAP)SelectObject(_backHdc, _backBitMap);
-		DeleteObject(oldBitMap);
+		HRESULT hr = _graphicDevice->Initialize(hwnd, width, height);
+		if (FAILED(hr))
+		{
+			MessageBox(nullptr, L"GraphicDevice Initialize Fail.", L"Error", MB_OK | MB_ICONERROR);
+			return;
+		}
 	}
 }

@@ -61,7 +61,7 @@ namespace Source
 		}
 	}
 
-	void Scene::Render(HDC hdc)
+	void Scene::Render()
 	{
 		for (Layer* layer : _sceneLayers)
 		{
@@ -70,7 +70,7 @@ namespace Source
 				continue;
 			}
 
-			layer->Render(hdc);
+			layer->Render();
 		}
 	}
 
@@ -83,6 +83,19 @@ namespace Source
 				continue;
 			}
 			layer->Destroy();
+		}
+	}
+
+	void Scene::OnDrawGizmos()
+	{
+		for (Layer* layer : _sceneLayers)
+		{
+			if (layer == nullptr)
+			{
+				continue;
+			}
+
+			layer->OnDrawGizmos();
 		}
 	}
 

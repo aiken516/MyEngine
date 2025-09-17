@@ -27,8 +27,12 @@ namespace Source
 
 	}
 
-	void Component::Render(HDC hdc)
+	void Component::Render()
 	{
 
+	}
+
+	void Component::OnDrawGizmos()
+	{
 	}
 }

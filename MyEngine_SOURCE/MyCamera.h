@@ -13,7 +13,7 @@ namespace Source
 		void Initialize() override;
 		void Update()  override;
 		void LateUpdate()  override;
-		void Render(HDC hdc)  override;
+		void Render()  override;
 
 		void SetTarget(GameObject* target) { _target = target; }
 

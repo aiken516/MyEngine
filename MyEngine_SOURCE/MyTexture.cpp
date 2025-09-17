@@ -9,107 +9,101 @@ namespace Source::Graphics
 {
 	Texture::Texture() :
 		Resource(Enums::ResourceType::Texture),
-		_hasAlpha(false),
-		_sprite(nullptr),
-		_bitMap(nullptr),
-		_hdc(nullptr),
-		_textureType(TextureType::NONE),
 		_width(0),
 		_height(0)
 	{
 	}
-	
+
 	Texture::~Texture()
 	{
 	}
 
-	Texture* Texture::Create(const std::wstring& name, UINT width, UINT height)
-	{
-		Texture* texture = Resources::Find<Texture>(name);
-		if (texture != nullptr)
-		{
-			return texture;
-		}
-
-		texture = new Texture();
-		texture->SetName(name);
-		texture->SetWidth(width);
-		texture->SetHeight(height);
-
-		HDC hdc = application.GetHDC();
-
-		texture->_bitMap = CreateCompatibleBitmap(hdc, width, height);
-		texture->_hdc = CreateCompatibleDC(hdc);
-
-		HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
-		Rectangle(texture->_hdc, -1, -1, texture->GetWidth() + 1, texture->GetHeight() + 1);
-		SelectObject(hdc, oldBrush);
-
-		HBITMAP oldBitMap = (HBITMAP)SelectObject(texture->_hdc, texture->_bitMap);
-		DeleteObject(oldBitMap);
-
-		Resources::Insert(name + L"Sheet", texture);
-
-		return texture;
-	}
-
 	HRESULT Texture::Load(const std::wstring path)
 	{
-		//파일 확장자 받아오기
-		std::wstring ext = path.substr(path.find_last_of(L".") + 1);
+		_path = path;
 
-		//이미지가 bmp일 때
-		if (ext == L"bmp")
+		// GraphicDevice에서 WIC 팩토리와 렌더 타겟 가져오기
+		ID2D1HwndRenderTarget* renderTarget = application.GetGraphicDevice()->GetRenderTarget();
+		IWICImagingFactory* wicFactory = application.GetGraphicDevice()->GetWICFactory();
+
+		if (!renderTarget || !wicFactory)
 		{
-			_textureType = TextureType::Bmp;
-			_bitMap = (HBITMAP)LoadImageW(nullptr, path.c_str(), IMAGE_BITMAP, 0, 0,
-				LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-
-			if (_bitMap == nullptr)
-			{
-				return S_FALSE;
-			}
-
-			BITMAP info = {};
-			GetObject(_bitMap, sizeof(BITMAP), &info);
-
-			_width = info.bmWidth;
-			_height = info.bmHeight;
-
-			if (info.bmBitsPixel == 32)
-			{
-				_hasAlpha = true;
-			}
-			else if (info.bmBitsPixel == 24)
-			{
-				_hasAlpha = false;
-			}
-
-			HDC mainDC = application.GetHDC();
-			_hdc = CreateCompatibleDC(mainDC);
-
-			HBITMAP oldBitmap = (HBITMAP)SelectObject(_hdc, _bitMap);
-			DeleteObject(oldBitmap);
-		}
-		//이미지가 png일 때
-		else if (ext == L"png")
-		{
-			_textureType = TextureType::Png;
-			_sprite = Gdiplus::Image::FromFile(path.c_str());
-			if (_sprite == nullptr)
-			{
-				return S_FALSE;
-			}
-
-			_width = _sprite->GetWidth();
-			_height = _sprite->GetHeight();
-		}
-		else
-		{
-			return S_FALSE;
+			return E_FAIL;
 		}
 
-		return S_OK;
+		HRESULT result = S_OK;
+
+		// WIC 디코더 생성
+		// 디코더는 파일의 확장자를 자동으로 인식하여 그 파일 형식에 맞는 데이터를 해석
+		ComPtr<IWICBitmapDecoder> decoder;
+		result = wicFactory->CreateDecoderFromFilename(
+			path.c_str(),
+			nullptr,
+			GENERIC_READ,
+			WICDecodeMetadataCacheOnLoad,
+			&decoder
+		);
+
+		if (FAILED(result)) 
+		{
+			return result;
+		}
+
+		// 디코더에서 첫 번째 프레임 가져오기
+		// GIF 등은 여러 프레임을 가질 수 있으나, 일반적인 이미지는 0번째를 이용
+		ComPtr<IWICBitmapFrameDecode> frame;
+		result = decoder->GetFrame(0, &frame);
+
+		if (FAILED(result))
+		{
+			return result;
+		}
+
+		// 비트맵 픽셀 포맷 변환
+		// D2D와 호환되는 포맷으로 변환하는 과정
+		ComPtr<IWICFormatConverter> converter;
+		result = wicFactory->CreateFormatConverter(&converter);
+
+		if (FAILED(result))
+		{
+			return result;
+		}
+
+		// WIC_PIXEL_FORMAT_32BPP_PBGRA: Direct2D에서 기본적으로 사용되는 픽셀 포맷
+		result = converter->Initialize(
+			frame.Get(),
+			GUID_WICPixelFormat32bppPBGRA,
+			WICBitmapDitherTypeNone,
+			nullptr,
+			0.0f,
+			WICBitmapPaletteTypeMedianCut
+		);
+
+		if (FAILED(result))
+		{
+			return result;
+		}
+
+		// WIC 비트맵을 Direct2D 비트맵으로 변환
+		result = renderTarget->CreateBitmapFromWicBitmap(
+			converter.Get(),
+			nullptr,
+			&_bitmap
+		);
+
+		if (FAILED(result))
+		{
+			return result;
+		}
+
+		// 비트맵의 너비와 높이 저장
+		if (SUCCEEDED(result))
+		{
+			D2D1_SIZE_F size = _bitmap.Get()->GetSize();
+			_width = static_cast<UINT>(size.width);
+			_height = static_cast<UINT>(size.height);
+		}
+
+		return result;
 	}
 }

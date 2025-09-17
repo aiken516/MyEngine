@@ -64,16 +64,22 @@ namespace Source
 		_dontDestroyOnLoad->LateUpdate();
 	}
 
-	void SceneManager::Render(HDC hdc)
+	void SceneManager::Render()
 	{
-		_activeScene->Render(hdc);
-		_dontDestroyOnLoad->Render(hdc);
+		_activeScene->Render();
+		_dontDestroyOnLoad->Render();
 	}
 
 	void SceneManager::Destroy()
 	{
 		_activeScene->Destroy();
 		_dontDestroyOnLoad->Destroy();
+	}
+
+	void SceneManager::OnDrawGizmos()
+	{
+		_activeScene->OnDrawGizmos();
+		_dontDestroyOnLoad->OnDrawGizmos();
 	}
 
 	void SceneManager::Release()

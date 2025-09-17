@@ -25,14 +25,19 @@ namespace Source
 		Scene::LateUpdate();
 	}
 
-	void DontDestroyOnLoad::Render(HDC hdc)
+	void DontDestroyOnLoad::Render()
 	{
-		Scene::Render(hdc);
+		Scene::Render();
 	}
 
 	void DontDestroyOnLoad::Destroy()
 	{
 		Scene::Destroy();
+	}
+
+	void DontDestroyOnLoad::OnDrawGizmos()
+	{
+		Scene::OnDrawGizmos();
 	}
 
 	void DontDestroyOnLoad::OnEnter()

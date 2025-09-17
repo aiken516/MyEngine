@@ -30,8 +30,6 @@ namespace Source
 		virtual HRESULT Load(const std::wstring path) override;
 
 		void Update();
-		void Render(HDC hdc);
-
 
 		//애니메이션은 다른 곳에서 받아서 하는게 나을거 같음, 스프라이트 에디터 등이 있으면 좋을 듯
 		void CreateAnimation(const std::wstring& name,
@@ -44,8 +42,11 @@ namespace Source
 
 		void SetAnimator(class Animator* animator) { _animator = animator; }
 
+		Graphics::Texture* GetSpriteSheet() const { return _spriteSheet; }
+		const Sprite& GetCurrentSprite() const { return _animationSheet[_index]; }
+
 		void Reset();
-		bool IsComplete() { return _isComplete; }
+		bool IsComplete() const { return _isComplete; }
 
 	private:
 		class Animator* _animator;

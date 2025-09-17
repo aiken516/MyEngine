@@ -1,5 +1,11 @@
 #include "MyAnimator.h"
 #include "MyResources.h"
+#include "MyTransform.h"
+#include "MyRenderer.h"
+#include "MyApplication.h"
+#include "MyRenderManager.h"
+
+extern Source::Application application;
 
 namespace Source
 {
@@ -65,12 +71,78 @@ namespace Source
 	{
 	}
 
-	void Animator::Render(HDC hdc)
+	void Animator::Render()
 	{
-		if (_currentAnimation != nullptr)
+		if (_currentAnimation == nullptr)
 		{
-			_currentAnimation->Render(hdc);
+			return;
 		}
+
+		Graphics::Texture* spriteSheet = _currentAnimation->GetSpriteSheet();
+		if (spriteSheet == nullptr)
+		{
+			return;
+		}
+
+		Animation::Sprite currentSprite = _currentAnimation->GetCurrentSprite();
+		if (currentSprite.size.x == 0 || currentSprite.size.y == 0)
+		{
+			return;
+		}
+
+		Transform* transform = GetOwner()->GetComponent<Transform>();
+
+		Vector2 position = transform->GetPosition();
+		float rotation = transform->GetRotation();
+		Vector2 scale = transform->GetScale();
+
+		UINT width = currentSprite.size.x;
+		UINT height = currentSprite.size.y;
+
+		if (Renderer::MainCamera != nullptr)
+		{
+			position = Renderer::MainCamera->CalculatePostion(position);
+		}
+
+		float leftTopX = position.x - (width * scale.x * 0.5f);
+		float leftTopY = position.y - (height * scale.y * 0.5f);
+
+		float rightBottomX = position.x + (width * scale.x * 0.5f);
+		float rightBottomY = position.y + (height * scale.y  * 0.5f);
+
+		if (leftTopX > application.GetWidth() || rightBottomX < 0.0f ||
+			leftTopY > application.GetHeight() || rightBottomY < 0.0f)
+		{
+			return; // 화면 밖에 있으면 렌더링하지 않음
+		}
+
+		D2D1_MATRIX_3X2_F rotationMatrix = D2D1::Matrix3x2F::Rotation(
+			rotation,
+			D2D1::Point2F(position.x - currentSprite.leftTop.x, position.y - currentSprite.leftTop.y)
+		);
+
+		D2D1_MATRIX_3X2_F scaleMatrix = D2D1::Matrix3x2F::Scale(
+			D2D1::SizeF(scale.x, scale.y),
+			D2D1::Point2F(position.x - currentSprite.leftTop.x, position.y - currentSprite.leftTop.y)
+		);
+
+		D2D1_MATRIX_3X2_F translationMatrix = D2D1::Matrix3x2F::Translation(
+			position.x - currentSprite.leftTop.x, position.y - currentSprite.leftTop.y
+		);
+
+		D2D1_MATRIX_3X2_F finalTransform = scaleMatrix * rotationMatrix * translationMatrix;
+
+		RenderRequest request{};
+		request.texture = spriteSheet;
+		request.sourceRect = D2D1::RectF(
+			currentSprite.leftTop.x,
+			currentSprite.leftTop.y,
+			currentSprite.leftTop.x + currentSprite.size.x,
+			currentSprite.leftTop.y + currentSprite.size.y
+		);
+		request.transformMatrix = finalTransform;
+
+		RenderManager::AddRenderRequest(request);
 	}
 
 	void Animator::CreateAnimation(const std::wstring& name, Graphics::Texture* spriteSheet, 
@@ -99,6 +171,7 @@ namespace Source
 
 	void Animator::CreateAnimationByFolder(const std::wstring& name, const std::wstring& path, Vector2 offset, float duration)
 	{
+		/*
 		Animation* animation = nullptr;
 
 		animation = FindAnimation(name);
@@ -144,6 +217,8 @@ namespace Source
 
 		CreateAnimation(name, spriteSheet, Vector2::zero, offset,
 			Vector2(imageWidth, imageHeight), fileCount, duration);
+
+		*/
 	}
 
 	Animation* Animator::FindAnimation(const std::wstring& name)

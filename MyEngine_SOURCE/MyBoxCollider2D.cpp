@@ -28,8 +28,10 @@ namespace Source
 	{
 	}
 
-	void BoxCollider2D::Render(HDC hdc)
+	void BoxCollider2D::Render()
 	{
+		/*
+
 		Transform* transform = GetOwner()->GetComponent<Transform>();
 		Vector2 position = transform->GetPosition();
 
@@ -56,6 +58,11 @@ namespace Source
 		SelectObject(hdc, oldBrush);
 		SelectObject(hdc, oldPen);
 		DeleteObject(greenPen);
+		*/
+	}
+
+	void BoxCollider2D::OnDrawGizmos()
+	{
 	}
 
 	bool BoxCollider2D::Intersect(Collider* other)

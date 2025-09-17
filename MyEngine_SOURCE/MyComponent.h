@@ -1,5 +1,6 @@
 #pragma once
 #include "MyEntity.h"
+#include <d2d1.h>
 
 namespace Source
 {
@@ -15,7 +16,9 @@ namespace Source
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		virtual void Render(HDC hdc);
+		virtual void Render();
+
+		virtual void OnDrawGizmos();
 
 		void SetOwner(GameObject* owner) { _owner = owner; }
 		GameObject* GetOwner() { return _owner; }

@@ -30,7 +30,7 @@ namespace Source
 		Fmod::Set3DListenerAttributes(&posisiotn);
 	}
 
-	void AudioListener::Render(HDC hdc)
+	void AudioListener::Render()
 	{
 	}
 }

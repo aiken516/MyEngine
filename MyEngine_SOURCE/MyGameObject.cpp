@@ -66,7 +66,7 @@ namespace Source
 		}
 	}
 
-	void GameObject::Render(HDC hdc)
+	void GameObject::Render()
 	{
 		for (Component* comp : _components)
 		{
@@ -75,7 +75,20 @@ namespace Source
 				continue;
 			}
 
-			comp->Render(hdc);
+			comp->Render();
+		}
+	}
+
+	void GameObject::OnDrawGizmos()
+	{
+		for (Component* comp : _components)
+		{
+			if (comp == nullptr)
+			{
+				continue;
+			}
+
+			comp->OnDrawGizmos();
 		}
 	}
 }

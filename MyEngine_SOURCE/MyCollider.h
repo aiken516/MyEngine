@@ -14,7 +14,9 @@ namespace Source
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
-		virtual void Render(HDC hdc) override;
+		virtual void Render() override;
+
+		virtual void OnDrawGizmos() override;
 
 		virtual bool Intersect(Collider* other) = 0;
 		virtual bool IntersectWithCircle(class CircleCollider2D* other) = 0;
