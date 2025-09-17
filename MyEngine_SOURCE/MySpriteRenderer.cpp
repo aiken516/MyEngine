@@ -58,11 +58,11 @@ namespace Source
 			position = Renderer::MainCamera->CalculatePostion(position);
 		}
 
-		float leftTopX = position.x - (width * scale.x);
-		float leftTopY = position.y - (height * scale.x);
+		float leftTopX = position.x - (width * scale.x * 0.5f);
+		float leftTopY = position.y - (height * scale.x * 0.5f);
 
-		float rightBottomX = position.x + (width * scale.x);
-		float rightBottomY = position.y + (height * scale.y);
+		float rightBottomX = position.x + (width * scale.x * 0.5f);
+		float rightBottomY = position.y + (height * scale.y * 0.5f);
 
 		if (leftTopX > application.GetWidth() || rightBottomX < 0.0f ||
 			leftTopY > application.GetHeight() || rightBottomY < 0.0f)

@@ -3,6 +3,7 @@
 #include "MyTransform.h"
 #include "MyGameObject.h"
 #include "MyRenderer.h"
+#include "MyRenderManager.h"
 
 namespace Source
 {
@@ -30,8 +31,10 @@ namespace Source
 
 	void BoxCollider2D::Render()
 	{
-		/*
+	}
 
+	void BoxCollider2D::OnDrawGizmos()
+	{
 		Transform* transform = GetOwner()->GetComponent<Transform>();
 		Vector2 position = transform->GetPosition();
 
@@ -40,29 +43,20 @@ namespace Source
 			position = Renderer::MainCamera->CalculatePostion(position);
 		}
 
-		HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
-
-		HPEN greenPen = CreatePen(PS_SOLID, 2, RGB(0, 255, 0));
-		HPEN oldPen = (HPEN)SelectObject(hdc, greenPen);
-
 		Vector2 offset = GetOffset();
-		
-		Rectangle(hdc, 
-			position.x + offset.x - GetSize().x * 0.5f * PIXELS_PER_UNIT,
-			position.y + offset.y - GetSize().y * 0.5f * PIXELS_PER_UNIT,
-			position.x + offset.x + GetSize().x * 0.5f * PIXELS_PER_UNIT,
-			position.y + offset.y + GetSize().y * 0.5f * PIXELS_PER_UNIT
+		Vector2 size = GetSize() * PIXELS_PER_UNIT;
+
+		GizmoRequest request{};
+		request.type = GizmoType::Box;
+		request.color = D2D1::ColorF(D2D1::ColorF::Green, 1.0f);
+		request.rect = D2D1::RectF(
+			position.x + offset.x - size.x * 0.5f,
+			position.y + offset.y - size.y * 0.5f,
+			position.x + offset.x + size.x * 0.5f,
+			position.y + offset.y + size.y * 0.5f
 		);
 
-		SelectObject(hdc, oldBrush);
-		SelectObject(hdc, oldPen);
-		DeleteObject(greenPen);
-		*/
-	}
-
-	void BoxCollider2D::OnDrawGizmos()
-	{
+		RenderManager::AddGizmoRequest(request);
 	}
 
 	bool BoxCollider2D::Intersect(Collider* other)

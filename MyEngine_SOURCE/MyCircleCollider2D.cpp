@@ -4,6 +4,7 @@
 #include "MyGameObject.h"
 #include "MyRenderer.h"
 #include "MyApplication.h"
+#include "MyRenderManager.h"
 
 extern Source::Application application;
 
@@ -48,26 +49,16 @@ namespace Source
 
 		Vector2 offset = GetOffset();
 
-		ID2D1HwndRenderTarget* renderTarget = application.GetGraphicDevice()->GetRenderTarget();
-
-		ID2D1SolidColorBrush* brush = nullptr;
-		HRESULT hr = renderTarget->CreateSolidColorBrush(
-			D2D1::ColorF(D2D1::ColorF::Green, 1.0f),
-			&brush
+		GizmoRequest request{};
+		request.type = GizmoType::Circle;
+		request.color = D2D1::ColorF(D2D1::ColorF::Green, 1.0f);
+		request.ellipse = D2D1::Ellipse(
+			D2D1::Point2F(position.x + offset.x, position.y + offset.y),
+			_radius * PIXELS_PER_UNIT,
+			_radius * PIXELS_PER_UNIT
 		);
 
-		if (SUCCEEDED(hr))
-		{
-			D2D1_ELLIPSE ellipse = D2D1::Ellipse(
-				D2D1::Point2F(position.x + offset.x, position.y + offset.y), // 중심점 (x, y)
-				GetRadius() * PIXELS_PER_UNIT, // 반지름 x
-				GetRadius() * PIXELS_PER_UNIT  // 반지름 y
-			);
-
-			renderTarget->DrawEllipse(ellipse, brush, 2.0f/* 굵기 */);
-
-			brush->Release();
-		}
+		RenderManager::AddGizmoRequest(request);
 	}
 
 	bool CircleCollider2D::Intersect(Collider* other)

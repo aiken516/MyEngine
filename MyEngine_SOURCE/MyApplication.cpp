@@ -63,9 +63,9 @@ namespace Source
 		_graphicDevice->BeginDraw(D2D1::ColorF(D2D1::ColorF::White, 1.0f));
 		
 		SceneManager::Render();
-		//RenderManager::Render(_graphicDevice->GetRenderTarget());
-		RenderManager::ClearRenderRequests();
 		SceneManager::OnDrawGizmos();
+		RenderManager::Render(_graphicDevice->GetRenderTarget());
+		RenderManager::ClearRequests();
 
 		_graphicDevice->EndDraw();
 	}
