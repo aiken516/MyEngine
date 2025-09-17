@@ -61,7 +61,7 @@ namespace Source
 
 		D2D1_MATRIX_3X2_F finalTransform = scaleMatrix * rotationMatrix * translationMatrix;
 
-		GizmoRequest request{};
+		GizmoRenderRequest request{};
 		request.type = GizmoType::Circle;
 		request.color = D2D1::ColorF(D2D1::ColorF::Green, 1.0f);
 		request.ellipse = D2D1::Ellipse(

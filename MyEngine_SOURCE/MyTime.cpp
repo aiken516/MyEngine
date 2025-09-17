@@ -64,7 +64,7 @@ namespace Source
 			&myTextFormat
 		);
 
-		TextRequest request{};
+		TextRenderRequest request{};
 		request.text = str;
 		request.textRect = D2D1::RectF(0.0f, 0.0f, 200.0f, 50.0f);
 		request.color = D2D1::ColorF(D2D1::ColorF::Black);

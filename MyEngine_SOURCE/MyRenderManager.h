@@ -3,7 +3,7 @@
 
 namespace Source
 {
-	struct RenderRequest
+	struct SpriteRenderRequest
 	{
 		Graphics::Texture* texture;
 		D2D1_MATRIX_3X2_F transformMatrix;
@@ -11,7 +11,7 @@ namespace Source
 		D2D1_SIZE_F size;
 	};
 
-	struct TextRequest
+	struct TextRenderRequest
 	{
 		std::wstring text;
 		D2D1_RECT_F textRect;
@@ -27,7 +27,7 @@ namespace Source
 		Box
 	};
 
-	struct GizmoRequest
+	struct GizmoRenderRequest
 	{
 		GizmoType type;
 		D2D1_MATRIX_3X2_F transformMatrix;
@@ -52,9 +52,9 @@ namespace Source
 		static void LateUpdate();
 		static void Render(ID2D1HwndRenderTarget* renderTarget);
 
-		static void AddRenderRequest(const RenderRequest& request);
-		static void AddGizmoRequest(const GizmoRequest& request);
-		static void AddTextRequest(const TextRequest& request);
+		static void AddSpriteRequest(const SpriteRenderRequest& request);
+		static void AddGizmoRequest(const GizmoRenderRequest& request);
+		static void AddTextRequest(const TextRenderRequest& request);
 		static void ClearRequests();
 	private:
 		static void RenderSprites(ID2D1HwndRenderTarget* renderTarget, D2D1_MATRIX_3X2_F cameraMatrix);
@@ -63,8 +63,8 @@ namespace Source
 
 		static ID2D1SolidColorBrush* _brush;
 
-		static std::vector<RenderRequest> _renderRequestList;
-		static std::vector<TextRequest> _textRequestList;
-		static std::vector<GizmoRequest> _gizmoRequestList;
+		static std::map<ID2D1Bitmap*, std::vector<SpriteRenderRequest>> _spriteRequestBatches;
+		static std::vector<TextRenderRequest> _textRequestList;
+		static std::vector<GizmoRenderRequest> _gizmoRequestList;
 	};
 }

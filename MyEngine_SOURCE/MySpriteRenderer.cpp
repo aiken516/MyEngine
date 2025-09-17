@@ -52,13 +52,13 @@ namespace Source
 
 		D2D1_MATRIX_3X2_F finalTransform = scaleMatrix * rotationMatrix * translationMatrix;
 
-		RenderRequest request{};
+		SpriteRenderRequest request{};
 		request.texture = _texture;
 		request.sourceRect = D2D1::RectF(0.0f, 0.0f, (float)width, (float)height);
 		request.transformMatrix = finalTransform;
 
 		request.size = D2D1::SizeF(width * scale.x, height * scale.y);
 
-		RenderManager::AddRenderRequest(request);
+		RenderManager::AddSpriteRequest(request);
 	}
 }

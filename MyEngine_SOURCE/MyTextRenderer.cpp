@@ -52,7 +52,7 @@ namespace Source
 		D2D1_MATRIX_3X2_F rotationMatrix = D2D1::Matrix3x2F::Rotation(rotation);
 		D2D1_MATRIX_3X2_F translationMatrix = D2D1::Matrix3x2F::Translation(position.x, position.y);
 
-		TextRequest request{};
+		TextRenderRequest request{};
 		request.text = _text;
 		request.textRect = _textRect;
 		request.color = _color;

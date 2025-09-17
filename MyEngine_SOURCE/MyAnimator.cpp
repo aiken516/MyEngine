@@ -113,7 +113,7 @@ namespace Source
 
 		D2D1_MATRIX_3X2_F finalTransform = scaleMatrix * rotationMatrix * translationMatrix;
 
-		RenderRequest request{};
+		SpriteRenderRequest request{};
 		request.texture = spriteSheet;
 		request.sourceRect = D2D1::RectF(
 			currentSprite.leftTop.x,
@@ -124,7 +124,7 @@ namespace Source
 		request.transformMatrix = finalTransform;
 		request.size = D2D1::SizeF(currentSprite.size.x, currentSprite.size.y);
 
-		RenderManager::AddRenderRequest(request);
+		RenderManager::AddSpriteRequest(request);
 	}
 
 	void Animator::CreateAnimation(const std::wstring& name, Graphics::Texture* spriteSheet, 

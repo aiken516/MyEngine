@@ -8,9 +8,9 @@ extern Source::Application application;
 
 namespace Source
 {
-	std::vector<RenderRequest> RenderManager::_renderRequestList = {};
-	std::vector<TextRequest> RenderManager::_textRequestList = {};
-	std::vector<GizmoRequest> RenderManager::_gizmoRequestList = {};
+	std::map<ID2D1Bitmap*, std::vector<SpriteRenderRequest>>  RenderManager::_spriteRequestBatches = {};
+	std::vector<TextRenderRequest> RenderManager::_textRequestList = {};
+	std::vector<GizmoRenderRequest> RenderManager::_gizmoRequestList = {};
 	ID2D1SolidColorBrush* RenderManager::_brush = nullptr;
 
 	void RenderManager::Initialize()
@@ -49,15 +49,12 @@ namespace Source
 
 	void RenderManager::RenderSprites(ID2D1HwndRenderTarget* renderTarget, D2D1_MATRIX_3X2_F cameraMatrix)
 	{
-		// 텍스처 포인터 주소값 기준 정렬 로직은 유지
-		std::sort(_renderRequestList.begin(), _renderRequestList.end(),
-			[](const RenderRequest& a, const RenderRequest& b) {
-				return a.texture < b.texture;
-			});
-
-		for (const auto& request : _renderRequestList)
+		for (const auto& pair : _spriteRequestBatches)
 		{
-			if (request.texture != nullptr && request.texture->GetBitmap())
+			ID2D1Bitmap* bitmap = pair.first; // 텍스처
+			const auto& requests = pair.second; // 해당 텍스처의 모든 요청
+
+			for (const auto& request : requests)
 			{
 				D2D1_MATRIX_3X2_F finalTransform = request.transformMatrix * cameraMatrix;
 
@@ -80,10 +77,9 @@ namespace Source
 				}
 
 				renderTarget->SetTransform(finalTransform);
-
-				// Direct2D의 DrawBitmap 함수를 사용해 텍스처 그리기
+				
 				renderTarget->DrawBitmap(
-					request.texture->GetBitmap(),
+					bitmap,
 					destRect,
 					1.0f,
 					D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR,
@@ -145,24 +141,24 @@ namespace Source
 		}
 	}
 
-	void RenderManager::AddRenderRequest(const RenderRequest& request)
+	void RenderManager::AddSpriteRequest(const SpriteRenderRequest& request)
 	{
-		_renderRequestList.push_back(request);
+		_spriteRequestBatches[request.texture->GetBitmap()].push_back(request);
 	}
 
-	void RenderManager::AddGizmoRequest(const GizmoRequest& request)
+	void RenderManager::AddGizmoRequest(const GizmoRenderRequest& request)
 	{
 		_gizmoRequestList.push_back(request);
 	}
 
-	void RenderManager::AddTextRequest(const TextRequest& request)
+	void RenderManager::AddTextRequest(const TextRenderRequest& request)
 	{
 		_textRequestList.push_back(request);
 	}
 
 	void RenderManager::ClearRequests()
 	{
-		_renderRequestList.clear();
+		_spriteRequestBatches.clear();
 		_textRequestList.clear();
 		_gizmoRequestList.clear();
 	}
