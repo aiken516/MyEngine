@@ -53,7 +53,10 @@ namespace Source
 			if (request.texture != nullptr && request.texture->GetBitmap())
 			{
 				D2D1_MATRIX_3X2_F finalTransform = request.transformMatrix * cameraMatrix;
-				renderTarget->SetTransform(finalTransform);
+
+				// 위치만 추출 (행렬의 translation 부분)
+				float worldX = finalTransform._31;
+				float worldY = finalTransform._32;
 
 				D2D1_RECT_F destRect = D2D1::RectF(
 					-request.size.width * 0.5f,
@@ -61,6 +64,15 @@ namespace Source
 					request.size.width * 0.5f,
 					request.size.height * 0.5f
 				);
+
+				// 화면과 교차 안 하면 스킵
+				if (worldX - destRect.right < 100.0f || worldX + destRect.left > application.GetWidth() ||
+					worldY - destRect.bottom < 0.0f || worldY + destRect.top > application.GetHeight())
+				{
+					continue;
+				}
+
+				renderTarget->SetTransform(finalTransform);
 
 				// Direct2D의 DrawBitmap 함수를 사용해 텍스처 그리기
 				renderTarget->DrawBitmap(
@@ -79,6 +91,7 @@ namespace Source
 		for (const auto& gizmo : _gizmoRequestList)
 		{
 			D2D1_MATRIX_3X2_F finalTransform = gizmo.transformMatrix * cameraMatrix;
+
 			renderTarget->SetTransform(finalTransform);
 
 			_brush->SetColor(gizmo.color);
