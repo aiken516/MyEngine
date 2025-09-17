@@ -96,38 +96,19 @@ namespace Source
 		float rotation = transform->GetRotation();
 		Vector2 scale = transform->GetScale();
 
-		UINT width = currentSprite.size.x;
-		UINT height = currentSprite.size.y;
-
-		if (Renderer::MainCamera != nullptr)
-		{
-			position = Renderer::MainCamera->CalculatePostion(position);
-		}
-
-		float leftTopX = position.x - (width * scale.x * 0.5f);
-		float leftTopY = position.y - (height * scale.y * 0.5f);
-
-		float rightBottomX = position.x + (width * scale.x * 0.5f);
-		float rightBottomY = position.y + (height * scale.y  * 0.5f);
-
-		if (leftTopX > application.GetWidth() || rightBottomX < 0.0f ||
-			leftTopY > application.GetHeight() || rightBottomY < 0.0f)
-		{
-			return; // 화면 밖에 있으면 렌더링하지 않음
-		}
+		D2D1_MATRIX_3X2_F scaleMatrix = D2D1::Matrix3x2F::Scale(
+			D2D1::SizeF(scale.x, scale.y),
+			D2D1::Point2F(0, 0)
+		);
 
 		D2D1_MATRIX_3X2_F rotationMatrix = D2D1::Matrix3x2F::Rotation(
 			rotation,
-			D2D1::Point2F(position.x - currentSprite.leftTop.x, position.y - currentSprite.leftTop.y)
-		);
-
-		D2D1_MATRIX_3X2_F scaleMatrix = D2D1::Matrix3x2F::Scale(
-			D2D1::SizeF(scale.x, scale.y),
-			D2D1::Point2F(position.x - currentSprite.leftTop.x, position.y - currentSprite.leftTop.y)
+			D2D1::Point2F(0, 0)
 		);
 
 		D2D1_MATRIX_3X2_F translationMatrix = D2D1::Matrix3x2F::Translation(
-			position.x - currentSprite.leftTop.x, position.y - currentSprite.leftTop.y
+			position.x,
+			position.y
 		);
 
 		D2D1_MATRIX_3X2_F finalTransform = scaleMatrix * rotationMatrix * translationMatrix;
@@ -141,6 +122,7 @@ namespace Source
 			currentSprite.leftTop.y + currentSprite.size.y
 		);
 		request.transformMatrix = finalTransform;
+		request.size = D2D1::SizeF(currentSprite.size.x, currentSprite.size.y);
 
 		RenderManager::AddRenderRequest(request);
 	}

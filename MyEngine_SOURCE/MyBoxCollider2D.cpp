@@ -37,24 +37,37 @@ namespace Source
 	{
 		Transform* transform = GetOwner()->GetComponent<Transform>();
 		Vector2 position = transform->GetPosition();
-
-		if (Renderer::MainCamera != nullptr)
-		{
-			position = Renderer::MainCamera->CalculatePostion(position);
-		}
+		Vector2 scale = transform->GetScale();
+		float rotation = transform->GetRotation();
 
 		Vector2 offset = GetOffset();
 		Vector2 size = GetSize() * PIXELS_PER_UNIT;
+
+		D2D1_MATRIX_3X2_F scaleMatrix = D2D1::Matrix3x2F::Scale(
+			D2D1::SizeF(scale.x, scale.y),
+			D2D1::Point2F(0, 0)
+		);
+		D2D1_MATRIX_3X2_F rotationMatrix = D2D1::Matrix3x2F::Rotation(
+			rotation,
+			D2D1::Point2F(0, 0)
+		);
+		D2D1_MATRIX_3X2_F translationMatrix = D2D1::Matrix3x2F::Translation(
+			position.x + offset.x,
+			position.y + offset.y
+		);
+
+		D2D1_MATRIX_3X2_F finalTransform = scaleMatrix * rotationMatrix * translationMatrix;
 
 		GizmoRequest request{};
 		request.type = GizmoType::Box;
 		request.color = D2D1::ColorF(D2D1::ColorF::Green, 1.0f);
 		request.rect = D2D1::RectF(
-			position.x + offset.x - size.x * 0.5f,
-			position.y + offset.y - size.y * 0.5f,
-			position.x + offset.x + size.x * 0.5f,
-			position.y + offset.y + size.y * 0.5f
+			-size.x * 0.5f,
+			-size.y * 0.5f,
+			size.x * 0.5f,
+			size.y * 0.5f
 		);
+		request.transformMatrix = finalTransform;
 
 		RenderManager::AddGizmoRequest(request);
 	}

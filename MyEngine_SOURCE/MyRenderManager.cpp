@@ -46,16 +46,26 @@ namespace Source
 				return a.texture < b.texture;
 			});
 
+		D2D1_MATRIX_3X2_F cameraMatrix = Renderer::MainCamera->GetViewMatrix();
+
 		for (const auto& request : _renderRequestList)
 		{
 			if (request.texture != nullptr && request.texture->GetBitmap())
 			{
-				// Direct2D의 DrawBitmap 함수를 사용해 텍스처 그리기
-				renderTarget->SetTransform(request.transformMatrix);
+				D2D1_MATRIX_3X2_F finalTransform = request.transformMatrix * cameraMatrix;
+				renderTarget->SetTransform(finalTransform);
 
+				D2D1_RECT_F destRect = D2D1::RectF(
+					-request.size.width * 0.5f,
+					-request.size.height * 0.5f,
+					request.size.width * 0.5f,
+					request.size.height * 0.5f
+				);
+
+				// Direct2D의 DrawBitmap 함수를 사용해 텍스처 그리기
 				renderTarget->DrawBitmap(
 					request.texture->GetBitmap(),
-					request.sourceRect,
+					destRect,
 					1.0f,
 					D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR,
 					request.sourceRect
@@ -68,6 +78,9 @@ namespace Source
 		// 기즈모 요청 처리
 		for (const auto& gizmo : _gizmoRequestList)
 		{
+			D2D1_MATRIX_3X2_F finalTransform = gizmo.transformMatrix * cameraMatrix;
+			renderTarget->SetTransform(finalTransform);
+
 			_brush->SetColor(gizmo.color);
 
 			switch (gizmo.type)

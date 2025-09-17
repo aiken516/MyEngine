@@ -41,22 +41,35 @@ namespace Source
 	{
 		Transform* transform = GetOwner()->GetComponent<Transform>();
 		Vector2 position = transform->GetPosition();
-
-		if (Renderer::MainCamera != nullptr)
-		{
-			position = Renderer::MainCamera->CalculatePostion(position);
-		}
+		Vector2 scale = transform->GetScale();
+		float rotation = transform->GetRotation();
 
 		Vector2 offset = GetOffset();
+
+		D2D1_MATRIX_3X2_F scaleMatrix = D2D1::Matrix3x2F::Scale(
+			D2D1::SizeF(scale.x, scale.y),
+			D2D1::Point2F(0, 0)
+		);
+		D2D1_MATRIX_3X2_F rotationMatrix = D2D1::Matrix3x2F::Rotation(
+			rotation,
+			D2D1::Point2F(0, 0)
+		);
+		D2D1_MATRIX_3X2_F translationMatrix = D2D1::Matrix3x2F::Translation(
+			position.x + offset.x,
+			position.y + offset.y
+		);
+
+		D2D1_MATRIX_3X2_F finalTransform = scaleMatrix * rotationMatrix * translationMatrix;
 
 		GizmoRequest request{};
 		request.type = GizmoType::Circle;
 		request.color = D2D1::ColorF(D2D1::ColorF::Green, 1.0f);
 		request.ellipse = D2D1::Ellipse(
-			D2D1::Point2F(position.x + offset.x, position.y + offset.y),
+			D2D1::Point2F(0, 0),
 			_radius * PIXELS_PER_UNIT,
 			_radius * PIXELS_PER_UNIT
 		);
+		request.transformMatrix = finalTransform;
 
 		RenderManager::AddGizmoRequest(request);
 	}

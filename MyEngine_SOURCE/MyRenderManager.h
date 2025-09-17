@@ -8,6 +8,7 @@ namespace Source
 		Graphics::Texture* texture;
 		D2D1_MATRIX_3X2_F transformMatrix;
 		D2D1_RECT_F sourceRect;
+		D2D1_SIZE_F size;
 	};
 
 	enum class GizmoType
@@ -20,6 +21,7 @@ namespace Source
 	struct GizmoRequest
 	{
 		GizmoType type;
+		D2D1_MATRIX_3X2_F transformMatrix;
 		D2D1_COLOR_F color;
 
 		union
