@@ -66,6 +66,7 @@ namespace Source
 		SceneManager::OnDrawGizmos();
 		RenderManager::Render(_graphicDevice->GetRenderTarget());
 		RenderManager::ClearRequests();
+		Time::Render();
 
 		_graphicDevice->EndDraw();
 	}

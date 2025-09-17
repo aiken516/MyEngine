@@ -97,6 +97,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MyGraphicDevice.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyTextRenderer.cpp">
+      <Filter>Component\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyComponent.h">
@@ -212,6 +215,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)MyGraphics.h">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyTextRenderer.h">
+      <Filter>Component\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

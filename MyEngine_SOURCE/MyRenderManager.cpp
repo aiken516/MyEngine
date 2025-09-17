@@ -9,6 +9,7 @@ extern Source::Application application;
 namespace Source
 {
 	std::vector<RenderRequest> RenderManager::_renderRequestList = {};
+	std::vector<TextRequest> RenderManager::_textRequestList = {};
 	std::vector<GizmoRequest> RenderManager::_gizmoRequestList = {};
 	ID2D1SolidColorBrush* RenderManager::_brush = nullptr;
 
@@ -39,14 +40,20 @@ namespace Source
 		{
 			return;
 		}
+		D2D1_MATRIX_3X2_F cameraMatrix = Renderer::MainCamera->GetViewMatrix();
 
+		RenderSprites(renderTarget, cameraMatrix);
+		RenderTexts(renderTarget, cameraMatrix);
+		RenderGizmos(renderTarget, cameraMatrix);
+	}
+
+	void RenderManager::RenderSprites(ID2D1HwndRenderTarget* renderTarget, D2D1_MATRIX_3X2_F cameraMatrix)
+	{
 		// 텍스처 포인터 주소값 기준 정렬 로직은 유지
 		std::sort(_renderRequestList.begin(), _renderRequestList.end(),
 			[](const RenderRequest& a, const RenderRequest& b) {
 				return a.texture < b.texture;
 			});
-
-		D2D1_MATRIX_3X2_F cameraMatrix = Renderer::MainCamera->GetViewMatrix();
 
 		for (const auto& request : _renderRequestList)
 		{
@@ -66,8 +73,8 @@ namespace Source
 				);
 
 				// 화면과 교차 안 하면 스킵
-				if (worldX - destRect.right < 100.0f || worldX + destRect.left > application.GetWidth() ||
-					worldY - destRect.bottom < 0.0f || worldY + destRect.top > application.GetHeight())
+				if (worldX + destRect.right < 0.0f || worldX + destRect.left > application.GetWidth() ||
+					worldY + destRect.bottom < 0.0f || worldY + destRect.top > application.GetHeight())
 				{
 					continue;
 				}
@@ -86,7 +93,32 @@ namespace Source
 		}
 
 		renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
-		
+	}
+
+	void RenderManager::RenderTexts(ID2D1HwndRenderTarget* renderTarget, D2D1_MATRIX_3X2_F cameraMatrix)
+	{
+		for (const auto& request : _textRequestList)
+		{
+			D2D1_MATRIX_3X2_F finalTransform = request.transformMatrix * cameraMatrix;
+
+			renderTarget->SetTransform(finalTransform);
+
+			_brush->SetColor(request.color);
+
+			renderTarget->DrawText(
+				request.text.c_str(),
+				request.text.length(),
+				request.textFormat,
+				request.textRect,
+				_brush
+			);
+		}
+
+		renderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	}
+
+	void RenderManager::RenderGizmos(ID2D1HwndRenderTarget* renderTarget, D2D1_MATRIX_3X2_F cameraMatrix)
+	{
 		// 기즈모 요청 처리
 		for (const auto& gizmo : _gizmoRequestList)
 		{
@@ -123,9 +155,15 @@ namespace Source
 		_gizmoRequestList.push_back(request);
 	}
 
+	void RenderManager::AddTextRequest(const TextRequest& request)
+	{
+		_textRequestList.push_back(request);
+	}
+
 	void RenderManager::ClearRequests()
 	{
 		_renderRequestList.clear();
+		_textRequestList.clear();
 		_gizmoRequestList.clear();
 	}
 }

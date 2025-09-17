@@ -48,6 +48,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)MySceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MySpriteRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)MyTextRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)MyTransform.h" />
@@ -82,6 +83,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)MySceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MySpriteRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)MyTextRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)MyTransform.cpp" />

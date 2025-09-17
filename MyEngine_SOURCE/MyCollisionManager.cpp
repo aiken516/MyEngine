@@ -32,7 +32,7 @@ namespace Source
 	{
 	}
 
-	void CollisionManager::Render(HDC hdc)
+	void CollisionManager::Render()
 	{
 	}
 

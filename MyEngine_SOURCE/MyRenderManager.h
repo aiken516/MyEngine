@@ -11,6 +11,15 @@ namespace Source
 		D2D1_SIZE_F size;
 	};
 
+	struct TextRequest
+	{
+		std::wstring text;
+		D2D1_RECT_F textRect;
+		D2D1_MATRIX_3X2_F transformMatrix;
+		D2D1_COLOR_F color;
+		IDWriteTextFormat* textFormat;
+	};
+
 	enum class GizmoType
 	{
 		Circle,
@@ -45,11 +54,17 @@ namespace Source
 
 		static void AddRenderRequest(const RenderRequest& request);
 		static void AddGizmoRequest(const GizmoRequest& request);
+		static void AddTextRequest(const TextRequest& request);
 		static void ClearRequests();
 	private:
+		static void RenderSprites(ID2D1HwndRenderTarget* renderTarget, D2D1_MATRIX_3X2_F cameraMatrix);
+		static void RenderTexts(ID2D1HwndRenderTarget* renderTarget, D2D1_MATRIX_3X2_F cameraMatrix);
+		static void RenderGizmos(ID2D1HwndRenderTarget* renderTarget, D2D1_MATRIX_3X2_F cameraMatrix);
+
 		static ID2D1SolidColorBrush* _brush;
 
 		static std::vector<RenderRequest> _renderRequestList;
+		static std::vector<TextRequest> _textRequestList;
 		static std::vector<GizmoRequest> _gizmoRequestList;
 	};
 }
